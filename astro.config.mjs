@@ -8,7 +8,7 @@ import starlightSidebarTopics from "starlight-sidebar-topics";
 export default defineConfig({
 	integrations: [
 		starlight({
-			title: "Mulot NSI",
+			title: "Mulot.prof",
 			customCss: ["./src/styles/global.css"],
 			locales: {
 				root: {
@@ -20,7 +20,7 @@ export default defineConfig({
 				{
 					icon: "github",
 					label: "GitHub",
-					href: "https://github.com/withastro/starlight",
+					href: "https://github.com/mulot-nsi/website-2027",
 				},
 			],
 			plugins: [
@@ -55,21 +55,6 @@ export default defineConfig({
 					},
 				]),
 			],
-
-			/*
-            sidebar: [
-                {
-                    label: "Guides",
-                    items: [
-                        // Each item here is one entry in the navigation menu.
-                        {label: "Example Guide", slug: "guides/example"},
-                    ],
-                },
-                {
-                    label: "Reference",
-                    items: [{autogenerate: {directory: "reference"}}],
-                },
-            ],*/
 		}),
 	],
 

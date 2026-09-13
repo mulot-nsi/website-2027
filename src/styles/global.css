@@ -3,3 +3,7 @@
 @import "@astrojs/starlight-tailwind";
 @import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/utilities.css" layer(utilities);
+
+table ul {
+    padding-inline-start: 2ex;
+}

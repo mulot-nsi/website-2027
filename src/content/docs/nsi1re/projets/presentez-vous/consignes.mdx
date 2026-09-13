@@ -4,60 +4,175 @@ description: Consignes de réalisation du projet de création d'un site web de p
 ---
 
 import { Aside } from '@astrojs/starlight/components';
+import { FileTree } from '@astrojs/starlight/components';
+import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-## Les contenus
+## Contenus
 
-Votre mini-site web ne doit comporter que deux pages dont voici les descriptions :
+Votre mini-site web doit être composé d'exactement **deux pages**, ni plus ni moins.
+La première page est consacrée à votre présentation, et la seconde détaille un ou plusieurs de vos centres d'intérêt.
 
-### Page d'accueil
+<Aside type="tip" icon="information" title="Bon à savoir">
+Ce projet est à destination exclusive de votre professeur et ne sera jamais rendu public.
+</Aside>
 
-Page d'accueil du site, elle est dédiée à vous présenter
-Le code est enregistré dans un fichier nommé `index.html`
+### La page d'accueil
+
+ette page sert à vous présenter. 
+Son code doit obligatoirement être enregistré dans un fichier nommé `index.html`.
+Elle devra afficher au minimum les éléments suivants :
 
 <Aside type="note" icon="document" title="Contenu">
-    - La page doit contenir au minimum les informations suivantes :
-        - votre classe et année scolaire ;
-        - nom, prénom ;
-        - une photo (un avatar ou vous-même) ;
-        - vos spécialités ;
-        - vos souhaits d'études supérieures et/ou de métier ;
-        - vos centres d'intérêts.
-    - La page doit contenir un lien hypertexte pointant vers la seconde page du mini-site dédiée à la présentation d'un ou plusieurs centres d'intérêt
+    - Votre prénom et votre nom
+    - Une image vous représentant (photo ou avatar)
+    - Votre classe et l'année scolaire en cours
+    - Vos spécialités
+    - Vos souhaits d'études supérieures ou d'orientation professionnelle
+    - Une liste de vos centres d'intérêt
+    - Un lien hypertexte permettant de naviguer vers votre seconde page
 </Aside>
 
-### Page secondaire
+### La page secondaire
 
-Seconde page dédiée à présenter un ou plusieurs de vos centres d'intérêt
-Le code est enregistré dans un fichier dont le nom est libre mais cohérent avec le contenu de la page
+Cette page complète votre site en détaillant un ou plusieurs de vos centres d'intérêt.
 
-Le contenu est libre mais doit respecter la  [legislation française](https://www.service-public.gouv.fr/particuliers/vosdroits/F32075)
-Un lien hypertexte doit permettre de retourner vers la page d'accueil
+Son code doit être enregistré dans un fichier HTML dont vous êtes libre de choisir le nom, en veillant à ce qu'il soit **cohérent avec son contenu** (par exemple `sports.html` ou `musique.html`).
+Il ne comporte ni espaces (remplacer par des tirets `-`) ni caractères spéciaux (pas d'accents).
 
+Le choix du sujet est libre mais votre page devra impérativement respecter les règles suivantes :
 
-# L'organisation des fichiers
-
-Les fichiers de votre projet doivent être rangés dans un dosser à votre nom. À l'intérieur de celui-ci doivent être présents :
-
-un dossier css pour y placer votre fichier CSS ;
-un dossier images pour les fichiers des images présentes sur votre mini-site ;
-vos deux fichiers HTML.
-
-<Aside type="note" icon="document" title="Aperçu de l'arborescence de fichiers">
-```
-/
-├── css
-│   └── style.css
-├── images
-│   ├── image1.jpg
-│   ├── image2.jpg
-│   └── ...
-├── index.html
-└── ???.html
-```
+<Aside type="caution" title="Contenus interdits et réglementés">
+- Respecter la [legislation française](https://www.service-public.gouv.fr/particuliers/vosdroits/F32075) en vigueur
+- Ne faire aucun prosélytisme politique ou religieux
+- Ne diffuser aucune donnée personnelle sensible
+- N'inclure aucun propos violent, injurieux ou inapproprié
+- Respecter le droit d'auteur en rédigeant vous-même vos textes et en citant la source des images que vous utilisez
 </Aside>
 
-Veillez à ce que vos noms de fichiers et de dossiers soient en minuscules.
-Tout devrait bien fonctionner bien sous Windows ou MacOS.
-Cependant, certains systèmes d'exploitation comme Linux ont un système de fichiers sensible à la casse (qui distingue les minuscules des majuscules).
+Enfin veillez à y intégrer un lien hypertexte permettant de **revenir à la page d'accueil**.
 
-En cas de sensibilité à la casse, avoir des images stockées dans le dossier `Images/...` et les appeler en HTML avec le chemin `images/...` provoquera une anomalie.
+
+## Organisation des fichiers
+
+Afin de garder un projet clair et bien structuré, vous devez répartir vos fichiers ainsi :
+
+- Un dossier `css` destiné à accueillir votre **unique** feuille de style `style.css`
+- Un dossier `images` destiné à rassembler toutes les illustrations
+- À la base du projet, vos deux fichiers HTML (`index.html` et votre seconde page)
+
+<Aside type="note" icon="add-document" title="Aperçu de l'arborescence">
+    <FileTree>
+    - css
+        - style.css
+    - images
+        - image1.jpg
+        - image2.jpg
+        - ...
+    - index.html
+    - ???.html
+    </FileTree>
+</Aside>
+
+<Aside type="caution" title="Règles de nommage">
+Nommer l'ensemble de vos fichiers et dossiers uniquement en minuscules, sans espaces ni accents.
+
+Certains systèmes d'exploitation comme Linux disposent d'un système de fichiers sensible à la casse (il différencie minuscules et majuscules).
+Dans ce cas de figure, une image nommée `CHAT.jpg` ne s'affichera pas si vous l'insérez avec le code `<img src="chat.jpg">`.
+</Aside>
+
+## Code HTML
+
+### Les balises HTML
+
+Vous êtes libres d'utiliser toute balise HTML que vous jugerez nécessaire.
+Cependant, vous devez obligatoirement utiliser celles de la liste suivante :
+
+<Aside type="note" icon="document" title="Balises obligatoires">
+    | Élément                          | Balises                                      | Commentaire                                                                                                                                     |
+    |:---------------------------------|:---------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------|
+    | Titre principal                  | `<h1></h1>`                                  | <ul><li>Un seul par page</li><li>Présent sur les deux pages</li></ul>                                                                           |
+    | Sous-titre                       | `<h2></h2>`                                  |                                                                                                                                                 |
+    | Paragraphe                       | `<p></p>`                                    |                                                                                                                                                 |
+    | Fort ou emphase                  | `<strong></strong>` ou `<em></em>`           | Utilisez l'un ou l'autre                                                                                                                                 |
+    | Image                            | `<img src="" alt="">`                        | <ul><li>N'oubliez pas l'attribut `alt`</li><li>Pas d'images externes</li><li>Placez les images dans le dossier `images`</li></ul>              |
+    | Lien hypertexte                  | `<a href="url"></a>`                         | <ul><li>N'oubliez pas la navigation entre les deux pages</li><li>Vous devez avoir au moins un lien sortant (pointant vers un site web autre que le vôtre)</li></ul> |
+    | Liste à puces ou liste numérotée | `<ul><li></li></ul>` ou `<ol><li></li></ol>` | L'un ou l'autre                                                                                                                                 |
+    | Tableau                          | `<table></table>`                            |                                                                                                                                                 |
+    | Titre                            | `<title></title>`                            | Présent sur les deux pages.                                                                                                                     |
+    | Métadonnée description           | `<meta name="description" content="...">`    | <ul><li>Présent sur les deux pages</li><li>Description de votre page à saisir dans l'attribut `content`</li></ul>                               |
+    | Liens vers une ressource CSS     | `<link rel="stylesheet" href="">`            | Présent sur les deux pages.                                                                                                                     |
+</Aside>
+
+### Les interdictions
+
+Afin de vous faire acquérir les bonnes habitudes du Web (notamment la séparation entre contenu et mise en forme), plusieurs pratiques de développement sont interdites :
+
+<Aside type="danger" title="Pratiques interdites">
+    - Interdiction d'utiliser la balise `<style></style>` pour définir le style d'une page
+    - Interdiction d'utiliser l'attribut `style` pour définir le style d'un élément
+    - Interdiction d'intégrer des images **externes** : `<img src="https://...">`
+</Aside>
+
+### La structure d'une page
+
+Pour rappel, voici le code HTML minimal permettant la création d'une page web :
+
+```html
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Titre de la page</title>
+</head>
+<body>
+    Contenu de la page
+</body>
+</html>
+```
+
+## Code CSS
+
+Attention, vous n'avez droit qu'à **un seul fichier CSS** pour mettre en forme l'ensemble de votre mini-site. 
+À vous d'organiser vos styles avec astuce pour cibler les éléments de chaque page.
+
+### Les sélecteurs CSS
+
+Pour vous assurer de bien maîtriser le code que vous écrivez, seuls deux types de sélecteurs sont autorisés (l'utilisation de sélecteurs complexes est interdite) :
+
+<Aside type="danger" title="Sélecteurs CSS imposés">
+    | Sélecteur           | Syntaxe                    | Commentaire                                                                                                                 |
+    |:--------------------|:---------------------------|:----------------------------------------------------------------------------------------------------------------------------|
+    | Sélecteur de balise | `p { ... }`          |  S'applique à **toutes** les balises de ce type dans le site.                                                                                                                           |
+    | Sélecteur de classe | `.nom { ... }` | <ul><li>Ne pas oublier le `.` devant le nom de la classe dans le fichier CSS</li><li>S'applique à toute balise possédant l'attribut `class="nom"`</li></ul> |
+</Aside>
+
+### Les propriétés CSS
+
+Vous êtes libre d'utiliser les propriétés CSS de votre choix pour personnaliser votre mini-site. 
+Vous devez cependant intégrer au moins les propriétés listées ci-dessous.
+
+
+<Aside type="note" title="Propriétés CSS obligatoires">
+    | Propriété           | Syntaxe             | Commentaire                                  |
+    |:--------------------|:--------------------|:---------------------------------------------|
+    | Couleur du texte    | `color:`      |       Pour modifier la couleur du texte                                       |
+    | Couleur du fond     | `background-color:` | Pour modifier le couleur de fond d'une balise                                             |
+    | Alignement du texte | `text-align:` | Pour centrer du texte ou des images          |
+    | Largeur             | `width:`      | Pour fixer la largeur des images |
+</Aside>
+
+## Qualité
+
+Les langages HTML et CSS sont très permissifs.
+Pour s'assurer de la qualité de votre code, voici les contraintes de qualité à respecter pour chacun d'eux :
+
+<Tabs>
+  <TabItem label="Code HTML">
+    - Le code HTML de chaque page web doit être indenté de façon à ce qu'on puisse bien identifier l'ouverture et la fermeture des balises
+    - Le code HTML devra être vérifié en le copiant/collant sur le site [W3C Markup Validation Service](https://validator.w3.org/#validate_by_input+with_options). Elles ne devront comporter aucune erreur
+    - Si vous avez l'anomalie *"Trailing slash on void elements has no effect and interacts badly with unquoted attribute values"*, supprimez le `/` de fin des balises auto-fermantes (meta, link, ìmg, ...)
+  </TabItem>
+  <TabItem label="Code CSS">
+        Le code CSS devra être vérifié en le copiant/collant sur le site [W3C CSS Validation Service](https://jigsaw.w3.org/css-validator/#validate_by_input). Il ne deva comporter aucune erreur.
+  </TabItem>
+</Tabs>  

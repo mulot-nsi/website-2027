@@ -50,7 +50,15 @@ Check out [Starlight’s docs](https://starlight.astro.build/), read [the Astro 
 
 ## Ressources
 
+### Astro
+
+- [Astro Icon](https://www.astroicon.dev/)
+
+### Starlight
+
 - [Starlight Sidebar Topics](https://starlight-sidebar-topics.netlify.app/)
+- [Starlight Markdown Blocks](https://delucis.github.io/starlight-markdown-blocks/)
+
 
 ## Développement
 
