@@ -47,3 +47,16 @@ All commands are run from the root of the project, from a terminal:
 ## 👀 Want to learn more?
 
 Check out [Starlight’s docs](https://starlight.astro.build/), read [the Astro documentation](https://docs.astro.build), or jump into the [Astro Discord server](https://astro.build/chat).
+
+## Ressources
+
+- [Starlight Sidebar Topics](https://starlight-sidebar-topics.netlify.app/)
+
+## Développement
+
+Lancement de la mise au format des fichiers :
+
+```
+pnpx @biomejs/biome format --write astro.config.mjs  
+```
+

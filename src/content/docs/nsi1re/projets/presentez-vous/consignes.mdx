@@ -1,0 +1,63 @@
+---
+title: Consignes
+description: Consignes de réalisation du projet de création d'un site web de présentation individuelle.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+## Les contenus
+
+Votre mini-site web ne doit comporter que deux pages dont voici les descriptions :
+
+### Page d'accueil
+
+Page d'accueil du site, elle est dédiée à vous présenter
+Le code est enregistré dans un fichier nommé `index.html`
+
+<Aside type="note" icon="document" title="Contenu">
+    - La page doit contenir au minimum les informations suivantes :
+        - votre classe et année scolaire ;
+        - nom, prénom ;
+        - une photo (un avatar ou vous-même) ;
+        - vos spécialités ;
+        - vos souhaits d'études supérieures et/ou de métier ;
+        - vos centres d'intérêts.
+    - La page doit contenir un lien hypertexte pointant vers la seconde page du mini-site dédiée à la présentation d'un ou plusieurs centres d'intérêt
+</Aside>
+
+### Page secondaire
+
+Seconde page dédiée à présenter un ou plusieurs de vos centres d'intérêt
+Le code est enregistré dans un fichier dont le nom est libre mais cohérent avec le contenu de la page
+
+Le contenu est libre mais doit respecter la  [legislation française](https://www.service-public.gouv.fr/particuliers/vosdroits/F32075)
+Un lien hypertexte doit permettre de retourner vers la page d'accueil
+
+
+# L'organisation des fichiers
+
+Les fichiers de votre projet doivent être rangés dans un dosser à votre nom. À l'intérieur de celui-ci doivent être présents :
+
+un dossier css pour y placer votre fichier CSS ;
+un dossier images pour les fichiers des images présentes sur votre mini-site ;
+vos deux fichiers HTML.
+
+<Aside type="note" icon="document" title="Aperçu de l'arborescence de fichiers">
+```
+/
+├── css
+│   └── style.css
+├── images
+│   ├── image1.jpg
+│   ├── image2.jpg
+│   └── ...
+├── index.html
+└── ???.html
+```
+</Aside>
+
+Veillez à ce que vos noms de fichiers et de dossiers soient en minuscules.
+Tout devrait bien fonctionner bien sous Windows ou MacOS.
+Cependant, certains systèmes d'exploitation comme Linux ont un système de fichiers sensible à la casse (qui distingue les minuscules des majuscules).
+
+En cas de sensibilité à la casse, avoir des images stockées dans le dossier `Images/...` et les appeler en HTML avec le chemin `images/...` provoquera une anomalie.
