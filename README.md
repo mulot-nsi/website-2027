@@ -35,9 +35,9 @@ Static assets, like favicons, can be placed in the `public/` directory.
 
 All commands are run from the root of the project, from a terminal:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
+| Command                | Action                                           |
+| :--------------------- | :----------------------------------------------- |
+| `pnpm install`         | Installs dependencies                            |
 | `pnpm dev`             | Starts local dev server at `localhost:4321`      |
 | `pnpm build`           | Build your production site to `./dist/`          |
 | `pnpm preview`         | Preview your build locally, before deploying     |
@@ -59,12 +59,10 @@ Check out [Starlight’s docs](https://starlight.astro.build/), read [the Astro 
 - [Starlight Sidebar Topics](https://starlight-sidebar-topics.netlify.app/)
 - [Starlight Markdown Blocks](https://delucis.github.io/starlight-markdown-blocks/)
 
-
 ## Développement
 
 Lancement de la mise au format des fichiers :
 
 ```
-pnpx @biomejs/biome format --write astro.config.mjs  
+pnpx @biomejs/biome format --write astro.config.mjs
 ```
-

@@ -5,5 +5,5 @@
 @import "tailwindcss/utilities.css" layer(utilities);
 
 table ul {
-    padding-inline-start: 2ex;
+  padding-inline-start: 2ex;
 }
