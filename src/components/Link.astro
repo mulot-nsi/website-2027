@@ -1,7 +1,10 @@
 ---
+import { Icon } from "@astrojs/starlight/components";
+
 const { href } = Astro.props;
 ---
 
 <a href={href} target="_blank" rel="nofollow noopener noreferrer">
+  <Icon name="link-alt" class="inline-block align-text-bottom mr-0.5" />
   <slot />
 </a>

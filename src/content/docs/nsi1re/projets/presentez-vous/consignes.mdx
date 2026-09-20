@@ -6,7 +6,7 @@ description: Consignes de réalisation du projet de création d'un site web de p
 import { Aside } from "@astrojs/starlight/components";
 import { FileTree } from "@astrojs/starlight/components";
 import { Tabs, TabItem } from "@astrojs/starlight/components";
-import Link from  "@components/Link.astro";
+import Link from "@components/Link.astro";
 
 ## Contenus
 
@@ -24,8 +24,6 @@ Ce projet est à destination exclusive de votre professeur et ne sera jamais ren
 Cette page sert à vous présenter.
 Son code doit obligatoirement être enregistré dans un fichier nommé `index.html`.
 Elle devra afficher au minimum les éléments suivants :
-
-
 
 <Aside type="note" icon="document" title="Contenu">
 
@@ -50,7 +48,7 @@ Le choix du sujet est libre mais votre page devra impérativement respecter les 
 
 <Aside type="caution" title="Contenus interdits et réglementés">
 
-- Respecter la [legislation française](https://www.service-public.gouv.fr/particuliers/vosdroits/F32075) en vigueur
+- Respecter la <Link href="https://www.service-public.gouv.fr/particuliers/vosdroits/F32075">legislation française</Link>
 - Ne faire aucun prosélytisme politique ou religieux
 - Ne diffuser aucune donnée personnelle sensible
 - N'inclure aucun propos violent, injurieux ou inapproprié
@@ -188,15 +186,16 @@ Pour s'assurer de la qualité de votre code, voici les contraintes de qualité �
 <Tabs>
 <TabItem label="Code HTML">
 
-- Le code HTML de chaque page web doit être indenté de façon à ce qu'on puisse bien identifier l'ouverture et la fermeture des balises
-- Le code HTML devra être vérifié en le copiant/collant sur le site [W3C Markup Validation Service](https://validator.w3.org/#validate_by_input+with_options). Elles ne devront comporter aucune erreur
+- Le code doit être indenté de façon à pouvoir identifier l'ouverture et la fermeture des balises
+- Le code HTML devra être vérifié en le copiant/collant sur le site <Link href="https://validator.w3.org/#validate_by_input+with_options">W3C Markup Validation Service</Link>
 - Si vous avez l'anomalie _"Trailing slash on void elements has no effect and interacts badly with unquoted attribute values"_, supprimez le `/` de fin des balises auto-fermantes (meta, link, ìmg, ...)
 
 </TabItem>
 
 <TabItem label="Code CSS">
 
-Le code CSS devra être vérifié en le copiant/collant sur le site [W3C CSS Validation Service](https://jigsaw.w3.org/css-validator/#validate_by_input). Il ne deva comporter aucune erreur.
+Le code CSS devra être vérifié en le copiant/collant sur le site <Link href="https://jigsaw.w3.org/css-validator/#validate_by_input">W3C CSS Validation Service</Link>.
+Il ne deva comporter aucune erreur.
 
 </TabItem>
 </Tabs>
