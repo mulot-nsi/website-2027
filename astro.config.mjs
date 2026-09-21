@@ -53,6 +53,17 @@ export default defineConfig({
             icon: "open-book",
             items: [
               {
+                label: "Bases de programmation",
+                items: [
+                  {
+                    autogenerate: {
+                      directory: "nsi1re/programmation",
+                    },
+                  },
+                ],
+              },
+
+              {
                 label: "Projets",
                 items: [
                   {
