@@ -26,7 +26,11 @@ export default defineConfig({
         },
       ],
       plugins: [
-        starlightQuiz(),
+        starlightQuiz({
+          quizDefaults: {
+            autoNumber: false,
+          },
+        }),
         starlightSidebarTopics([
           {
             label: "Seconde",
