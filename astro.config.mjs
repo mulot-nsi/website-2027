@@ -3,6 +3,7 @@ import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
 import tailwindcss from "@tailwindcss/vite";
 import starlightSidebarTopics from "starlight-sidebar-topics";
+import starlightQuiz from 'starlight-quiz';
 
 // https://astro.build/config
 export default defineConfig({
@@ -10,10 +11,11 @@ export default defineConfig({
     starlight({
       title: "Mulot.prof",
       customCss: ["./src/styles/global.css"],
+      defaultLocale: 'root',
       locales: {
         root: {
           label: "Français",
-          lang: "fr-FR",
+          lang: "fr",
         },
       },
       social: [
@@ -24,6 +26,7 @@ export default defineConfig({
         },
       ],
       plugins: [
+        starlightQuiz(),
         starlightSidebarTopics([
           {
             label: "Seconde",
@@ -43,6 +46,7 @@ export default defineConfig({
                       "snt/internet/simulation-reseau/bilan",
                     ],
                   },
+                  { label: "Annuaire d'Internet", slug: "snt/internet/dns" }
                 ],
               },
             ],

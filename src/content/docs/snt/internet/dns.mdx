@@ -1,0 +1,176 @@
+---
+title: L'annuaire d'Internet
+description: Page d'accueil de la thématique Internet
+sidebar:
+  label: Annuaire d'Internet
+---
+
+import { Steps, Tabs, TabItem, Aside } from '@astrojs/starlight/components';
+import { Quiz, QuizResults } from 'starlight-quiz/components';
+import Link from "@components/Link.astro";
+
+Toute machine connectée au réseau Internet dispose d'une adresse IP.
+Cependant, au quotidien, les adresses IP sont difficiles à mémoriser, tout comme il vous est difficile de mémoriser les numéros de téléphone de tous vos contacts.
+
+Pour y remédier, il existe un service appelé DNS (*Domain Name System*).
+Il permet de traduire une **adresse symbolique** comme `lemonde.fr` (aussi appelée **nom de domaine**), en une adresse IP utilisable par les machines pour communiquer.
+
+## 1. Navigation par adresse IP
+
+Pour comprendre la nécessité du DNS, nous allons naviguer sur le Web sans utiliser de nom de domaine.
+
+<Steps>
+1. Ouvrez un nouvel onglet dans votre navigateur web
+2. Saisissez précisément l'adresse IP `141.94.212.184` dans la barre d'adresse
+3. Validez avec la touche Entrée
+</Steps>
+
+<Aside title="Analyse">
+Vous constatez que la page d'accueil d'une encyclopédie s'affiche.
+Lorsqu'elles sont en réseau, les machines utilisent uniquement les adresses IP pour communiquer.
+Le DNS intervient de manière à éviter aux utilisateurs de les mémoriser.
+</Aside>
+
+<Quiz title="Question 1">
+Pourquoi le système DNS a-t-il été inventé ?
+
+- [] Pour accélérer la vitesse de communication entre les machines
+- [x] Pour nous permettre de mémoriser des adresses symboliques au lieu de chiffres
+- [] Pour compenser le manque d'adresses IP en ajoutant des noms de domaine
+- [] Pour sécuriser la navigation en chiffrant les données
+
+Le DNS n'a pas été créé pour résoudre la pénurie d'adresse IPv4. Il sert uniquement d'annuaire pour associer un nom mémorisable à une adresse IP.
+</Quiz>
+
+## 2. Interrogation d'un serveur DNS
+
+Lorsque votre ordinateur effectue automatiquement en arrière-plan la traduction d'un nom de domaine en adresse IP, ce processus s'appelle la **résolution DNS**.
+Afin de visualiser ce travail invisible, nous allons interroger manuellement un serveur DNS.
+
+<Tabs>
+  <TabItem label="Version Web">
+    Cette version utilise une interface web pour interroger les serveurs DNS.
+
+    <Steps>
+    1. Rendez-vous sur le site d'analyse réseau : <Link href="https://www.nslookup.io">nslookup.io</Link>
+    2. Dans le champ de recherche, saisissez `wikipedia.fr` et validez
+    3. Dans les résultats, repérez la section **IPv4 address** et comparez l'adresse IP avec celle du premier exercice
+    4. Choisissez trois sites web que vous visitez régulièrement (site du lycée, ENT...).<br/> Répétez l'opération pour identifier leurs adresses IP respectives.
+    </Steps>
+  </TabItem>
+
+  <TabItem label="Version Linux">
+    Cette version utilise un émulateur de système d'exploitation Linux en ligne de commande pour utiliser les outils de diagnostic réseau.
+
+    <Steps>
+        1. Rendez-vous sur <Link href="https://bellard.org/jslinux/vm.html?cpu=x86_64&url=alpine-x86_64.cfg&mem=256">l'émulateur Linux</Link>
+        2. **Test de connectivité :** Tapez la commande `ping wikipedia.fr` puis appuyez sur Entrée.
+           L'ordinateur affiche l'adresse IP avec laquelle il communique.<br/>
+           Arrêtez l'exécution en utilisant le raccourci `Ctrl + C`
+        3. **Outil de résolution :** Tapez la commande `nslookup wikipedia.fr`
+        4. Repérez la ligne `Address` qui contient l'addresse IP associée à `wikipedia.fr` et comparez celle-ci avec celle du premier exercice
+        5. Utilisez l'outil `nslookup` avec trois sites de votre choix
+    </Steps>
+  </TabItem>
+</Tabs>
+
+<Aside type="tip" title="Remarque">
+  Certains domaines sont également associés à des adresses au format **IPv6**.
+  Ce format, stocké sur 128 bits, a été créé pour remédier à l'épuisement mondial des adresses IPv4 (stockées sur 32 bits).
+</Aside>
+
+<Quiz title="Question 2">
+À quoi correspond l'adresse IP renvoyée lorsque l'on cherche `wikipedia.fr` ?
+
+- [] À l'adresse IP de votre ordinateur
+- [] À l'adresse IP du serveur DNS
+- [x] À l'adresse IP du serveur Web qui héberge le site de Wikipédia
+- [] À l'adresse IP du moteur de recherche
+
+Les outils employés interroge l'annuaire DNS pour obtenir l'adresse IP finale du serveur Web contenant les pages demandées.
+</Quiz>
+
+<Quiz title="Question 3">
+Comment se nomme le principe consistant à traduire un nom de domaine en une adresse IP ?
+
+- [] La recherche DNS
+- [] La navigation Web
+- [] La traduction IP
+- [x] La résolution DNS
+</Quiz>
+
+## 3. Architecture mondiale
+
+Le système DNS n'est pas centralisé sur un serveur unique, mais s'appuie sur une infrastructure répartie à travers le monde.
+
+<Steps>
+1. Rendez-vous sur la plateforme d'analyse globale <Link href="https://dnschecker.org/">dnschecker.org</Link>
+2. **Site à faible trafic :** Saisissez le nom de domaine d'un petit site (par exemple `mulot.prof` ou le site de votre mairie) et lancez la recherche. Observez les adresses IP renvoyées à travers le monde.
+3. **Site à fort trafic :** Saisissez ensuite le nom d'un service à très forte audience mondiale (par exemple `netflix.com` ou `tiktok.com`). Comparez les résultats obtenus.
+</Steps>
+
+<Aside title="Analyse">
+- **Pour le site à faible trafic :** L'adresse IP renvoyée est la même sur tous les continents. Le site web est hébergé sur un serveur unique.
+- **Pour le site à fort trafic :** Il y a plusieurs adresses IP et celles-ci varient selon la région. Le DNS oriente chaque utilisateur vers le serveur le plus adapté, ce qui permet de répartir la charge réseau et d'optimiser le temps d'affichage.
+</Aside>
+
+## 4. Propriétaire d'un nom de domaine
+
+Quand on réserve un nom de domaine, les informations sur son propriétaire sont inscrites dans un annuaire public appelé le **WHOIS**.
+
+<Tabs>
+  <TabItem label="Version Web">
+    Cette version utilise une interface web pour interroger les serveurs DNS.
+
+    <Steps>
+    1. Rendez-vous sur l'outil de recherche : <Link href="https://www.gandi.net/fr/domain/p/whois">Gandi - Whois</Link>
+    2. Saisissez `instagram.fr` dans la barre de recherche et validez
+    3. Identifiez le propriétaire de ce nom de domaine
+    4. Répétez l'opération avec le nom de domaine `whatsapp.fr`
+    5. Testez l'opération sur un ou plusieurs noms de domaine de votre choix
+    </Steps>
+  </TabItem>
+
+  <TabItem label="Version Linux">
+    Cette version utilise un émulateur de système d'exploitation Linux en ligne de commande pour utiliser les outils de diagnostic réseau.
+
+    <Steps>
+        1. Rendez-vous sur <Link href="https://bellard.org/jslinux/vm.html?cpu=x86_64&url=alpine-x86_64.cfg&mem=256">l'émulateur Linux</Link>
+        2. Tapez la commande `whois instagram.fr` puis appuyez sur Entrée.
+        3. Identifiez le propriétaire de ce nom de domaine
+        4. Répétez l'opération avec le nom de domaine `whatsapp.fr`
+        5. Testez l'opération sur un ou plusieurs noms de domaine de votre choix
+    </Steps>
+  </TabItem>
+</Tabs>
+
+<Quiz title="Question 4">
+D'après vos recherches WHOIS sur `instagram.fr` et `whatsapp.fr`, quelle entreprise est propriétaire de ces deux services ?
+
+- [] Google
+- [x] Meta *(anciennement Facebook)*
+- [] Microsoft
+- [] ByteDance
+</Quiz>
+
+
+## 5. Réservation d'un nom de domaine
+
+Un nom de domaine n'est pas acheté mais **loué pour une durée limitée**. Chaque extension (`.fr`, `.com`...) est gérée par un organisme officiel.
+
+
+<Aside>
+* **Le registre :** C'est l'organisme qui gère une extension. En France, l'<Link href="https://www.afnic.fr/">Afnic</Link> gère l'extension `.fr`. Dans le monde, le <Link href="https://www.pir.org/">PIR</Link> gère l'extension `.org`.
+* **Le bureau d'enregistrement (registrar) :** L'entreprise intermédiaire (ex: Gandi, OVHcloud) auprès de laquelle les particuliers et entreprises réservent leurs noms de domaine.
+</Aside>
+
+<Steps>
+1. Rendez-vous sur le site du bureau d'enregistrement <Link href="https://www.gandi.net/">gandi.net</Link>.
+2. Dans la barre de recherche principale, saisissez un nom de domaine personnalisé de votre choix (ex: `votre-prenom-nom.fr` ou tout autre nom de votre choix).
+3. Observez la disponibilité du nom ainsi que le tarif annuel de réservation pour les extensions `.fr` et `.com`.
+</Steps>
+
+
+<Aside type="tip" title="Terminé">
+    Appelez votre professeur afin qu'il vous indique l'activité suivante.
+</Aside>
