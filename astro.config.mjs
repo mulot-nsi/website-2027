@@ -50,7 +50,7 @@ export default defineConfig({
                       "snt/internet/simulation-reseau/bilan",
                     ],
                   },
-                  { label: "Annuaire d'Internet", slug: "snt/internet/dns-bis" }
+                  { label: "Annuaire d'Internet", slug: "snt/internet/dns" }
                 ],
               },
             ],
