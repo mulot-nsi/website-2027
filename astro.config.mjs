@@ -9,6 +9,7 @@ import { sidebarTopics } from "./src/config/sidebar/index.mjs";
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://2027.mulot.prof',
   integrations: [
     starlight({
       title: "Mulot.prof",

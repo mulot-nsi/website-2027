@@ -13,18 +13,19 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.10",
-    "@astrojs/starlight": "^0.42.2",
+    "@astrojs/starlight": "^0.42.6",
     "@astrojs/starlight-tailwind": "^5.0.0",
     "@tailwindcss/vite": "^4.3.3",
-    "astro": "^7.3.3",
-    "sharp": "^0.35.4",
+    "astro": "^7.3.8",
+    "livecodes": "^0.14.1",
+    "sharp": "^0.35.5",
     "starlight-quiz": "^1.0.2",
     "starlight-sidebar-topics": "^0.9.0",
     "tailwindcss": "^4.3.3",
     "typescript": "^7.0.2"
   },
   "devDependencies": {
-    "prettier": "^3.9.8",
-    "prettier-plugin-astro": "^1.0.1"
+    "prettier": "^3.9.10",
+    "prettier-plugin-astro": "^1.1.1"
   }
 }
