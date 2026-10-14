@@ -1,0 +1,52 @@
+---
+interface Props {
+  language?: "html" | "python";
+  code?: string;
+  height?: string;
+}
+
+const { language = "html", code = "", height = "360px" } = Astro.props;
+---
+
+<live-editor
+  data-lang={language}
+  data-code={code}
+  class="not-content"
+  style={`display: block; height: ${height}; margin: 1.5rem 0;`}
+>
+  <div
+    class="editor-target"
+    style="height: 100%; border-radius: 8px; overflow: hidden; border: 1px solid var(--sl-color-gray-5);"
+  ></div>
+</live-editor>
+
+<script>
+  import { createPlayground } from "livecodes";
+
+  class LiveEditor extends HTMLElement {
+    async connectedCallback() {
+      const target = this.querySelector(".editor-target");
+      if (!target || this.dataset.loaded) return;
+      this.dataset.loaded = "true";
+
+      const lang = this.dataset.lang || "html";
+      const code = this.dataset.code || "";
+      const isPython = lang === "python";
+
+      await createPlayground(target as HTMLElement, {
+        config: {
+          markup: isPython ? undefined : { language: "html", content: code },
+          script: isPython ? { language: "python", content: code } : undefined,
+          activeEditor: isPython ? "script" : "markup",
+          delay: 300,
+          mode: "simple",
+          view: "split",
+          theme: "light",
+        },
+        params: isPython ? { console: "open" } : {},
+      });
+    }
+  }
+
+  customElements.define("live-editor", LiveEditor);
+</script>

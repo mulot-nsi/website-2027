@@ -8,3 +8,179 @@ sidebar:
 
 prev: false
 ---
+
+import { Image } from 'astro:assets';
+import { Steps, Tabs, TabItem, Aside } from "@astrojs/starlight/components";
+import { Kbd } from "starlight-kbd/components";
+import Link from "@components/Link.astro";
+import Playground from "@components/Playground.astro";
+
+Toutes les pages que vous consultez sur le Web sont construites à partir d'un même langage informatique :
+le **HTML** _(HyperText Markup Language)_.
+
+Ce langage, créé spécialement pour le web, permet de donner des instructions au navigateur afin de **définir** et **structurer** le contenu d'une page.
+C'est grâce à lui que vous pouvez voir du texte, des images, des liens et bien d'autres éléments sur un site web.
+
+## Analyse d'une page web
+
+### Le code source
+
+Un **code source** est un texte qui contient des instructions destinées à l'ordinateur afin de lui expliquer quoi faire.
+Pour une page web, ce texte est écrit en HTML. Ce langage est interprété par le **navigateur web** (_Firefox_, _Chrome_, _Edge_...) qui le transforme en un contenu lisible pour les humains.
+Mais à quoi ressemble le code HTML ?
+
+<Tabs>
+<TabItem label="Chromebook" icon="laptop">
+
+<Steps>
+
+1. Accédez à la page de démonstration en cliquant sur le lien suivant : <Link href="/demo.html">demo.html</Link>
+2. Enregistrez la page sur votre ordinateur :
+   - à l'aide du raccourci <Kbd mac="Cmd+S" windows="Ctrl+S" />
+   - ou par un clic-droit puis **Enregistrez sous...**
+
+   Sélectionnez impérativement le format **Page Web, HTML uniquement** :
+   <Image src={import('@/assets/images/snt_web_enregistrer_page.png')} alt="Enregistrement de la page web" width={500} class="mx-auto block" />
+3. Dans votre dossier **Téléchargement**, ouvrez le fichier `Démo.html` avec l'application **Text** (clic droit &gt; _Ouvrir avec..._) :
+   <Image src={import('@/assets/images/snt_web_ouvrir_page.png')} alt="Ouverture de la page web" width={500} class="mx-auto block" />
+4. **Observez** attentivement le code source. Distinguez le **contenu visible** (le texte en français) de la **structure** (les balises HTML qui l'organisent).
+5. Lisez le bloc d'explications ci-après.
+
+</Steps>
+</TabItem>
+
+<TabItem label="Autre" icon="desktop">
+
+Il est possible de visualiser le code source de n'importe quelle page web directement depuis un navigateur web.
+
+<Steps>
+
+1. Accédez à la page de démonstration en cliquant sur le lien suivant : <Link href="/demo.html">demo.html</Link>
+2. Affichez son code source à l'aide du raccourci <Kbd mac="Cmd+U" windows="Ctrl+U" />
+3. **Observez** attentivement le code source. Distinguez le **contenu visible** (le texte en français) de la **structure** (les balises HTML qui l'organisent).
+4. Lisez le bloc d'explications ci-après..
+
+</Steps>
+</TabItem>
+</Tabs>
+
+<Aside type="note" title="Explications">
+
+Dans le code source, certains éléments entourés de chevrons comme `<h1>`, `<p>` ou `<strong>` ne s'affichent pas sur la page finale.
+
+Ces éléments s'appellent des **balises** et constituent la base du langage HTML.
+Elles ne sont pas visibles par l'utilisateur, mais indiquent au navigateur (Chrome, Firefox…) comment structurer et hiérarchiser le contenu (définir un titre, un paragraphe ou du texte important).
+
+</Aside>
+
+### Les balises HTML
+
+Les balises HTML servent à structurer le contenu d'une page web.
+Chacune a un rôle précis, comme définir un titre, créer un paragraphe ou mettre du texte en valeur.
+Découvrons les plus courantes avant de construire votre première page.
+
+#### Structurer le contenu
+
+Tout comme dans un traitement de texte, une page web est structurée avec des titres, des sous-titres et des paragraphes.
+En HTML, on utilise des balises pour encadrer le texte et indiquer son rôle.
+
+##### Fonctionnement d'une balise
+
+Une balise fonctionne presque toujours par paire : elle **encadre** le contenu pour indiquer où l'élément commence et où il se termine.
+
+```html  annotations="side"
+<!-- Cas Général -->
+<balise> <!-- [!annotate] Balise **ouvrante** : marque le début de l'élément. -->
+    Contenu de la balise
+</balise> <!-- [!annotate] Balise **fermante** : marque la fin de l'élément (attention à la barre oblique `/`) -->
+
+<!-- Exemple avec un titre -->
+<h1>Bienvenue</h1> <!-- [!annotate] Le titre "Bienvenue" est encadré par les balises `<h1>` et `</h1>` -->
+
+<!-- Exemple avec un paragraphe -->
+<p>
+    Contenu de mon paragraphe. <!-- [!annotate] Les espaces et les sauts de ligne servent à rendre le code lisible pour vous, le navigateur les ignore. -->
+</p>
+```
+
+<Aside type="note" title="Les balises pour structurer le texte">
+
+- Les balises de `<h1>` à `<h6>` définissent les niveaux de titres.<br/>`<h1>` est le titre principal (le plus gros), `<h2>` est un sous-titre, etc.
+- La balise `<p>` définit un paragraphe de texte.
+
+</Aside>
+
+##### Mise en pratique
+
+Le simulateur ci-après vous permet d'écrire du code HTML à gauche et de voir immédiatement le résultat à droite.
+
+<Steps>
+
+1. Remplacez le texte du titre principal `<h1>` par votre prénom.
+2. Remplacez le texte du premier sous-titre `<h2>` par le texte "Qui suis-je ?"
+3. Modifiez le texte du premier paragraphe `<p>` par la phrase de votre choix.
+4. Remplacez le texte du deuxième sous-titre `<h2>` par le texte "Mes passions"
+4. Créez un nouveau sous-titre de niveau 3 en utilisant les balises `<h3>` et `</h3>`.<br/>Écrivez le texte de votre choix à l'intérieur.
+5. Créez un nouveau paragraphe en utilisant les balises `<p>` et `</p>`.<br/>Écrivez le texte de votre choix à l'intérieur.
+5. Observez comment la taille du texte change selon la balise utilisée (`h1`, `h2`, `h3`, `h4` ou `p`).
+
+</Steps>
+
+<Playground
+  language="html"
+  code={`<h1>Titre principal</h1>
+
+<h2>Sous-Titre 1</h2>
+<p>
+   Contenu du
+   paragraphe
+</p>
+
+<h2>Sous-Titre 2</h2>`}
+/>
+
+#### Mettre en valeur du texte
+
+À l'intérieur d'un paragraphe, vous pouvez avoir besoin de faire ressortir certains mots importants ou d'insérer un saut de ligne.
+En HTML, on utilise des balises spécifiques qui s'insèrent directement au milieu du texte.
+
+<Aside type="note" title="Les balises pour mettre en valeur du texte">
+
+- La balise `<strong>` indique une forte importance<br/>(le navigateur l'affiche généralement en **gras**).
+- La balise `<em>` indique une mise en évidence<br/>(le navigateur l'affiche généralement en _italique_).
+- La balise `<br>` permet d'insérer un saut de ligne simple.<br/>C'est une balise **orpheline**, elle n'a pas besoin de balise fermante.
+
+</Aside>
+
+##### Mise en pratique
+
+Dans l'éditeur ci-dessous, le code d'un petit paragraphe vous est proposé.
+Observez attentivement le résultat à droite, puis réalisez les étapes suivantes :
+
+<Steps>
+
+1. Supprimez les balises `<em>` et `</em>` qui encadrent le texte « mes nouvelles connaissances en HTML » pour lui redonner un aspect normal.
+2. À l'aide de la balise `<strong>`, mettez en valeur (en gras) l'expression « créer un site web ».
+3. À l'aide de la balise `<em>`, mettez le mot « librement » en italique.
+4. Supprimez la deuxième balise `<br>` située juste après le point d'exclamation. Que constatez-vous sur l'affichage du texte à droite ?
+
+</Steps>
+
+<Playground
+  language="html"
+  code={`<p>
+    Grâce à
+    <em>mes nouvelles connaissance en HTML</em>,
+
+    je vais pouvoir créer un site web et
+
+    <br>
+    <strong>dominer le monde</strong> 😎 !
+    <br>
+
+    Ou tout simplement
+    écrire librement
+    sur les sujets
+    qui m'intéressent 🥰
+  </p>`}
+/>

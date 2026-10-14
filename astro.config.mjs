@@ -2,14 +2,18 @@
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
 import tailwindcss from "@tailwindcss/vite";
+
 import starlightSidebarTopics from "starlight-sidebar-topics";
 import starlightQuiz from "starlight-quiz";
+import codeblocks from 'starlight-codeblocks';
+import starlightKbd from "starlight-kbd";
 
+import { kbdConfig } from "@/config/plugins.mjs";
 import { sidebarTopics } from "./src/config/sidebar/index.mjs";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://2027.mulot.prof',
+  site: "https://2027.mulot.prof",
   integrations: [
     starlight({
       title: "Mulot.prof",
@@ -29,11 +33,13 @@ export default defineConfig({
         },
       ],
       plugins: [
+        codeblocks(),
         starlightQuiz({
           quizDefaults: {
             autoNumber: false,
           },
         }),
+        starlightKbd(kbdConfig),
         starlightSidebarTopics(sidebarTopics),
       ],
     }),

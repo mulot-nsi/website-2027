@@ -29,6 +29,12 @@ importers:
       sharp:
         specifier: ^0.35.5
         version: 0.35.5(@types/node@24.19.2)
+      starlight-codeblocks:
+        specifier: ^1.1.0
+        version: 1.1.0(@astrojs/starlight@0.42.6(astro@7.3.8(@types/node@24.19.2)(jiti@2.7.0)(yaml@2.9.1))(typescript@7.0.2))(astro-expressive-code@0.44.2(astro@7.3.8(@types/node@24.19.2)(jiti@2.7.0)(yaml@2.9.1)))(astro@7.3.8(@types/node@24.19.2)(jiti@2.7.0)(yaml@2.9.1))
+      starlight-kbd:
+        specifier: ^0.4.0
+        version: 0.4.0(@astrojs/starlight@0.42.6(astro@7.3.8(@types/node@24.19.2)(jiti@2.7.0)(yaml@2.9.1))(typescript@7.0.2))
       starlight-quiz:
         specifier: ^1.0.2
         version: 1.0.2(@astrojs/starlight@0.42.6(astro@7.3.8(@types/node@24.19.2)(jiti@2.7.0)(yaml@2.9.1))(typescript@7.0.2))(astro@7.3.8(@types/node@24.19.2)(jiti@2.7.0)(yaml@2.9.1))
@@ -394,6 +400,12 @@ packages:
   '@expressive-code/plugin-text-markers@0.44.2':
     resolution: {integrity: sha512-SNI7EgUSiADqbqUzzMbj1ZeC/r2pa5eg3KyFOGAd3a7EsIA4qzjXQLp+ODWQtHVDKFCdGs4J3ovSJUqvKIK96g==}
 
+  '@iconify-json/vscode-icons@1.2.88':
+    resolution: {integrity: sha512-KX7uUqiVte6CCgOejdhEsFVGk0SRA3P9Q3+PKaOvQ2xx69+V6vq9JF330eJKRu5CEDsQXcy6xMVsuq4Z5B4qSg==}
+
+  '@iconify/types@2.0.0':
+    resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
+
   '@img/colour@1.1.0':
     resolution: {integrity: sha512-Td76q7j57o/tLVdgS746cYARfSyxk8iEfRxewL9h4OMzYhbW4TAcppl0mT4eyqXddh6L/jwoM75mo7ixa/pCeQ==}
     engines: {node: '>=18'}
@@ -747,6 +759,27 @@ packages:
   '@shikijs/langs@4.5.0':
     resolution: {integrity: sha512-wwBTqwduXSz0X4v9Qa2EWeFaYJEw1clCncWjoRNQRbVDu3SPRTRWucnouYapKj3b8Q+sk/41Vbc4B5c8nuYzLA==}
     engines: {node: '>=20'}
+
+  '@shikijs/magic-move@4.5.0':
+    resolution: {integrity: sha512-5odJkSvOtEXb/BXg7YH0e5Cneao2iefa3Kdjg2zamAbuj63d5cdD4uqxqAKnu3it1dCEKadk8KDHGsNALjT6fA==}
+    engines: {node: '>=20'}
+    peerDependencies:
+      react: ^18.2.0 || ^19.0.0
+      shiki: ^4.0.0
+      solid-js: ^1.9.1
+      svelte: ^5.0.0-0
+      vue: ^3.4.0
+    peerDependenciesMeta:
+      react:
+        optional: true
+      shiki:
+        optional: true
+      solid-js:
+        optional: true
+      svelte:
+        optional: true
+      vue:
+        optional: true
 
   '@shikijs/primitive@4.5.0':
     resolution: {integrity: sha512-UM7ShlA8oz0OWxLLO8BmO9Ip6fVqdkt8yF0EH7nOCqHfrx1eEAzF0ZUVK7L+I8NEgeu1PEWSRlxaiPPeCb4iDg==}
@@ -1258,6 +1291,9 @@ packages:
   devlop@1.1.0:
     resolution: {integrity: sha512-RWmIqhcFf1lRYBvNmr7qTNuyCt/7/ns2jbpp1+PalgE/rDQcBT0fioSMUpJ93irlUhC5hrg4cYqe6U+0ImW0rA==}
 
+  diff-match-patch-es@2.0.1:
+    resolution: {integrity: sha512-+Sl+/H47ArQiKPp8fA307M1RwyCwFqNhggw0mAEFherLNL/J2ZUFZsnELj65Cir91VfVPx3jlNzeKBdr+QAFTw==}
+
   diff@9.0.0:
     resolution: {integrity: sha512-svtcdpS8CgJyqAjEQIXdb3OjhFVVYjzGAPO8WGCmRbrml64SPw/jJD4GoE98aR7r25A0XcgrK3F02yw9R/vhQw==}
     engines: {node: '>=0.3.1'}
@@ -1295,6 +1331,10 @@ packages:
 
   entities@4.5.0:
     resolution: {integrity: sha512-V0hjH4dGPh9Ao5p0MoRY6BVqtwCjhz6vI5LT8AJ55H+4g9/4vbHx1I54fS0XuclLhDHArPQCiMjDxjaL8fPxhw==}
+    engines: {node: '>=0.12'}
+
+  entities@6.0.1:
+    resolution: {integrity: sha512-aN97NXWF6AWBTahfVOIrB/NShkzi5H7F9r1s9mD3cDj4Ko5f2qhhVoYMibXF7GlLveb/D2ioWay8lxI97Ven3g==}
     engines: {node: '>=0.12'}
 
   entities@8.1.0:
@@ -1387,6 +1427,12 @@ packages:
 
   hast-util-format@1.1.0:
     resolution: {integrity: sha512-yY1UDz6bC9rDvCWHpx12aIBGRG7krurX0p0Fm6pT547LwDIZZiNr8a+IHDogorAdreULSEzP82Nlv5SZkHZcjA==}
+
+  hast-util-from-html@2.0.3:
+    resolution: {integrity: sha512-CUSRHXyKjzHov8yKsQjGOElXy/3EKpyX56ELnkHH34vDVw1N1XSQ1ZcAvTyAPtGqLTuKP/uxM+aLkSPqF/EtMw==}
+
+  hast-util-from-parse5@8.0.3:
+    resolution: {integrity: sha512-3kxEVkEKt0zvcZ3hCRYI8rqrgwtlIOFMWkbclACvjlDw8Li9S2hk/d51OI0nr/gIpdMHNepwgOKqZ/sy0Clpyg==}
 
   hast-util-has-property@3.0.0:
     resolution: {integrity: sha512-MNilsvEKLFpV604hwfhVStK0usFY/QmM5zX16bo7EjnAEGofr5YyI37kzopBlZJkHD4t887i+q/C8/tr5Q94cA==}
@@ -1651,6 +1697,10 @@ packages:
     resolution: {integrity: sha512-U4N8FgzmWxc8k1VH8Kr6lQg18U7Fjvby6wXHVRX/ZZ7IwWbRMgrRbP0Wrb5q5NVinryp4SQampHKdvtecItxUg==}
     engines: {node: 20 || >=22}
 
+  lz-string@1.5.0:
+    resolution: {integrity: sha512-h5bgJWpxJNswbU7qCrV0tIKQCaS3blPDrqKWx+QxzuzL1zGUzij9XCWLrSLsJPu5t+eWA/ycetzYAO5IOMcWAQ==}
+    hasBin: true
+
   magic-string@0.30.21:
     resolution: {integrity: sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==}
 
@@ -1829,6 +1879,9 @@ packages:
   parse-entities@4.0.2:
     resolution: {integrity: sha512-GG2AQYWoLgL877gQIKeRPGO1xF9+eG1ujIb5soS5gPvLQ1y2o8FL90w2QWNdf9I361Mpp7726c+lj3U0qK1uGw==}
 
+  parse5@7.3.0:
+    resolution: {integrity: sha512-IInvU7fabl34qmi9gY8XOVxhYyMyuH2xUNpb2q8/Y+7552KlejkRvqvD19nMoUW/uQGGbqNpA6Tufu5FL5BZgw==}
+
   path-browserify@1.0.1:
     resolution: {integrity: sha512-b7uo2UCUOYZcnF/3ID0lulOJi/bafxa1xPe7ZPsammBSpjSWQkjNxlt635YGS2MiR9GjvuXCtz2emr3jbsz98g==}
 
@@ -1961,6 +2014,10 @@ packages:
     resolution: {integrity: sha512-OcRW72ngQvc+MSVWBRIovC/BTW589iUE/Vxav7VeM4RcY9MUjqB+IR6ILG1k9nuW6LiG/nct9uma4/MBtnZbmQ==}
     engines: {node: '>=20'}
 
+  simple-icons@16.35.0:
+    resolution: {integrity: sha512-TCfl/2+GTrx0nCo4pEWGvxhOb8c6NsqOU1OpwjtF4lwJAthB8IYVD0fuIMjLMg6JFuG1YBO0t1iETQqJLqkoJA==}
+    engines: {node: '>=0.12.18'}
+
   sisteransi@1.0.5:
     resolution: {integrity: sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==}
 
@@ -1979,6 +2036,31 @@ packages:
 
   space-separated-tokens@2.0.2:
     resolution: {integrity: sha512-PEGlAwrG8yXGXRjW32fGbg66JAlOAwbObuqVoJpv/mRgoWDQfgH1wDPvtzWyUSNAXBGSk8h755YDbbcEy3SH2Q==}
+
+  starlight-codeblocks@1.1.0:
+    resolution: {integrity: sha512-3GLq0Yd8EP3iW/YQ3LsAJVcJd+7eE4SYx0EcXtiHFkI2PEvYSUZGrgtu4W4swTLtRqVxSJKQCxlaYvj6P2mD0A==}
+    engines: {node: '>=22.12.0'}
+    peerDependencies:
+      '@astrojs/starlight': '>=0.42.0'
+      '@iconify-json/catppuccin': '>=1.2.0'
+      '@iconify-json/material-icon-theme': '>=1.2.0'
+      astro: '>=7.0.0'
+      astro-expressive-code: '>=0.44.0'
+    peerDependenciesMeta:
+      '@astrojs/starlight':
+        optional: true
+      '@iconify-json/catppuccin':
+        optional: true
+      '@iconify-json/material-icon-theme':
+        optional: true
+      astro-expressive-code:
+        optional: true
+
+  starlight-kbd@0.4.0:
+    resolution: {integrity: sha512-Uz/MimnPaRqHsv2EllVnkD78ab2k3SQbVls3VZ53nUMbPMjIzg0+evgicqxrF8ZukQSRdve5sykKlbBEdH4xzQ==}
+    engines: {node: '>=22.12.0'}
+    peerDependencies:
+      '@astrojs/starlight': '>=0.38.0'
 
   starlight-quiz@1.0.2:
     resolution: {integrity: sha512-wTVdlYN2TZFM23zUHutiggJrWroMMUExbWvMW/rpCAA1nzJt5HDadoXzWU0/nP83hAcOa6O2fW2AXZYNBguf+Q==}
@@ -2176,6 +2258,9 @@ packages:
     resolution: {integrity: sha512-u4J1hr6Y+C/hit34GwL3eIcUf3wngT8TlYUjK7tk0jxydKLAq3sYvifjdTDA6U3KCKRcQCQDGf/srjxfZF3l7g==}
     engines: {node: '>=18.12.0'}
 
+  vfile-location@5.0.3:
+    resolution: {integrity: sha512-5yXvWDEgqeiYiBe1lbxYF7UMAIm/IcopxMHrMQDq3nvKcjPKIhZklUKL+AE7J7uApI4kwe2snsK+eI6UTj9EHg==}
+
   vfile-message@4.0.3:
     resolution: {integrity: sha512-QTHzsGd1EhbZs4AsQ20JX1rC3cOlt/IWJruk893DfLRr57lcnOeMaWG4K0JrRta4mIJZKth2Au3mM3u03/JWKw==}
 
@@ -2340,6 +2425,9 @@ packages:
 
   vscode-uri@3.2.0:
     resolution: {integrity: sha512-m2gXo3bn0G1kT9InzMf07fTbqMbGtyckj3bH5ktLO+1Ssv+yiATZ4dhwaQv9UZWxJh6E9IFGnQyjgWVDWVBDrg==}
+
+  web-namespaces@2.0.1:
+    resolution: {integrity: sha512-bKr1DkiNa2krS7qxNtdrtHAmzuYGFQLiQ13TsorsdT6ULTkPLKuu5+GsFpDlg6JFjUTwX2DyhMPG2be8uPrqsQ==}
 
   wrap-ansi@9.0.2:
     resolution: {integrity: sha512-42AtmgqjV+X1VpdOfyTGOYRi0/zsoLqtXQckTmqTeybT+BDIbM/Guxo7x3pE2vtpr1ok6xRqM9OpBe+Jyoqyww==}
@@ -2764,6 +2852,12 @@ snapshots:
     dependencies:
       '@expressive-code/core': 0.44.2
 
+  '@iconify-json/vscode-icons@1.2.88':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify/types@2.0.0': {}
+
   '@img/colour@1.1.0': {}
 
   '@img/sharp-darwin-arm64@0.35.5':
@@ -3007,6 +3101,13 @@ snapshots:
   '@shikijs/langs@4.5.0':
     dependencies:
       '@shikijs/types': 4.5.0
+
+  '@shikijs/magic-move@4.5.0(shiki@4.5.0)':
+    dependencies:
+      diff-match-patch-es: 2.0.1
+      ohash: 2.0.12
+    optionalDependencies:
+      shiki: 4.5.0
 
   '@shikijs/primitive@4.5.0':
     dependencies:
@@ -3500,6 +3601,8 @@ snapshots:
     dependencies:
       dequal: 2.0.3
 
+  diff-match-patch-es@2.0.1: {}
+
   diff@9.0.0: {}
 
   direction@2.0.1: {}
@@ -3537,6 +3640,8 @@ snapshots:
       tapable: 2.3.3
 
   entities@4.5.0: {}
+
+  entities@6.0.1: {}
 
   entities@8.1.0: {}
 
@@ -3626,6 +3731,26 @@ snapshots:
       hast-util-whitespace: 3.0.0
       html-whitespace-sensitive-tag-names: 3.0.1
       unist-util-visit-parents: 6.0.2
+
+  hast-util-from-html@2.0.3:
+    dependencies:
+      '@types/hast': 3.0.5
+      devlop: 1.1.0
+      hast-util-from-parse5: 8.0.3
+      parse5: 7.3.0
+      vfile: 6.0.3
+      vfile-message: 4.0.3
+
+  hast-util-from-parse5@8.0.3:
+    dependencies:
+      '@types/hast': 3.0.5
+      '@types/unist': 3.0.3
+      devlop: 1.1.0
+      hastscript: 9.0.1
+      property-information: 7.2.0
+      vfile: 6.0.3
+      vfile-location: 5.0.3
+      web-namespaces: 2.0.1
 
   hast-util-has-property@3.0.0:
     dependencies:
@@ -3862,6 +3987,8 @@ snapshots:
   longest-streak@3.1.0: {}
 
   lru-cache@11.5.3: {}
+
+  lz-string@1.5.0: {}
 
   magic-string@0.30.21:
     dependencies:
@@ -4177,6 +4304,10 @@ snapshots:
       is-decimal: 2.0.1
       is-hexadecimal: 2.0.1
 
+  parse5@7.3.0:
+    dependencies:
+      entities: 6.0.1
+
   path-browserify@1.0.1: {}
 
   piccolore@0.1.3: {}
@@ -4356,6 +4487,8 @@ snapshots:
       '@shikijs/vscode-textmate': 10.0.2
       '@types/hast': 3.0.5
 
+  simple-icons@16.35.0: {}
+
   sisteransi@1.0.5: {}
 
   sitemap@9.0.1:
@@ -4370,6 +4503,31 @@ snapshots:
   source-map-js@1.2.2: {}
 
   space-separated-tokens@2.0.2: {}
+
+  starlight-codeblocks@1.1.0(@astrojs/starlight@0.42.6(astro@7.3.8(@types/node@24.19.2)(jiti@2.7.0)(yaml@2.9.1))(typescript@7.0.2))(astro-expressive-code@0.44.2(astro@7.3.8(@types/node@24.19.2)(jiti@2.7.0)(yaml@2.9.1)))(astro@7.3.8(@types/node@24.19.2)(jiti@2.7.0)(yaml@2.9.1)):
+    dependencies:
+      '@expressive-code/core': 0.44.2
+      '@expressive-code/plugin-frames': 0.44.2
+      '@iconify-json/vscode-icons': 1.2.88
+      '@shikijs/magic-move': 4.5.0(shiki@4.5.0)
+      astro: 7.3.8(@types/node@24.19.2)(jiti@2.7.0)(yaml@2.9.1)
+      expressive-code: 0.44.2
+      hast-util-from-html: 2.0.3
+      lz-string: 1.5.0
+      shiki: 4.5.0
+      simple-icons: 16.35.0
+    optionalDependencies:
+      '@astrojs/starlight': 0.42.6(astro@7.3.8(@types/node@24.19.2)(jiti@2.7.0)(yaml@2.9.1))(typescript@7.0.2)
+      astro-expressive-code: 0.44.2(astro@7.3.8(@types/node@24.19.2)(jiti@2.7.0)(yaml@2.9.1))
+    transitivePeerDependencies:
+      - react
+      - solid-js
+      - svelte
+      - vue
+
+  starlight-kbd@0.4.0(@astrojs/starlight@0.42.6(astro@7.3.8(@types/node@24.19.2)(jiti@2.7.0)(yaml@2.9.1))(typescript@7.0.2)):
+    dependencies:
+      '@astrojs/starlight': 0.42.6(astro@7.3.8(@types/node@24.19.2)(jiti@2.7.0)(yaml@2.9.1))(typescript@7.0.2)
 
   starlight-quiz@1.0.2(@astrojs/starlight@0.42.6(astro@7.3.8(@types/node@24.19.2)(jiti@2.7.0)(yaml@2.9.1))(typescript@7.0.2))(astro@7.3.8(@types/node@24.19.2)(jiti@2.7.0)(yaml@2.9.1)):
     dependencies:
@@ -4540,6 +4698,11 @@ snapshots:
 
   verkit@0.5.0: {}
 
+  vfile-location@5.0.3:
+    dependencies:
+      '@types/unist': 3.0.3
+      vfile: 6.0.3
+
   vfile-message@4.0.3:
     dependencies:
       '@types/unist': 3.0.3
@@ -4674,6 +4837,8 @@ snapshots:
   vscode-nls@5.2.0: {}
 
   vscode-uri@3.2.0: {}
+
+  web-namespaces@2.0.1: {}
 
   wrap-ansi@9.0.2:
     dependencies:
