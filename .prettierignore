@@ -1,0 +1,5 @@
+# Fichiers servis tels quels aux élèves (ex. demo.html) : ne pas reformater
+public/
+
+# Généré automatiquement par pnpm
+pnpm-lock.yaml
