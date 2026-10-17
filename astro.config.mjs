@@ -5,7 +5,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 import starlightSidebarTopics from "starlight-sidebar-topics";
 import starlightQuiz from "starlight-quiz";
-import codeblocks from 'starlight-codeblocks';
+import codeblocks from "starlight-codeblocks";
 import starlightKbd from "starlight-kbd";
 
 import { kbdConfig } from "@/config/plugins.mjs";
