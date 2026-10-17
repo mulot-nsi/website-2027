@@ -1,0 +1,33 @@
+---
+// Lecteur vidéo PeerTube (ex. tube-sciences-technologies.apps.education.fr)
+// Accepte l'URL de partage (/w/<id>) ou l'URL d'intégration (/videos/embed/<id>)
+const { src, title = "Vidéo", width = "100%" } = Astro.props;
+
+const url = new URL(src);
+url.pathname = url.pathname.replace(/^\/w\//, "/videos/embed/");
+---
+
+<div class="video" style={`max-width: ${width}`}>
+  <iframe
+    src={url.toString()}
+    title={title}
+    allow="fullscreen"
+    allowfullscreen
+    sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
+    loading="lazy"
+  ></iframe>
+</div>
+
+<style>
+  .video {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+  }
+
+  .video iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+</style>
