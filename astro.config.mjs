@@ -18,6 +18,7 @@ export default defineConfig({
     starlight({
       title: "Mulot.prof",
       customCss: ["./src/styles/global.css"],
+      pagination: false,
       components: {
         PageSidebar: "./src/components/starlight/PageSidebar.astro",
       },
