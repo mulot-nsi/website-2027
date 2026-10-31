@@ -18,6 +18,9 @@ export default defineConfig({
     starlight({
       title: "Mulot.prof",
       customCss: ["./src/styles/global.css"],
+      components: {
+        PageSidebar: "./src/components/starlight/PageSidebar.astro",
+      },
       defaultLocale: "root",
       locales: {
         root: {

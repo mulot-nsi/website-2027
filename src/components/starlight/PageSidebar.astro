@@ -1,0 +1,271 @@
+---
+// Remplace la colonne de droite de Starlight.
+// Sur les pages ayant `etapes: true` dans leur en-tête :
+// - une boîte « Étapes » liste les sections (titres de niveau 2) avec une case à cocher ;
+// - une seule section du contenu est affichée à la fois ;
+// - le sommaire « Sur cette page » ne montre que la section en cours ;
+// - des liens précédent/suivant sont ajoutés en bas du contenu.
+// Sans JavaScript, la page s'affiche normalement en entier.
+import Default from "@astrojs/starlight/components/PageSidebar.astro";
+
+const { entry, toc } = Astro.locals.starlightRoute;
+const steps =
+  entry.data.etapes && toc
+    ? toc.items.filter((item) => item.slug !== "_top")
+    : [];
+---
+
+{steps.length > 1 && (
+  <div class="steps-panel sl-hidden lg:sl-block" data-etapes hidden>
+    <h2>Étapes</h2>
+    <ol class="steps-list">
+      {steps.map((step) => (
+        <li data-slug={step.slug}>
+          <input type="checkbox" aria-label={`${step.text} terminée`} />
+          <a href={`#${step.slug}`}>{step.text}</a>
+        </li>
+      ))}
+    </ol>
+  </div>
+)}
+<Default />
+
+<script>
+  const panel = document.querySelector<HTMLElement>("[data-etapes]");
+  const content = document.querySelector<HTMLElement>(".sl-markdown-content");
+
+  if (panel && content) {
+    const storageKey = "etapes:" + location.pathname;
+
+    // Découpe le contenu en sections : chacune commence par un titre h2
+    // (Starlight l'enveloppe dans un div.sl-heading-wrapper).
+    // Ce qui précède le premier titre reste toujours visible.
+    const sections: { slug: string; title: string; nodes: Element[] }[] = [];
+    for (const node of Array.from(content.children)) {
+      const h2 = node.matches("h2") ? node : node.querySelector(":scope > h2");
+      if (h2) {
+        sections.push({
+          slug: h2.id,
+          title: h2.textContent!.trim(),
+          nodes: [],
+        });
+      }
+      sections.at(-1)?.nodes.push(node);
+    }
+
+    // État sauvegardé : section en cours et sections terminées.
+    let current = 0;
+    const done = new Set<string>();
+    try {
+      const saved = JSON.parse(localStorage.getItem(storageKey) ?? "{}");
+      const index = sections.findIndex((s) => s.slug === saved.current);
+      if (index !== -1) current = index;
+      if (Array.isArray(saved.done))
+        saved.done.forEach((slug: string) => done.add(slug));
+    } catch {
+      // Pas de sauvegarde exploitable : on commence au début.
+    }
+
+    const save = () => {
+      try {
+        localStorage.setItem(
+          storageKey,
+          JSON.stringify({ current: sections[current].slug, done: [...done] }),
+        );
+      } catch {
+        // Stockage indisponible (navigation privée) : la progression n'est pas conservée.
+      }
+    };
+
+    // Liens précédent/suivant en bas du contenu.
+    const controls = document.createElement("div");
+    controls.className = "not-content steps-controls";
+    const prev = document.createElement("a");
+    prev.className = "steps-prev";
+    const next = document.createElement("a");
+    next.className = "steps-next";
+    controls.append(prev, next);
+    content.append(controls);
+
+    // Passer à la section suivante coche automatiquement la section en cours.
+    next.addEventListener("click", () => {
+      done.add(sections[current].slug);
+    });
+
+    const items = Array.from(
+      panel.querySelectorAll<HTMLLIElement>(".steps-list li"),
+    );
+    items.forEach((li) => {
+      const checkbox = li.querySelector("input")!;
+      checkbox.addEventListener("change", () => {
+        if (checkbox.checked) done.add(li.dataset.slug!);
+        else done.delete(li.dataset.slug!);
+        save();
+      });
+    });
+
+    // Sommaires (bureau et mobile) : on ne garde que « Vue d'ensemble »
+    // et la section en cours avec ses sous-titres.
+    const tocItems = Array.from(
+      document.querySelectorAll<HTMLLIElement>(
+        "starlight-toc li, mobile-starlight-toc li",
+      ),
+    ).filter((li) => !li.parentElement!.closest("li"));
+
+    const setLink = (link: HTMLAnchorElement, index: number, text: string) => {
+      const section = sections[index];
+      link.hidden = !section;
+      if (section) {
+        link.href = "#" + section.slug;
+        link.textContent = text.replace("%s", section.title);
+      }
+    };
+
+    const show = (index: number) => {
+      current = index;
+      const slug = sections[index].slug;
+
+      sections.forEach((section, i) => {
+        section.nodes.forEach((node) =>
+          node.classList.toggle("steps-hidden", i !== index),
+        );
+      });
+
+      items.forEach((li) => {
+        li.toggleAttribute("aria-current", li.dataset.slug === slug);
+        li.querySelector("input")!.checked = done.has(li.dataset.slug!);
+      });
+
+      tocItems.forEach((li) => {
+        const href = decodeURIComponent(
+          li.querySelector("a")!.getAttribute("href")!,
+        );
+        li.hidden = href !== "#_top" && href !== "#" + slug;
+      });
+
+      setLink(prev, index - 1, "← %s");
+      setLink(next, index + 1, "%s →");
+      save();
+    };
+
+    /** Index de la section contenant l'élément ciblé par l'ancre de l'URL. */
+    const indexFromHash = () => {
+      const target = document.getElementById(
+        decodeURIComponent(location.hash.slice(1)),
+      );
+      if (!target) return -1;
+      return sections.findIndex((s) =>
+        s.nodes.some((n) => n === target || n.contains(target)),
+      );
+    };
+
+    const fromHash = indexFromHash();
+    show(fromHash === -1 ? current : fromHash);
+    panel.hidden = false;
+    if (fromHash !== -1)
+      document
+        .getElementById(decodeURIComponent(location.hash.slice(1)))
+        ?.scrollIntoView();
+
+    // Clic sur une étape, un lien du sommaire ou précédent/suivant.
+    window.addEventListener("hashchange", () => {
+      const index = indexFromHash();
+      if (index === -1) return;
+      show(index);
+      document
+        .getElementById(decodeURIComponent(location.hash.slice(1)))
+        ?.scrollIntoView();
+    });
+  }
+</script>
+
+<style is:global>
+  .steps-hidden {
+    display: none !important;
+  }
+
+  .steps-controls {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--sl-color-hairline);
+  }
+
+  .steps-controls a {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.5rem;
+    text-decoration: none;
+    color: var(--sl-color-white);
+  }
+
+  .steps-controls a:hover {
+    border-color: var(--sl-color-accent);
+  }
+
+  .steps-controls a[hidden] {
+    display: none;
+  }
+
+  .steps-controls .steps-next {
+    margin-inline-start: auto;
+    background-color: var(--sl-color-accent);
+    border-color: var(--sl-color-accent);
+    color: var(--sl-color-black);
+  }
+</style>
+
+<style>
+  .steps-panel {
+    padding: 1rem var(--sl-sidebar-pad-x);
+    border-bottom: 1px solid var(--sl-color-hairline);
+  }
+
+  .steps-panel[hidden] {
+    display: none;
+  }
+
+  h2 {
+    color: var(--sl-color-white);
+    font-size: var(--sl-text-h5);
+    font-weight: 600;
+    line-height: var(--sl-line-height-headings);
+    margin-bottom: 0.5rem;
+  }
+
+  .steps-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .steps-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.125rem 0;
+  }
+
+  .steps-list input {
+    flex-shrink: 0;
+    accent-color: var(--sl-color-accent);
+  }
+
+  .steps-list a {
+    font-size: var(--sl-text-xs);
+    text-decoration: none;
+    color: var(--sl-color-gray-3);
+    overflow-wrap: anywhere;
+  }
+
+  .steps-list a:hover {
+    color: var(--sl-color-white);
+  }
+
+  .steps-list li[aria-current] a {
+    color: var(--sl-color-text-accent);
+    font-weight: 600;
+  }
+</style>
