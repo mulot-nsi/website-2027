@@ -44,8 +44,10 @@ const steps =
 
     // Découpe le contenu en sections : chacune commence par un titre h2
     // (Starlight l'enveloppe dans un div.sl-heading-wrapper).
-    // Ce qui précède le premier titre reste toujours visible.
+    // Ce qui précède le premier titre (l'introduction) n'est visible
+    // qu'avec la première section.
     const sections: { slug: string; title: string; nodes: Element[] }[] = [];
+    const intro: Element[] = [];
     for (const node of Array.from(content.children)) {
       const h2 = node.matches("h2") ? node : node.querySelector(":scope > h2");
       if (h2) {
@@ -55,7 +57,7 @@ const steps =
           nodes: [],
         });
       }
-      sections.at(-1)?.nodes.push(node);
+      (sections.at(-1)?.nodes ?? intro).push(node);
     }
 
     // État sauvegardé : section en cours et sections terminées.
@@ -178,6 +180,16 @@ const steps =
           node.classList.toggle("steps-hidden", i !== index),
         );
       });
+      intro.forEach((node) =>
+        node.classList.toggle("steps-hidden", index !== 0),
+      );
+      // Après la première section, le titre est en haut de page : pas de marge.
+      sections.forEach((section, i) =>
+        section.nodes[0].classList.toggle(
+          "steps-first",
+          i === index && index !== 0,
+        ),
+      );
 
       syncChecklists();
       refreshItems();
@@ -228,6 +240,10 @@ const steps =
 <style is:global>
   .steps-hidden {
     display: none !important;
+  }
+
+  .sl-markdown-content .steps-first {
+    margin-top: 0 !important;
   }
 
   .steps-controls {
@@ -316,6 +332,5 @@ const steps =
 
   .steps-list li[aria-current] a {
     color: var(--sl-color-text-accent);
-    font-weight: 600;
   }
 </style>
