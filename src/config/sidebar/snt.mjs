@@ -1,18 +1,6 @@
 const internet = {
   label: "Internet",
-  items: [
-    { label: "Introduction", slug: "snt/internet" },
-    {
-      label: "Simulation d'un réseau",
-      collapsed: true,
-      items: [
-        "snt/internet/simulation-reseau",
-        "snt/internet/simulation-reseau/consignes",
-        "snt/internet/simulation-reseau/bilan",
-      ],
-    },
-    { label: "Annuaire d'Internet", slug: "snt/internet/dns" },
-  ],
+  items: [{ autogenerate: { directory: "snt/internet" } }],
 };
 
 const web = {
