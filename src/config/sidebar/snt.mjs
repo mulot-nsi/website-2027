@@ -17,14 +17,7 @@ const internet = {
 
 const web = {
   label: "Le web",
-  items: [
-    { slug: "snt/web" },
-    {
-      label: "Le langage HTML",
-      collapsed: false,
-      items: [{ autogenerate: { directory: "snt/web/langage-html" } }],
-    },
-  ],
+  items: [{ autogenerate: { directory: "snt/web" } }],
 };
 
 export const sntTopic = {
