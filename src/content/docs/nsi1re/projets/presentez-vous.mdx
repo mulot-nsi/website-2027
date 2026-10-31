@@ -1,14 +1,49 @@
 ---
-title: Consignes
-description: Consignes de réalisation du projet de création d'un site web de présentation individuelle.
+title: Présentez-vous
+description: Projet de réalisation d'un site web de présentation individuelle.
+tableOfContents:
+  maxHeadingLevel: 4
+etapes: true
+
+prev: false
+next: false
 ---
 
-import { Aside } from "@astrojs/starlight/components";
-import { FileTree } from "@astrojs/starlight/components";
-import { Tabs, TabItem } from "@astrojs/starlight/components";
+import {
+  Aside,
+  FileTree,
+  Tabs,
+  TabItem,
+  Steps,
+} from "@astrojs/starlight/components";
 import Link from "@components/Link.astro";
 
-## Contenus
+## Introduction
+
+Ce projet consiste en la création d'un mini-site web composé de deux pages.
+Une première page sera consacrée à vous, et une seconde à un ou plusieurs de vos centres d'intérêt.
+Des contraintes techniques sont imposées et vous serez évalué sur le respect de celles-ci.
+
+<Aside type="tip" icon="rocket" title="Objectifs">
+
+- Mesurer votre capacité à suivre des consignes
+- Mesurer votre maîtrise des langages HTML et CSS
+- Mesurer le soin apporté au code
+- Mieux vous connaître
+
+</Aside>
+
+<Aside type="caution">
+
+Ce projet est une réalisation personnelle.
+Vous pouvez partager vos connaissances et découvertes à vos camarades mais le partage de code est interdit.
+Toute similitude de code sera sanctionnée.
+
+</Aside>
+
+## Consignes
+
+### Contenus
 
 Votre mini-site web doit être composé d'exactement **deux pages**, ni plus ni moins.
 La première page est consacrée à votre présentation, et la seconde détaille un ou plusieurs de vos centres d'intérêt.
@@ -19,7 +54,7 @@ Ce projet est à destination exclusive de votre professeur et ne sera jamais ren
 
 </Aside>
 
-### La page d'accueil
+#### La page d'accueil
 
 Cette page sert à vous présenter.
 Son code doit obligatoirement être enregistré dans un fichier nommé `index.html`.
@@ -37,7 +72,7 @@ Elle devra afficher au minimum les éléments suivants :
 
 </Aside>
 
-### La page secondaire
+#### La page secondaire
 
 Cette page complète votre site en détaillant un ou plusieurs de vos centres d'intérêt.
 
@@ -58,7 +93,7 @@ Le choix du sujet est libre mais votre page devra impérativement respecter les 
 
 Enfin veillez à y intégrer un lien hypertexte permettant de **revenir à la page d'accueil**.
 
-## Organisation des fichiers
+### Organisation des fichiers
 
 Afin de garder un projet clair et bien structuré, vous devez répartir vos fichiers ainsi :
 
@@ -90,9 +125,9 @@ Dans ce cas de figure, une image nommée `CHAT.jpg` ne s'affichera pas si vous l
 
 </Aside>
 
-## Code HTML
+### Code HTML
 
-### Les balises HTML
+#### Les balises HTML
 
 Vous êtes libres d'utiliser toute balise HTML que vous jugerez nécessaire.
 Cependant, vous devez obligatoirement utiliser celles de la liste suivante :
@@ -115,7 +150,7 @@ Cependant, vous devez obligatoirement utiliser celles de la liste suivante :
 
 </Aside>
 
-### Les interdictions
+#### Les interdictions
 
 Afin de vous faire acquérir les bonnes habitudes du Web (notamment la séparation entre contenu et mise en forme), plusieurs pratiques de développement sont interdites :
 
@@ -127,7 +162,7 @@ Afin de vous faire acquérir les bonnes habitudes du Web (notamment la séparati
 
 </Aside>
 
-### La structure d'une page
+#### La structure d'une page
 
 Pour rappel, voici le code HTML minimal permettant la création d'une page web :
 
@@ -144,12 +179,12 @@ Pour rappel, voici le code HTML minimal permettant la création d'une page web :
 </html>
 ```
 
-## Code CSS
+### Code CSS
 
 Attention, vous n'avez droit qu'à **un seul fichier CSS** pour mettre en forme l'ensemble de votre mini-site.
 À vous d'organiser vos styles avec astuce pour cibler les éléments de chaque page.
 
-### Les sélecteurs CSS
+#### Les sélecteurs CSS
 
 Pour vous assurer de bien maîtriser le code que vous écrivez, seuls deux types de sélecteurs sont autorisés (l'utilisation de sélecteurs complexes est interdite) :
 
@@ -162,7 +197,7 @@ Pour vous assurer de bien maîtriser le code que vous écrivez, seuls deux types
 
 </Aside>
 
-### Les propriétés CSS
+#### Les propriétés CSS
 
 Vous êtes libre d'utiliser les propriétés CSS de votre choix pour personnaliser votre mini-site.
 Vous devez cependant intégrer au moins les propriétés listées ci-dessous.
@@ -178,7 +213,7 @@ Vous devez cependant intégrer au moins les propriétés listées ci-dessous.
 
 </Aside>
 
-## Qualité
+### Qualité
 
 Les langages HTML et CSS sont très permissifs.
 Pour s'assurer de la qualité de votre code, voici les contraintes de qualité à respecter pour chacun d'eux :
@@ -196,6 +231,54 @@ Pour s'assurer de la qualité de votre code, voici les contraintes de qualité �
 
 Le code CSS devra être vérifié en le copiant/collant sur le site <Link href="https://jigsaw.w3.org/css-validator/#validate_by_input">W3C CSS Validation Service</Link>.
 Il ne deva comporter aucune erreur.
+
+</TabItem>
+</Tabs>
+
+## Dépôt du projet
+
+Vous avez terminé votre projet, le moment est venu de le transmettre à votre professeur.
+Les consignes de dépôt varient selon que vous ayez réalisé le projet sous **Capytale** ou que vous l'ayez développé **localement** sur votre ordinateur :
+
+<Tabs>
+<TabItem label="Capytale">
+
+- Sauvegardez une dernière fois votre travail à l'aide du bouton orange **Enregistrer**.
+- N'oubliez pas de soumettre votre travail avant la date limite en cliquant sur le bouton **Rendre**.
+
+</TabItem>
+
+<TabItem label="Local">
+
+Vous avez développé votre projet localement sur votre ordinateur.
+Votre projet sera à déposer sur Pronote avant la date annoncée par votre enseignant.
+Les contraintes à respecter sont les suivantes :
+
+- L'ensemble de votre projet doit être compressé dans un unique fichier `.zip`.
+- Le poids du fichier ne doit pas dépasser 5 Mo.
+- Le nom du fichier est libre.
+
+<Aside type="tip" title="Création d'un fichier ZIP" icon="star">
+<Tabs>
+<TabItem label="Windows 11" icon="seti:windows">
+
+1. Lancez l'explorateur de fichiers
+2. Retrouvez le dossier à compresser au format ZIP
+3. Cliquez avec le bouton droit sur le dossier à compresser
+4. Choisir l'option **Compresser dans le fichier ZIP**
+
+</TabItem>
+
+<TabItem label="Windows 10" icon="seti:windows">
+
+1. Lancez l'explorateur de fichiers
+2. Retrouvez le dossier à compresser au format ZIP
+3. Cliquez avec le bouton droit sur le dossier à compresser
+4. Choisir l'option **Envoyer vers** puis **Dossier compressé**
+
+</TabItem>
+</Tabs>
+</Aside>
 
 </TabItem>
 </Tabs>

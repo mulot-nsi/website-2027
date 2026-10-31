@@ -18,14 +18,9 @@ export const nsi1reTopic = {
       label: "Projets",
       items: [
         {
-          label: "Présentez-vous",
-          items: [
-            {
-              autogenerate: {
-                directory: "nsi1re/projets/presentez-vous",
-              },
-            },
-          ],
+          autogenerate: {
+            directory: "nsi1re/projets",
+          },
         },
       ],
     },
