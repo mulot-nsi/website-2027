@@ -4,7 +4,8 @@
 // - une boîte « Étapes » liste les sections (titres de niveau 2) avec une case à cocher ;
 // - une seule section du contenu est affichée à la fois ;
 // - le sommaire « Sur cette page » ne montre que la section en cours ;
-// - des liens précédent/suivant sont ajoutés en bas du contenu.
+// - des liens précédent/suivant sont ajoutés en bas du contenu ;
+// - une section contenant une Checklist est validée quand toutes ses cases sont cochées.
 // Sans JavaScript, la page s'affiche normalement en entier.
 import Default from "@astrojs/starlight/components/PageSidebar.astro";
 
@@ -21,7 +22,11 @@ const steps =
     <ol class="steps-list">
       {steps.map((step) => (
         <li data-slug={step.slug}>
-          <input type="checkbox" aria-label={`${step.text} terminée`} />
+          <input
+            type="checkbox"
+            class="checkbox-vert"
+            aria-label={`${step.text} terminée`}
+          />
           <a href={`#${step.slug}`}>{step.text}</a>
         </li>
       ))}
@@ -87,21 +92,64 @@ const steps =
     controls.append(prev, next);
     content.append(controls);
 
-    // Passer à la section suivante coche automatiquement la section en cours.
+    // Checklists (composant Checklist) contenues dans chaque section.
+    type CheckList = HTMLElement & { complete?: boolean };
+    const checklists = sections.map((section) =>
+      section.nodes.flatMap((node) =>
+        Array.from(
+          node.matches("check-list")
+            ? [node]
+            : node.querySelectorAll("check-list"),
+        ),
+      ),
+    ) as CheckList[][];
+
+    // Une section avec checklist est validée quand toutes ses cases sont cochées.
+    const syncChecklists = () => {
+      sections.forEach((section, i) => {
+        if (!checklists[i].length) return;
+        if (checklists[i].every((list) => list.complete))
+          done.add(section.slug);
+        else done.delete(section.slug);
+      });
+    };
+
+    // Sans checklist, passer à la section suivante coche la section en cours.
     next.addEventListener("click", () => {
-      done.add(sections[current].slug);
+      if (!checklists[current].length) done.add(sections[current].slug);
     });
 
     const items = Array.from(
       panel.querySelectorAll<HTMLLIElement>(".steps-list li"),
     );
-    items.forEach((li) => {
+    items.forEach((li, i) => {
       const checkbox = li.querySelector("input")!;
+      if (checklists[i]?.length) {
+        // Case pilotée par la checklist de la section.
+        checkbox.disabled = true;
+        li.title = "Cochez la checklist de cette étape pour la valider";
+      }
       checkbox.addEventListener("change", () => {
         if (checkbox.checked) done.add(li.dataset.slug!);
         else done.delete(li.dataset.slug!);
         save();
       });
+    });
+
+    const refreshItems = () => {
+      items.forEach((li) => {
+        li.toggleAttribute(
+          "aria-current",
+          li.dataset.slug === sections[current].slug,
+        );
+        li.querySelector("input")!.checked = done.has(li.dataset.slug!);
+      });
+    };
+
+    document.addEventListener("checklist-change", () => {
+      syncChecklists();
+      refreshItems();
+      save();
     });
 
     // Sommaires (bureau et mobile) : on ne garde que « Vue d'ensemble »
@@ -131,10 +179,8 @@ const steps =
         );
       });
 
-      items.forEach((li) => {
-        li.toggleAttribute("aria-current", li.dataset.slug === slug);
-        li.querySelector("input")!.checked = done.has(li.dataset.slug!);
-      });
+      syncChecklists();
+      refreshItems();
 
       tocItems.forEach((li) => {
         const href = decodeURIComponent(
@@ -250,7 +296,11 @@ const steps =
 
   .steps-list input {
     flex-shrink: 0;
-    accent-color: var(--sl-color-accent);
+  }
+
+  /* Étape non validée : bordure fine et grise. */
+  .steps-list input:not(:checked) {
+    border: 1px solid var(--sl-color-gray-4);
   }
 
   .steps-list a {

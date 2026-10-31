@@ -1,0 +1,147 @@
+---
+// Encadré vert où l'élève coche ce qu'il a compris.
+// Chaque élément de la liste Markdown devient une case à cocher.
+// Les cases cochées sont conservées dans le navigateur.
+// Sur une page en mode `etapes: true`, l'étape est validée quand toutes
+// les cases de ses checklists sont cochées.
+//
+// Utilisation dans un fichier .mdx :
+//
+//   <Checklist>
+//
+//   - Je sais lancer Python en mode interactif
+//   - Je sais faire une affectation
+//
+//   </Checklist>
+const { title = "Ai-je bien compris ?" } = Astro.props;
+---
+
+<check-list class="not-content">
+  <p class="checklist-title">{title}</p>
+  <div class="checklist-items">
+    <slot />
+  </div>
+</check-list>
+
+<script>
+  class CheckList extends HTMLElement {
+    inputs: HTMLInputElement[] = [];
+
+    /** Toutes les cases sont cochées. */
+    get complete() {
+      return (
+        this.inputs.length > 0 && this.inputs.every((input) => input.checked)
+      );
+    }
+
+    connectedCallback() {
+      if (this.inputs.length) return;
+
+      // Identifiant stable : page + position de la checklist dans la page.
+      const index = Array.from(document.querySelectorAll("check-list")).indexOf(
+        this,
+      );
+      const storageKey = `checklist:${location.pathname}:${index}`;
+
+      let saved: unknown = [];
+      try {
+        saved = JSON.parse(localStorage.getItem(storageKey) ?? "[]");
+      } catch {
+        // Pas de sauvegarde exploitable.
+      }
+
+      // Chaque élément de liste devient une case à cocher.
+      const items = Array.from(this.querySelectorAll(".checklist-items li"));
+      // Si le nombre d'éléments a changé depuis la sauvegarde, on repart de zéro.
+      const state =
+        Array.isArray(saved) && saved.length === items.length ? saved : [];
+
+      items.forEach((li, i) => {
+        const label = document.createElement("label");
+        const input = document.createElement("input");
+        input.type = "checkbox";
+        input.className = "checkbox-vert";
+        input.checked = state[i] === true;
+        const text = document.createElement("span");
+        text.append(...Array.from(li.childNodes));
+        label.append(input, text);
+        li.append(label);
+        this.inputs.push(input);
+
+        input.addEventListener("change", () => {
+          try {
+            localStorage.setItem(
+              storageKey,
+              JSON.stringify(this.inputs.map((input) => input.checked)),
+            );
+          } catch {
+            // Stockage indisponible (navigation privée).
+          }
+          this.notify();
+        });
+      });
+
+      this.notify();
+    }
+
+    notify() {
+      this.toggleAttribute("data-complete", this.complete);
+      this.dispatchEvent(
+        new CustomEvent("checklist-change", { bubbles: true }),
+      );
+    }
+  }
+
+  customElements.define("check-list", CheckList);
+</script>
+
+<style>
+  check-list {
+    display: block;
+    margin-top: 1.5rem;
+    padding: 1rem 1.5rem;
+    border: 2px solid var(--sl-color-green);
+    border-radius: 0.25rem;
+    background-color: var(--sl-color-green-low);
+    color: var(--sl-color-green-high);
+  }
+
+  /* Même style que le titre des encadrés Starlight (Aside). */
+  .checklist-title {
+    margin: 0 0 0.5rem;
+    font-size: var(--sl-text-h5);
+    font-weight: 600;
+    line-height: var(--sl-line-height-headings);
+    color: var(--sl-color-green-high);
+  }
+
+  .checklist-items :global(ul) {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .checklist-items :global(li) {
+    margin: 0.25rem 0;
+  }
+
+  .checklist-items :global(label) {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.25rem 0;
+    cursor: pointer;
+  }
+
+  .checklist-items :global(input) {
+    flex-shrink: 0;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-top: 0.15rem;
+    cursor: pointer;
+  }
+
+  .checklist-items :global(code) {
+    font-size: var(--sl-text-code-sm);
+  }
+</style>

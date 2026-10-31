@@ -9,6 +9,7 @@ etapes: true
 
 import { Steps, Aside } from "@astrojs/starlight/components";
 import Link from "@components/Link.astro";
+import Checklist from "@components/Checklist.astro";
 
 Python est un langage interprété.
 Il est donc nécessaire de disposer d'un interpréteur Python pour exécuter un programme écrit dans ce langage.
@@ -122,6 +123,13 @@ Toutes les commandes saisies dans le cadre de ces travaux pratiques devront se f
 
 </Aside>
 
+<Checklist>
+
+- Je sais lancer l'interpréteur Python en mode interactif depuis la ligne de commande
+- Je sais vérifier la version de Python installée
+
+</Checklist>
+
 ## Les nombres
 
 ### Premières saisies
@@ -207,6 +215,13 @@ Après avoir importé le module `math`, testez les expressions suivantes et expl
 - `math.fabs(-10)`
 - `math.sin(math.radians(90))`
 
+<Checklist>
+
+- Je sais écrire des opérations sur les nombres (division, division entière, modulo, puissance)
+- Je sais importer le module `math` et utiliser ses fonctions
+
+</Checklist>
+
 ## Les chaînes de caractères
 
 ### Recherche d'expressions
@@ -232,6 +247,13 @@ Testez les expressions suivantes et expliquez-les à partir du résultat obtenu 
 - `'majuscules'.upper()`
 - `'MINUSCULES'.lower()`
 - `'Bonjour tout le monde'.replace("Bonjour", "Au revoir")`
+
+<Checklist>
+
+- Je sais délimiter une chaîne de caractères avec `"` ou `'`
+- Je sais concaténer, répéter et extraire une partie d'une chaîne
+
+</Checklist>
 
 ## Les variables
 
@@ -368,6 +390,13 @@ y = tmp
 
 </details>
 
+<Checklist>
+
+- Je sais ce qu'est une affectation et pourquoi elle n'affiche rien
+- Je sais prédire la valeur d'une variable après plusieurs affectations
+
+</Checklist>
+
 ## Les anomalies
 
 En programmation, c'est **inévitable**, vous devrez faire face à de très nombreuses anomalies.
@@ -394,6 +423,13 @@ Toutes les commandes ci-après provoquent une anomalie ou un comportement inatte
 - `2,5`
 - `import math` puis `math.cos(math.radians(90))` _(on rappelle que le cosinus de 90 degrés vaut 0)_
 - `0.1 + 0.2 == 0.3`
+
+<Checklist>
+
+- Je sais lire un message d'erreur Python et identifier le type d'anomalie
+- Je sais expliquer pourquoi `0.1 + 0.2 == 0.3` est faux
+
+</Checklist>
 
 ## Conclusion
 
