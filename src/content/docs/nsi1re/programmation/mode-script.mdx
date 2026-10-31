@@ -3,4 +3,726 @@ title: Python en mode script
 description: Découverte de l'interpréteur Python avec le mode script.
 sidebar:
   label: Mode script
+  order: 2
 ---
+
+import { Steps, Tabs, TabItem, Aside } from "@astrojs/starlight/components";
+import Link from "@components/Link.astro";
+
+L'objectif de ces travaux pratiques est d'utiliser Python en mode script.
+Il ne s'agit plus d'interagir directement avec l'interpréteur Python, mais d'écrire votre programme dans un fichier texte.
+L'interpréteur sera sollicité pour lire votre fichier et exécuter les instructions qu'il contient.
+
+## Préparation
+
+### Espace de travail
+
+Vous allez créer des dossiers afin de ne pas mélanger vos productions numériques entre vos différentes matières et travaux pratiques.
+
+<Tabs>
+<TabItem label="Ordinateur portable" icon="laptop">
+
+<Steps>
+
+1. Lancez l'application **Explorateur de fichiers** <kbd>Windows</kbd> + <kbd>E</kbd>
+2. Dans le dossier `Documents`, s'il n'y a pas de dossier nommé `NSI`, créez-le
+3. Dans le dossier `NSI`, s'il n'y a pas de dossier nommé `chapitre_03`, créez-le
+
+</Steps>
+
+</TabItem>
+<TabItem label="Ordinateur fixe" icon="desktop">
+
+<Steps>
+
+1. Depuis le bureau, double-cliquez sur l'icône intitulée **Zone personnelle**
+2. Dans votre zone personnelle, s'il n'y a pas de dossier `NSI`, créez-le
+3. Dans le dossier `NSI`, s'il n'y a pas de dossier nommé `chapitre_03`, créez-le
+
+</Steps>
+
+</TabItem>
+</Tabs>
+
+### Environnement de développement
+
+Pour ces travaux pratiques, l'utilisation de **Thonny** est **obligatoire**.
+Cet IDE (_Integrated Development Environment_) a été conçu pour l'apprentissage du langage Python.
+
+<Aside title="Téléchargement de Thonny">
+
+Thonny devrait normalement être déjà installé sur votre ordinateur portable.
+Si ce n'est pas le cas ou si vous utilisez un ordinateur fixe du lycée, voici les instructions pour l'installer :
+
+1. Rendez-vous sur le <Link href="https://thonny.org/">site officiel</Link>
+2. Approchez la souris de **Windows** dans la zone de téléchargement
+3. Téléchargez la version **Portable variant with 64-bit Python 3.10**
+4. Décompressez l'archive ZIP téléchargée
+5. Déplacez le dossier décompressé dans votre dossier `Documents`
+6. Lancez Thonny en double-cliquant sur l'exécutable `Thonny.exe`
+
+</Aside>
+
+<Aside type="danger" title="Ne perdez pas de temps !">
+
+Thonny peut être long à télécharger et décompresser.
+Ne perdez pas de temps et commencez immédiatement les travaux pratiques en utilisant l'interpréteur Python en ligne <Link href="https://console.basthon.fr/">Basthon</Link>.
+Une fois Thonny prêt, lancez-le.
+
+</Aside>
+
+## Calculateur d'âge
+
+### Version 1 - Saisie et affichage
+
+Écrire un programme qui demande à l'utilisateur de saisir son année de naissance et qui l'affiche.
+
+**Décomposition**
+
+1. Demande d'une saisie utilisateur avec pour message _« Indique ton année de naissance : »_
+2. Affichage du texte _« Ton année de naissance est : »_ suivi de l'année de naissance saisie
+
+**Exemple d'affichage**
+
+```
+Indique ton année de naissance : 2000
+Ton année de naissance est 2000
+```
+
+<details>
+<summary>Aide - Obtenir une saisie utilisateur</summary>
+
+En Python, la fonction `input()` permet de lire des données saisies au clavier (_entrée standard_ par défaut).
+Celles-ci sont renvoyées par la fonction sous forme d'une **chaîne de caractères**.
+
+<Link href="https://docs.python.org/fr/3.8/library/functions.html#input">
+  Voir la documentation
+</Link>
+
+<Tabs>
+<TabItem label="Console">
+
+```
+>>> nom = input("Quel est ton nom ? ")
+Quel est ton nom ? Jean
+>>> nom
+'Jean'
+```
+
+</TabItem>
+<TabItem label="Fichier">
+
+```python
+nom = input("Quel est ton nom ? ")
+print(nom)
+```
+
+</TabItem>
+</Tabs>
+
+</details>
+
+<details>
+<summary>Aide - Afficher une chaîne de caractères</summary>
+
+En Python, la fonction `print()` permet d'afficher du texte à l'écran (_sortie standard_ par défaut).
+Chaque argument transmis à la fonction est automatiquement converti en chaîne de caractères.
+Ils sont ensuite affichés à l'écran séparés par un caractère d'espacement.
+
+<Link href="https://docs.python.org/fr/3.8/library/functions.html#print">
+  Voir la documentation
+</Link>
+
+<Tabs>
+<TabItem label="Avec plusieurs arguments">
+
+Voici un exemple d'appel de la fonction `print()` avec cinq arguments :
+
+```python title="Code"
+nom = "Jean"
+age = 20
+print("Bonjour", nom, "tu as", age, "ans")
+```
+
+```text title="Affichage console"
+Bonjour Jean tu as 20 ans
+```
+
+</TabItem>
+<TabItem label="Avec un seul argument">
+
+Voici un autre exemple d'appel avec un seul argument.
+Cette fois, nous avons construit nous-même le texte à afficher en utilisant la concaténation.
+Notez qu'il est nécessaire de convertir manuellement certaines données en chaîne de caractères grâce à la fonction `str()`.
+
+```python title="Code"
+nom = "Jean"
+age = 20
+texte = "Bonjour " + nom + " tu as " + str(age) + " ans"
+print(texte)
+```
+
+```text title="Affichage console"
+Bonjour Jean tu as 20 ans
+```
+
+</TabItem>
+</Tabs>
+
+</details>
+
+<details>
+<summary>Solutions</summary>
+
+<Tabs>
+<TabItem label="Solution 1">
+
+```python
+annee = input("Indique ton année de naissance : ")
+print("Ton année de naissance est :", annee)
+```
+
+</TabItem>
+<TabItem label="Solution 2">
+
+```python
+annee = input("Indique ton année de naissance : ")
+affichage = "Ton année de naissance est : " + annee
+print(affichage)
+```
+
+</TabItem>
+<TabItem label="Solution 3">
+
+```python
+annee = input("Indique ton année de naissance : ")
+print("Ton année de naissance est : " + annee)
+```
+
+</TabItem>
+</Tabs>
+
+</details>
+
+### Version 2 - Calcul de l'âge
+
+Écrire un programme qui demande à l'utilisateur de saisir son année de naissance et qui affiche son âge.
+Bien entendu l'âge est approximatif, c'est celui que l'utilisateur a, ou aura, cette année.
+
+**Décomposition**
+
+1. Demande d'une saisie utilisateur avec pour message _« Indique ton année de naissance : »_
+2. Calcul de l'âge
+3. Affichage du texte _« Tu as : »_ suivi de l'âge de l'utilisateur.
+
+**Exemple d'affichage**
+
+```
+Indique ton année de naissance : 2000
+Tu as 24 ans.
+```
+
+<details>
+<summary>Aide - Conversion d'une chaîne de caractères en nombre</summary>
+
+En Python, la fonction `int()` permet de convertir une chaîne de caractères en nombre.
+
+<Link href="https://docs.python.org/fr/3.8/library/functions.html#int">
+  Voir la documentation
+</Link>
+
+```
+>>> chaine = "2000"
+>>> chaine
+'2000'
+>>> int(chaine)
+2000
+```
+
+</details>
+
+<details>
+<summary>Aide - Conversion d'un nombre en chaîne de caractères</summary>
+
+En Python, la fonction `str()` permet de convertir un nombre en chaîne de caractères.
+Il est nécessaire de convertir un nombre en chaîne de caractères si on souhaite le concaténer à une autre chaîne.
+
+<Link href="https://docs.python.org/fr/3.8/library/functions.html#func-str">
+  Voir la documentation
+</Link>
+
+```
+>>> nombre = 2000
+>>> nombre
+2000
+>>> str(nombre)
+'2000'
+```
+
+</details>
+
+<details>
+<summary>Aide - Obtenir l'année courante (hors programme)</summary>
+
+Pour les perfectionnistes, vous pouvez obtenir l'année courante en utilisant le module `datetime`.
+
+<Tabs>
+<TabItem label="Console">
+
+```
+>>> from datetime import date
+>>> date.today().year
+2024
+```
+
+</TabItem>
+<TabItem label="Fichier">
+
+```python
+from datetime import date
+annee_courante = date.today().year
+```
+
+</TabItem>
+</Tabs>
+
+</details>
+
+<details>
+<summary>Solutions</summary>
+
+<Tabs>
+<TabItem label="Solution 1">
+
+```python
+annee = int(input("Indique ton année de naissance : "))
+age = 2024 - annee
+print("Tu as", age, "ans")
+```
+
+</TabItem>
+<TabItem label="Solution 2">
+
+```python
+annee = input("Indique ton année de naissance : ")
+age = 2024 - int(annee)
+print("Tu as", age, "ans")
+```
+
+</TabItem>
+<TabItem label="Solution 3">
+
+```python
+annee = input("Indique ton année de naissance : ")
+print("Tu as", 2024 - int(annee), "ans")
+```
+
+</TabItem>
+<TabItem label="Solution 4">
+
+```python
+annee = input("Indique ton année de naissance : ")
+age = 2024 - int(annee)
+affichage = "Tu as " + str(age) + " ans"
+print(affichage)
+```
+
+</TabItem>
+<TabItem label="Solution 5">
+
+```python
+annee = input("Indique ton année de naissance : ")
+print("Tu as " + str(2024 - int(annee)) + " ans")
+```
+
+</TabItem>
+</Tabs>
+
+</details>
+
+### Version 3 - Mineur ou majeur
+
+Écrire un programme qui demande à l'utilisateur de saisir son année de naissance et qui affiche son âge.
+Si l'individu est mineur, le programme affiche en supplément l'année à laquelle il deviendra majeur.
+
+**Exemples d'affichage**
+
+```
+Indique ton année de naissance : 2000
+Tu as 24 ans et tu es majeur(e)
+```
+
+```
+Indique ton année de naissance : 2010
+Tu as 14 ans et tu es mineur(e)
+Tu seras majeur(e) en 2027
+```
+
+<details>
+<summary>Aide - Les structures conditionnelles</summary>
+
+Voici un rappel de la syntaxe des structures conditionnelles en Python.
+
+<Link href="https://docs.python.org/fr/3.8/tutorial/controlflow.html#if-statements">
+  Voir le tutoriel
+</Link>
+
+<Tabs>
+<TabItem label="if">
+
+```python
+if x > 0:
+    texte = "x est strictement positif"
+```
+
+</TabItem>
+<TabItem label="if-else">
+
+```python
+if x > 0:
+    texte = "x est strictement positif"
+else:
+    texte = "x est négatif ou nul"
+```
+
+</TabItem>
+<TabItem label="if-elif-else">
+
+```python
+if x > 0:
+    texte = "x est strictement positif"
+elif x == 0:
+    texte = "x est nul"
+else:
+    texte = "x est strictement négatif"
+```
+
+</TabItem>
+</Tabs>
+
+</details>
+
+### Version 4 - Vérification de la saisie
+
+**Problème**
+
+Le programme n'effectue actuellement aucune vérification de la saisie de l'utilisateur, ce qui peut entraîner certains problèmes :
+
+- la saisie d'une année supérieure à l'année en cours entraîne l'affichage d'âges négatifs ;
+- la saisie de valeurs non numériques provoque une anomalie.
+
+**Description**
+
+Modifiez le programme de façon à ce que celui-ci s'interrompe si :
+
+- `annee > 2022`
+- `annee < 1900`
+- année saisie n'est pas une valeur numérique
+
+**Exemples d'affichage**
+
+```
+Indique ton année de naissance : 2040
+Erreur, saisir une année comprise entre 1900 et 2024
+```
+
+```
+Indique ton année de naissance : 850
+Erreur, saisir une année comprise entre 1900 et 2024
+```
+
+```
+Indique ton année de naissance : hello
+Erreur, saisir une année comprise entre 1900 et 2024
+```
+
+<details>
+<summary>Aide - Vérifier si une chaîne est numérique (hors programme)</summary>
+
+Avant de convertir une chaîne de caractères en un nombre (`int` ou `float`), il est possible de vérifier au préalable que celle-ci ne contient que des caractères numériques.
+Ceci est possible grâce à la méthode `isdigit()` associée au type `str`.
+
+<Link href="https://docs.python.org/fr/3.8/library/stdtypes.html#str.isdigit">
+  Voir la documentation
+</Link>
+
+```
+>>> "12".isdigit()
+True
+>>> "douze".isdigit()
+False
+>>> "-12".isdigit()
+False
+>>> "10.5".isdigit()
+False
+>>> nombre = "12"
+>>> nombre.isdigit()
+True
+```
+
+</details>
+
+<details>
+<summary>Aide - Interrompre l'exécution d'un programme (hors programme)</summary>
+
+Si votre programme se trouve dans un état impropre à la poursuite de son exécution, vous pouvez en forcer la fin grâce à la fonction `exit()`.
+Celle-ci prend optionnellement en argument une chaîne de caractères correspondant au message à afficher.
+
+<Link href="https://docs.python.org/fr/3.8/library/sys.html#sys.exit">
+  Voir la documentation
+</Link>
+
+```python
+x = int(input("Saisir un nombre différent de zéro : "))
+if x == 0:
+    exit("Erreur, x = 0")
+
+print("10 /", x, "=", 10/x)
+```
+
+</details>
+
+## Les états physiques de l'eau
+
+Nous souhaitons un programme qui, à partir de la saisie d'une valeur de température, indique l'état de l'eau comme suit :
+
+- gazeux si `temperature >= 100`
+- liquide si `temperature < 100` et `temperature > 0`
+- solide si `temperature <= 0`
+
+**Exemples d'affichage**
+
+```
+Saisir une température : 120
+L'eau est à l'état gazeux
+```
+
+```
+Saisir une température : 10
+L'eau est à l'état liquide
+```
+
+```
+Saisir une température : -10
+L'eau est à l'état solide
+```
+
+<Aside type="caution" title="Attention">
+
+- Il n'est pas nécessaire de vérifier la saisie de l'utilisateur pour cet exercice
+- Pour celles et ceux qui les connaissent, ne pas utiliser les opérateurs booléens `not`, `and` et `or`
+
+</Aside>
+
+<details>
+<summary>Solution</summary>
+
+```python
+temperature = int(input("Saisir une température : "))
+
+if temperature >= 100:
+    print("L'eau est à l'état gazeux")
+elif temperature <= 0:
+    print("L'eau est à l'état solide")
+else:
+    print("L'eau est à l'état liquide")
+```
+
+</details>
+
+## Le nombre secret
+
+<Aside type="tip" title="Objectif">
+
+Nous souhaitons recréer en Python le jeu consistant à deviner un nombre choisi aléatoirement entre 0 et 100.
+
+</Aside>
+
+### Version 1 - Obtenir une valeur aléatoire
+
+Écrire un programme stockant en mémoire un entier aléatoire compris entre 0 et 100 et l'affichant à l'écran.
+La valeur choisie par l'ordinateur est affichée pour des raisons de débogage.
+Celle-ci devra être masquée une fois le développement du jeu terminé.
+
+<details>
+<summary>Aide - Obtenir un entier pseudo-aléatoire</summary>
+
+Il est possible d'obtenir un entier aléatoire grâce à la fonction `randint()` du module `random`.
+Ci-dessous, un exemple d'appel de la fonction `randint()` pour obtenir un entier aléatoire _n_ tel que 1 ≤ _n_ ≤ 6.
+
+<Link href="https://docs.python.org/fr/3.8/library/random.html#random.randint">
+  Voir la documentation
+</Link>
+
+```
+>>> import random
+>>> random.randint(1, 6)
+4
+>>> random.randint(1, 6)
+1
+>>> random.randint(1, 6)
+2
+>>> random.randint(1, 6)
+6
+```
+
+</details>
+
+### Version 2 - Obtenir le choix du joueur
+
+Modifier le programme de manière à demander à l'utilisateur de saisir un nombre.
+La saisie devra se répéter tant que le joueur n'a pas trouvé le nombre aléatoire conservé en mémoire.
+Les indications _« Plus petit »_ ou _« Plus grand »_ seront affichées après chaque saisie pour guider le joueur.
+
+**Exemple d'exécution**
+
+```
+42
+Saisir un nombre : 10
+Plus grand
+Saisir un nombre : 50
+Plus petit
+Saisir un nombre : 42
+Bravo !
+```
+
+<details>
+<summary>Aide - Les boucles non bornées</summary>
+
+Rappel de la syntaxe Python des boucles **while**, ou **boucles non bornées**.
+
+<Link href="https://docs.python.org/fr/3.8/tutorial/introduction.html#first-steps-towards-programming">
+  Voir le tutoriel
+</Link>
+<br />
+<Link href="https://docs.python.org/fr/3.8/reference/compound_stmts.html#while">
+  Voir la documentation
+</Link>
+
+```python
+# Affichage des entiers de 1 à 10.
+i = 1
+while i <= 10:
+    print(i)
+    i = i + 1
+```
+
+</details>
+
+<details>
+<summary>Solution partielle</summary>
+
+Compléter la solution en remplaçant les `...` par le code adéquat :
+
+```python
+import random
+
+nombre_secret = random.randint(..., ...)
+nombre_utilisateur = -1
+
+# Debug
+#print(nombre_secret)
+
+while nombre_utilisateur != ...:
+    nombre_utilisateur = int(input('Saisir un nombre : '))
+
+    if nombre_utilisateur > nombre_secret:
+        print(...)
+    elif ...:
+        print("Plus grand")
+
+print("Bravo !")
+```
+
+</details>
+
+### Version 3 - Affiner les messages
+
+Modifier le programme de manière à apporter des indications supplémentaires à l'utilisateur s'il s'approche de l'entier à trouver :
+
+- Si l'écart entre la valeur de l'utilisateur et celle à trouver est inférieur ou égal à 10, afficher _« tu chauffes ! »_
+- Si l'écart entre la valeur de l'utilisateur et celle à trouver est inférieur ou égal à 2, afficher _« tu brûles ! »_
+
+Le programme sera également modifié de manière à compter le nombre de tentatives et l'afficher à la fin du jeu.
+Une fois les développements terminés, ne plus afficher la valeur stockée en mémoire.
+
+**Exemple d'exécution**
+
+Voici un exemple d'exécution si le nombre à trouver est 42 :
+
+```
+Saisir un nombre : 10
+Plus grand
+Saisir un nombre : 60
+Plus petit
+Saisir un nombre : 50
+Plus petit, tu chauffes !
+Saisir un nombre : 40
+Plus grand, tu brûles !
+Saisir un nombre : 42
+Bravo ! Tu as trouvé en 5 tentatives
+```
+
+<details>
+<summary>Aide - Valeur absolue d'un nombre</summary>
+
+La fonction Python permettant d'obtenir la valeur absolue d'un nombre est `abs()`.
+
+<Link href="https://docs.python.org/fr/3.8/library/functions.html#abs">
+  Voir la documentation
+</Link>
+
+```
+>>> abs(-10)
+10
+>>> abs(10 - 12)
+2
+>>> abs(10 - 8)
+2
+```
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+```python
+import random
+
+nombre_secret = random.randint(1, 100)
+
+# Debug
+# print(nombre_secret)
+
+# On initialise la proposition du joueur à -1
+# pour pouvoir entrer dans la boucle de jeu.
+nombre_utilisateur = -1
+tentative = 0
+
+while nombre_utilisateur != nombre_secret:
+    nombre_utilisateur = int(input('Saisir un nombre : '))
+    tentative  += 1
+    message = ""
+
+    # On vérifie si la proposition du joueur est
+    # plus grande ou plus petite que le nombre secret
+    if nombre_utilisateur > nombre_secret:
+        message = "Plus petit"
+    elif nombre_utilisateur < nombre_secret:
+        message = "Plus grand"
+
+    # S'il y a un début de message, c'est que l'utilisateur
+    # n'a pas trouvé le nombre secret. Dans ce cas, on vérifie
+    # sa distance par rapport au nombre secret
+    if message:
+        distance = abs(nombre_utilisateur - nombre_secret)
+        if distance <= 2:
+            message += ", tu brûles !"
+        elif distance <= 10:
+            message += ", tu chauffes !"
+        print(message)
+
+print("Bravo, tu as trouvé en", tentative, "tentative(s)")
+```
+
+</details>
