@@ -15,6 +15,17 @@ export const nsi1reTopic = {
     },
 
     {
+      label: "Fonctions",
+      items: [
+        {
+          autogenerate: {
+            directory: "nsi1re/fonctions",
+          },
+        },
+      ],
+    },
+
+    {
       label: "Projets",
       items: [
         {

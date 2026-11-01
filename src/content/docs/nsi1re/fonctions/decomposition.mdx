@@ -1,0 +1,555 @@
+---
+title: Décomposition en sous-problèmes
+description: Décomposer un problème en sous-problèmes à travers le tracé de maisons avec le module Turtle.
+etapes: true
+sidebar:
+  label: Décomposition en sous-problèmes
+  order: 1
+---
+
+import { Image } from "astro:assets";
+import { Steps, Tabs, TabItem, Aside } from "@astrojs/starlight/components";
+import { Kbd } from "starlight-kbd/components";
+import Link from "@components/Link.astro";
+
+## Introduction
+
+L'une des compétences à acquérir dans le cadre de la spécialité NSI est de savoir _« décomposer un problème en sous-problèmes »_.
+Ces travaux pratiques consistent à dessiner un ensemble de maisons, mais pas n'importe comment.
+
+<Image
+  src={import("@/assets/images/nsi1re_fonctions_maisons.png")}
+  alt="Maisons"
+  class="mx-auto block"
+/>
+
+L'objectif n'est pas d'apprendre à réaliser une image sous Turtle, mais de comprendre l'intérêt et la façon de décomposer le problème _« dessiner un ensemble de maisons »_ en sous-problèmes plus simples à résoudre.
+
+<Aside type="tip" icon="rocket" title="Objectifs">
+
+- Comprendre le principe de décomposition d'un problème en sous-problèmes
+- Savoir définir et appeler une fonction (<Link href="https://docs.python.org/fr/3.9/tutorial/controlflow.html#defining-functions">Définir des fonctions</Link>)
+- Savoir documenter une fonction à l'aide d'une _docstring_ (<Link href="https://docs.python.org/fr/3.9/tutorial/controlflow.html#tut-docstrings">Chaînes de documentation</Link>)
+- Savoir utiliser les paramètres d'une fonction
+
+</Aside>
+
+## Préparation
+
+### Espace de travail
+
+Vous allez créer des dossiers afin de ne pas mélanger vos productions numériques entre vos différentes matières et travaux pratiques.
+
+<Tabs>
+<TabItem label="Ordinateur portable" icon="laptop">
+
+<Steps>
+
+1. Lancez l'application **Explorateur de fichiers** <Kbd windows="Win+E" />
+2. Accédez à votre dossier **OneDrive**
+3. Dans le dossier **OneDrive**, s'il n'y a pas de dossier **NSI**, créez-le
+4. Dans le dossier **NSI**, créez le dossier **chapitre_04**
+5. Dans le dossier **chapitre_04**, créez le dossier **tp1**
+
+</Steps>
+
+</TabItem>
+<TabItem label="Ordinateur fixe" icon="desktop">
+
+<Steps>
+
+1. Depuis le bureau, double-cliquez sur l'icône intitulée **Zone personnelle**
+2. Dans la **zone personnelle**, s'il n'y a pas de dossier **NSI**, créez-le
+3. Dans le dossier **NSI**, créez le dossier **chapitre_04**
+4. Dans le dossier **chapitre_04**, créez le dossier **tp1**
+
+</Steps>
+
+</TabItem>
+</Tabs>
+
+### Téléchargement
+
+Pour réaliser ces travaux pratiques, il est nécessaire de disposer de certains fichiers.
+
+<Steps>
+
+1. Téléchargez le fichier ZIP contenant les fichiers nécessaires : <a href="/files/nsi1re/NSI1RE04_TP1.zip" download="NSI1RE04_TP1.zip">NSI1RE04_TP1.zip</a>
+2. Ouvrez le fichier ZIP<br />_(si le navigateur ne l'ouvre pas automatiquement, cliquez sur le fichier téléchargé)_
+3. Sélectionnez tous les fichiers et dossiers <Kbd windows="Ctrl+A" mac="Cmd+A" />
+4. Copiez tous les fichiers et dossiers <Kbd windows="Ctrl+C" mac="Cmd+C" />
+5. Collez les fichiers dans le dossier **NSI/chapitre_04/tp1** <Kbd windows="Ctrl+V" mac="Cmd+V" />
+
+</Steps>
+
+## Démarrage
+
+### Décomposition
+
+Voici une illustration d'une décomposition possible du tracé de plusieurs maisons :
+
+<Image
+  src={import("@/assets/images/nsi1re_fonctions_decomposition.svg")}
+  alt="Décomposition d'un problème en sous-problèmes"
+  class="mx-auto block"
+/>
+
+Nous souhaitons tracer un nombre quelconque de maisons identiques.
+Pour cela, un premier niveau de décomposition pourrait être de _« tracer une seule maison »_.
+Le tracé d'une seule maison pourrait à son tour être décomposé en sous-problèmes qui pourraient être : _« tracer le toit d'une maison »_ et _« tracer le mur d'une maison »_.
+
+### Structure du code
+
+Vous ne partirez pas de zéro.
+Un code Python a été préparé de façon à refléter la décomposition en sous-problèmes décrite précédemment.
+
+<Steps>
+
+1. Lancez l'application **Thonny** _(ou l'IDE ayant votre préférence)_
+2. Ouvrez le fichier **paysage.py**
+3. Parcourez le code source
+
+</Steps>
+
+Le fichier **paysage.py** contient la définition de quatre procédures :
+
+- `mur()`
+- `toit()`
+- `maison()`
+- `dessiner_paysage()`
+
+<Aside title="Procédure ou fonction ?">
+
+Pour rappel, une **procédure** désigne une fonction ne renvoyant aucune valeur (donc sans instruction `return`).
+Cependant, par souci de simplicité, nous n'utiliserons que le terme **fonction** pour la suite de l'énoncé.
+
+</Aside>
+
+Ces fonctions sont en charge d'un tracé allant du plus spécifique avec `mur()` et `toit()`, au plus général avec `dessiner_paysage()`.
+
+Chaque fonction dispose d'une _docstring_ décrivant le comportement attendu et le rôle de chaque paramètre.
+
+Les fonctions `mur()` et `toit()` ne disposent que du code de positionnement de la tortue, le tracé reste à implémenter.
+Les fonctions `maison()` et `dessiner_paysage()` ne disposent que de leur _docstring_.
+
+## Sous-problèmes
+
+### Factorisation
+
+La portion de code ci-dessous, présente dans les fonctions `mur()` et `toit()`, permet de positionner la tortue aux coordonnées _(x, y)_ :
+
+```python
+turtle.penup()
+turtle.goto(x, y)
+turtle.pendown()
+```
+
+Ce code est donc utilisé à deux reprises.
+Il serait judicieux de le **factoriser** en créant une fonction dédiée au positionnement de la tortue.
+
+<Steps>
+
+1. Ouvrez le fichier **paysage.py**
+2. Exécutez-le et mémorisez le déplacement de la tortue.
+   Si tout fonctionne correctement, la tortue devra se déplacer de la même manière après vos modifications
+3. Créez la fonction `positionner` ayant deux paramètres `x` et `y` correspondant aux nouvelles coordonnées de la tortue.
+   Écrivez sa définition à la suite des instructions d'import
+4. Ajoutez en _docstring_ le texte suivant : « Positionne la tortue aux coordonnées (x, y). »
+5. Remplacez l'ancien code de positionnement des fonctions `mur()` et `toit()` par un appel à la fonction `positionner()`
+6. Exécutez le fichier **paysage.py** et vérifiez que le déplacement de la tortue n'a pas changé
+
+</Steps>
+
+<details>
+<summary>Solution</summary>
+
+<Tabs>
+<TabItem label="Avant">
+
+```python
+import turtle
+import aide
+
+def mur(x, y, largeur, hauteur):
+    turtle.penup()
+    turtle.goto(x, y)
+    turtle.pendown()
+
+def toit(x, y, base, hauteur):
+    turtle.penup()
+    turtle.goto(x, y)
+    turtle.pendown()
+```
+
+</TabItem>
+<TabItem label="Après">
+
+La correction ci-dessous ne comporte que les modifications.
+**Ne supprimez pas les docstrings des fonctions `mur()` et `toit()` ni le reste du code du fichier !**
+
+```python
+import turtle
+import aide
+
+def positionner(x, y):
+    """
+    Positionne la tortue aux coordonnées (x, y).
+    """
+    turtle.penup()
+    turtle.goto(x, y)
+    turtle.pendown()
+
+def mur(x, y, largeur, hauteur):
+    positionner(x, y)
+
+def toit(x, y, base, hauteur):
+    positionner(x, y)
+```
+
+</TabItem>
+</Tabs>
+
+</details>
+
+### Tracé d'un mur
+
+Vous allez commencer par implémenter la fonction `mur`.
+Celle-ci a pour paramètres la position _(x, y)_ du coin inférieur gauche du mur ainsi que ses dimensions.
+
+Le tracé du mur doit se faire en utilisant **uniquement** la fonction <Link href="https://docs.python.org/fr/3.9/library/turtle.html#turtle.goto">goto</Link> du module `turtle`.
+Vous devrez donc calculer les coordonnées de chaque point du rectangle formant le mur pour déplacer la tortue.
+
+<details>
+<summary>Conseils</summary>
+
+Soit **ABCD** le rectangle utilisé pour représenter le mur d'une maison.
+La _docstring_ précise que les paramètres `x` et `y` correspondent aux coordonnées du coin inférieur gauche du mur, donc le point **A**.
+Pour tracer le mur, vous devez :
+
+- calculer les coordonnées de B, C et D par rapport à A en utilisant les paramètres `hauteur` et `largeur`
+- déplacer la tortue sur chacun des points en utilisant la fonction `goto`
+
+<Image
+  src={import("@/assets/images/nsi1re_fonctions_absolu_mur.png")}
+  alt="Coordonnées du mur"
+  class="mx-auto block"
+/>
+
+</details>
+
+<Steps>
+
+1. Ouvrez le fichier **paysage.py**
+2. Modifiez **uniquement** le corps de la fonction `mur` pour effectuer le tracé en n'utilisant que la fonction `goto`
+3. Exécutez le fichier **paysage.py** pour vérifier le tracé
+
+</Steps>
+
+<details>
+<summary>Affichage attendu</summary>
+
+<Image
+  src={import("@/assets/images/nsi1re_fonctions_resultat_mur.png")}
+  alt="Tracé du mur"
+  width={400}
+  class="mx-auto block"
+/>
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+**Ne faites pas de copier/coller, comprenez le fonctionnement, fermez la solution et codez par vous-même.**
+
+```python
+def mur(x, y, largeur, hauteur):
+    """
+    Dessine le mur d'une maison.
+
+    x       -- position x du coin inférieur gauche du mur
+    y       -- position y du coin inférieur gauche du mur
+    largeur -- largeur du mur
+    hauteur -- hauteur du mur
+    """
+    positionner(x, y)                     # Positionnement de la tortue au point A
+    turtle.goto(x, y + hauteur)           # Tracé du segment AB
+    turtle.goto(x + largeur, y + hauteur) # Tracé du segment BC
+    turtle.goto(x + largeur, y)           # Tracé du segment CD
+    turtle.goto(x, y)                     # Tracé du segment DA
+```
+
+</details>
+
+### Tracé d'un toit
+
+Vous allez maintenant implémenter la fonction `toit`.
+Celle-ci a pour paramètres la position _(x, y)_ du coin inférieur gauche du toit ainsi que ses dimensions.
+
+<details>
+<summary>Conseils</summary>
+
+Soit **ABC** le triangle utilisé pour représenter le toit d'une maison.
+La _docstring_ précise que les paramètres `x` et `y` correspondent aux coordonnées du coin inférieur gauche du toit, donc le point **A**.
+
+<Image
+  src={import("@/assets/images/nsi1re_fonctions_absolu_toit.png")}
+  alt="Coordonnées du toit"
+  class="mx-auto block"
+/>
+
+</details>
+
+<Steps>
+
+1. Ouvrez le fichier **paysage.py**
+2. Modifiez **uniquement** le corps de la fonction `toit` pour effectuer le tracé en n'utilisant que la fonction `goto`
+3. Exécutez le fichier **paysage.py** pour vérifier le tracé
+
+</Steps>
+
+<details>
+<summary>Affichage attendu</summary>
+
+<Image
+  src={import("@/assets/images/nsi1re_fonctions_resultat_toit.png")}
+  alt="Tracé du mur et du toit"
+  width={400}
+  class="mx-auto block"
+/>
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+Avez-vous vraiment besoin de la solution ? Allez, cherchez encore 😄 !
+
+</details>
+
+### Tracé d'une maison
+
+Vous avez résolu les premiers sous-problèmes.
+Vous êtes maintenant en mesure d'implémenter la fonction `maison` en suivant la description donnée par la _docstring_ et en utilisant les fonctions `mur` et `toit`.
+
+<Steps>
+
+1. Ouvrez le fichier **paysage.py**
+2. Modifiez **uniquement** le corps de la fonction `maison` pour effectuer le tracé.
+   Celui-ci devra se faire en appelant les fonctions `toit` et `mur` avec des arguments en accord avec la description des dimensions de la maison indiquées dans la _docstring_
+3. Exécutez le fichier **paysage.py** pour vérifier le tracé
+
+</Steps>
+
+<details>
+<summary>Affichage attendu</summary>
+
+<Image
+  src={import("@/assets/images/nsi1re_fonctions_resultat_maison.png")}
+  alt="Tracé de la maison"
+  width={400}
+  class="mx-auto block"
+/>
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+La solution ci-dessous ne comporte que le strict nécessaire.
+**Ne supprimez pas** les docstrings des fonctions ou le code manquant !
+
+```python
+def maison(x, y):
+    # Caractéristiques de tracé d'une maison
+    largeur = 200
+    hauteur_mur = 100
+    hauteur_toit = 50
+
+    # Tracé de la maison
+    mur(x, y, largeur, hauteur_mur)                 # Tracé du mur
+    toit(x, y + hauteur_mur, largeur, hauteur_toit) # Tracé du toit juste au-dessus du mur
+```
+
+</details>
+
+## Problème principal
+
+Vous avez traité l'ensemble des sous-problèmes.
+Il reste maintenant à résoudre le problème principal qui, pour rappel, consiste à dessiner un ensemble de maisons.
+Mais avant cela, veuillez prendre connaissance de l'introduction au principe de modules et de l'usage de la variable spéciale `__name__`.
+
+### Exécution ou import d'un module
+
+Vous avez probablement remarqué les lignes suivantes à la fin du fichier **paysage.py** :
+
+```python
+if __name__ == "__main__":
+    aide.grille()
+    mur(-300, 0, 200, 100)
+    toit(-300, 150, 200, 50)
+    maison(0, 0)
+    turtle.mainloop()
+```
+
+Mais quelle est la finalité de la condition `if __name__ == "__main__":` ?
+
+Avant toute chose, pour simplifier, considérez que tout fichier Python est un <Link href="https://docs.python.org/fr/3.9/tutorial/modules.html">module</Link>.
+Un module peut être directement **exécuté**, c'est-à-dire que son fichier est celui à partir duquel vous lancez l'interpréteur Python.
+Un module peut aussi être **importé**, c'est-à-dire qu'il est inclus dans un autre module via l'instruction `import`.
+
+La variable `__name__` permet de savoir si un module est exécuté ou importé.
+En effet, Python définit une variable `__name__` automatiquement pour chaque module.
+Celle-ci a pour valeur la chaîne de caractères `"__main__"` si le module est exécuté, ou le nom du module si celui-ci est importé.
+
+<Aside title="Cas de l'exécution du fichier paysage.py">
+
+Si un fichier (ou module) est exécuté, alors la variable `__name__` aura pour valeur la chaîne de caractères `"__main__"`.
+
+Ainsi, lorsqu'on lance l'interpréteur Python à partir du fichier **paysage.py**, la valeur de `__name__` à l'intérieur du module `paysage` sera `"__main__"`.
+
+<Tabs>
+<TabItem label="paysage.py">
+
+```python title="paysage.py"
+print(__name__)
+if __name__ == "__main__":
+    print("Exécution code paysage")
+```
+
+</TabItem>
+<TabItem label="Console">
+
+```
+> python paysage.py
+__main__
+Exécution code paysage
+```
+
+</TabItem>
+</Tabs>
+
+</Aside>
+
+<Aside title="Cas de l'import du fichier paysage.py">
+
+Si un fichier (ou module) est importé, alors la variable `__name__` aura pour valeur le nom du module importé.
+
+Ainsi, si on importe `paysage` et que l'exécution se fait depuis un autre module, alors la valeur de `__name__` à l'intérieur de **paysage.py** sera `"paysage"`.
+
+<Tabs>
+<TabItem label="main.py">
+
+```python title="main.py"
+import paysage
+
+print("Exécution code main")
+```
+
+</TabItem>
+<TabItem label="paysage.py">
+
+```python title="paysage.py"
+print(__name__)
+if __name__ == "__main__":
+    # Dans le cas d'un import, cette portion de code ne sera pas exécutée
+    # car __name__ == "paysage" donc différent de "__main__"
+    print("Exécution du code")
+```
+
+</TabItem>
+<TabItem label="Console">
+
+Notez que c'est le module `main` qui est maintenant exécuté, le module `paysage` y étant importé :
+
+```
+> python main.py
+paysage
+Exécution code main
+```
+
+</TabItem>
+</Tabs>
+
+</Aside>
+
+Dans le cadre de ces travaux pratiques, le point de départ du programme final sera le fichier **main.py** d'où sera importé `paysage`.
+Mais avant d'en arriver là, nous souhaitons pouvoir tester les fonctions du module `paysage`.
+C'est le rôle de ces quelques lignes à la fin du fichier **paysage.py**.
+
+### Tracé du paysage
+
+Vous allez maintenant implémenter la fonction `dessiner_paysage` en suivant la description donnée par la _docstring_, c'est-à-dire dessiner trois maisons.
+Vous êtes libre de leur positionnement.
+Pour vérifier le tracé, vous exécuterez cette fois-ci le fichier **main.py**.
+
+<Steps>
+
+1. Ouvrez le fichier **paysage.py**
+2. Modifiez **uniquement** le corps de la fonction `dessiner_paysage` pour effectuer le tracé
+3. Exécutez le fichier **main.py** pour vérifier le tracé
+
+</Steps>
+
+## Évolutions
+
+Vous pensez peut-être qu'il aurait été plus simple d'effectuer tous les tracés directement, sans décomposer et passer par des fonctions.
+Ne perdez pas de vue que c'est grâce à cette décomposition que vous pouvez modifier ou ajouter des maisons sans aucune duplication de code.
+Celle-ci sera encore plus appréciable maintenant qu'il va être question de faire évoluer le tracé.
+
+### Gestion des étages
+
+Vous allez modifier la fonction `maison` de façon à indiquer le nombre d'étages de la maison grâce au paramètre `etages` :
+
+```python
+def maison(x, y, etages):
+    """
+    Dessine une maison de 200px de largeur.
+    Le mur fait 100px de hauteur et le toit, 50px de hauteur.
+
+    x      -- position x du coin inférieur gauche de la maison
+    y      -- position y du coin inférieur gauche de la maison
+    etages -- nombre d'étages de la maison
+    """
+```
+
+Les tests seront modifiés de façon à prendre en compte ce nouveau paramètre :
+
+```python {5}
+if __name__ == "__main__":
+    aide.grille()
+    mur(-300, 0, 200, 100)
+    toit(-300, 150, 200, 50)
+    maison(0, 0, 2)
+    turtle.mainloop()
+```
+
+<Steps>
+
+1. Ouvrez le fichier **paysage.py**
+2. Modifiez les tests en ajoutant l'argument `2` _(pour deux étages)_ à l'appel de fonction `maison`
+3. Modifiez les paramètres et le corps de la fonction `maison` pour gérer les étages
+4. Exécutez le fichier **paysage.py** pour vérifier le tracé
+
+</Steps>
+
+<details>
+<summary>Affichage attendu</summary>
+
+<Image
+  src={import("@/assets/images/nsi1re_fonctions_absolu_final.png")}
+  alt="Tracé d'une maison à deux étages"
+  class="mx-auto block"
+/>
+
+</details>
+
+### Suggestions
+
+Vous avez terminé ? Voici quelques suggestions pour faire évoluer le tracé de votre paysage et vous avancer pour le prochain projet :
+
+- Personnaliser le tracé de la maison
+- Tracer une porte
+- Tracer des fenêtres et rendre paramétrable leur nombre
+- Tracer le paysage de façon aléatoire
+- Concevoir un algorithme de tracé aléatoire plus harmonieux
