@@ -1,9 +1,8 @@
 ---
-title: Décomposition en sous-problèmes
-description: Décomposer un problème en sous-problèmes à travers le tracé de maisons avec le module Turtle.
+title: Décomposition d'un problème
+description: Décomposer un problème en sous-problèmes à travers le tracé de maisons avec le module turtle.
 etapes: true
 sidebar:
-  label: Décomposition d'un problème
   order: 1
 ---
 
@@ -11,28 +10,38 @@ import { Image } from "astro:assets";
 import { Steps, Tabs, TabItem, Aside } from "@astrojs/starlight/components";
 import { Kbd } from "starlight-kbd/components";
 import Link from "@components/Link.astro";
+import Callout from "@components/Callout.astro";
+import Checklist from "@components/Checklist.astro";
 
 ## Introduction
 
-L'une des compétences à acquérir dans le cadre de la spécialité NSI est de savoir _« décomposer un problème en sous-problèmes »_.
-Ces travaux pratiques consistent à dessiner un ensemble de maisons, mais pas n'importe comment.
+Savoir _décomposer un problème en sous-problèmes_ est l'une des compétences à acquérir en spécialité NSI.
+Dans ce TP, vous allez dessiner l'ensemble de maisons ci-dessous.
 
 <Image
   src={import("@/assets/images/nsi1re_fonctions_maisons.png")}
-  alt="Maisons"
+  alt="Fenêtre Turtle montrant trois maisons identiques alignées, chacune formée d'un rectangle surmonté d'un toit triangulaire"
+  width={500}
   class="mx-auto block"
 />
 
-L'objectif n'est pas d'apprendre à réaliser une image sous Turtle, mais de comprendre l'intérêt et la façon de décomposer le problème _« dessiner un ensemble de maisons »_ en sous-problèmes plus simples à résoudre.
+L'objectif n'est pas d'apprendre à réaliser une image avec le module `turtle`, mais de comprendre pourquoi et comment décomposer le problème « dessiner un ensemble de maisons » en sous-problèmes plus simples à résoudre.
 
-<Aside type="tip" icon="rocket" title="Objectifs">
+<Callout type="objectives">
 
 - Comprendre le principe de décomposition d'un problème en sous-problèmes
-- Savoir définir et appeler une fonction (<Link href="https://docs.python.org/fr/3.9/tutorial/controlflow.html#defining-functions">Définir des fonctions</Link>)
-- Savoir documenter une fonction à l'aide d'une _docstring_ (<Link href="https://docs.python.org/fr/3.9/tutorial/controlflow.html#tut-docstrings">Chaînes de documentation</Link>)
+- Savoir définir et appeler une fonction
 - Savoir utiliser les paramètres d'une fonction
+- Savoir documenter une fonction à l'aide d'une _docstring_
 
-</Aside>
+</Callout>
+
+<Checklist>
+
+- J'ai compris que ce TP porte sur les fonctions, pas spécifiquement sur `turtle`
+- J'ai lu et compris chacun des objectifs
+
+</Checklist>
 
 ## Préparation
 
@@ -553,3 +562,35 @@ Vous avez terminé ? Voici quelques suggestions pour faire évoluer le tracé de
 - Tracer des fenêtres et rendre paramétrable leur nombre
 - Tracer le paysage de façon aléatoire
 - Concevoir un algorithme de tracé aléatoire plus harmonieux
+
+## Pour approfondir
+
+Ces ressources reprennent les notions du TP. Consultez-les pour revoir un point ou aller plus loin.
+
+**Définir et appeler une fonction, utiliser ses paramètres**
+
+- <Link href="https://courspython.com/fonctions.html">Fonctions en Python</Link>
+  (Cours Python)
+- <Link href="https://zestedesavoir.com/tutoriels/2514/un-zeste-de-python/5-fonctions/1-fonctions-factoriser/">
+    Des fonctions pour factoriser
+  </Link>
+  et
+  <Link href="https://zestedesavoir.com/tutoriels/2514/un-zeste-de-python/5-fonctions/2-fonctions-parametrees/">
+    Fonctions paramétrées
+  </Link>
+  (Un zeste de Python)
+- <Link href="https://docs.python.org/fr/3/tutorial/controlflow.html#defining-functions">
+    Définir des fonctions
+  </Link>
+  (documentation Python)
+
+**Documenter une fonction avec une _docstring_**
+
+- <Link href="https://zestedesavoir.com/tutoriels/2514/un-zeste-de-python/7-perfectionnement/4-fonctions/#3-3-documentation-annotations">
+    Documentation et annotations
+  </Link>
+  (Un zeste de Python ; les annotations de type ne sont pas au programme)
+- <Link href="https://docs.python.org/fr/3/tutorial/controlflow.html#tut-docstrings">
+    Chaînes de documentation
+  </Link>
+  (documentation Python)
