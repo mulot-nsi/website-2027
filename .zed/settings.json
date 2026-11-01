@@ -1,0 +1,11 @@
+{
+  "soft_wrap": "none",
+  "languages": {
+    "Markdown": {
+      "soft_wrap": "none"
+    },
+    "MDX": {
+      "soft_wrap": "none"
+    }
+  }
+}
