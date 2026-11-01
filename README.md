@@ -52,6 +52,7 @@ Des alias d'import sont définis dans le fichier `tsconfig.json` :
 | `Video`                 | Vidéo intégrée                                                              |
 | `Playground`            | Éditeur HTML/CSS interactif (LiveCodes)                                     |
 | `Checklist`             | Encadré vert « Ai-je bien compris ? » où l'élève coche ce qu'il a compris   |
+| `AppLink`               | Bouton d'accès à une application en ligne (CapyCode…), à ses couleurs       |
 | `Callout`               | Encadré façon `Aside`, avec types supplémentaires, icônes Tabler, repliable |
 | `starlight/PageSidebar` | Colonne de droite avec la liste des étapes (pages avec `etapes: true`)      |
 

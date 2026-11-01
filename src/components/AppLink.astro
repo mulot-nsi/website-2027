@@ -1,0 +1,97 @@
+---
+// Bouton d'accès à une application en ligne (CapyCode…), avec son icône,
+// ses couleurs et son nom, ouvert dans un nouvel onglet. Les applications
+// sont déclarées dans src/config/apps.ts.
+//
+// Utilisation dans un fichier .mdx :
+//
+//   Ouvrez <AppLink app="capycode" />
+//   <AppLink app="capycode">Ouvrir CapyCode</AppLink>   (libellé personnalisé)
+//   <AppLink app="capycode" href="https://…" />         (adresse particulière)
+//
+// Props :
+//   - app : clé de l'application dans src/config/apps.ts (requis)
+//   - href : adresse à ouvrir (par défaut : adresse de l'application)
+import { AstroError } from "astro/errors";
+import { Icon } from "@astrojs/starlight/components";
+import { apps, type AppId } from "@/config/apps";
+
+interface Props {
+  app: AppId;
+  href?: string;
+}
+
+const { app, href } = Astro.props;
+
+const data = apps[app];
+if (!data) {
+  throw new AstroError(
+    "Application inconnue pour le composant `<AppLink>`.",
+    `Reçu : ${JSON.stringify(app)}\n` +
+      `Attendu : ${Object.keys(apps)
+        .map((a) => JSON.stringify(a))
+        .join(", ")}`,
+  );
+}
+
+const label = Astro.slots.has("default")
+  ? await Astro.slots.render("default")
+  : data.name;
+---
+
+<span class="not-content app-link-wrapper">
+  <a
+    class="app-link"
+    href={href ?? data.url}
+    target="_blank"
+    rel="nofollow noopener noreferrer"
+    style={{
+      "--app-bg": data.background,
+      "--app-fg": data.color,
+      "--app-accent": data.accent,
+    }}
+  >
+    <img src={data.icon.src} alt="" width="20" height="20" />
+    <span set:html={label} />
+    <Icon name="external" class="app-link__external" />
+  </a>
+</span>
+
+<style>
+  .app-link-wrapper {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .app-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45em;
+    padding: 0.2em 0.65em;
+    border: 1px solid #3c3c3c;
+    border-radius: 0.5rem;
+    background-color: var(--app-bg);
+    color: var(--app-fg);
+    font-weight: 600;
+    line-height: 1.5;
+    text-decoration: none;
+    transition:
+      border-color 0.15s,
+      box-shadow 0.15s;
+  }
+  .app-link:hover,
+  .app-link:focus-visible {
+    border-color: var(--app-accent);
+    box-shadow: 0 0 0 1px var(--app-accent);
+  }
+
+  .app-link img {
+    width: 1.25em;
+    height: 1.25em;
+  }
+
+  .app-link__external {
+    font-size: 0.85em;
+    opacity: 0.7;
+  }
+</style>

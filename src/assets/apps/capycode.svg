@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="capyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ca8a04"/>
+      <stop offset="100%" stop-color="#854d0e"/>
+    </linearGradient>
+    <linearGradient id="codeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#0284c7"/>
+    </linearGradient>
+  </defs>
+  <!-- Background badge -->
+  <rect width="64" height="64" rx="16" fill="#1e1e1e" />
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="none" stroke="#333" stroke-width="2"/>
+  
+  <!-- Stylized Capybara head outline -->
+  <path d="M 18 36 C 18 25, 26 20, 36 20 C 44 20, 50 25, 50 34 C 50 42, 42 46, 34 46 C 24 46, 18 43, 18 36 Z" fill="url(#capyGrad)"/>
+  <!-- Capybara muzzle -->
+  <path d="M 38 27 C 46 27, 52 31, 52 37 C 52 43, 44 44, 38 44 Z" fill="#713f12"/>
+  <!-- Eye -->
+  <ellipse cx="32" cy="28" rx="2.5" ry="2" fill="#1e1e1e"/>
+  <!-- Ear -->
+  <path d="M 22 23 C 20 20, 23 17, 26 19 C 27 20, 26 23, 24 23 Z" fill="#713f12"/>
+  <!-- Nose/Nostril -->
+  <circle cx="48" cy="34" r="1.5" fill="#1e1e1e"/>
+  
+  <!-- Code brackets </> -->
+  <path d="M 12 32 L 8 36 L 12 40" fill="none" stroke="url(#codeGrad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 52 32 L 56 36 L 52 40" fill="none" stroke="url(#codeGrad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 17 48 L 13 54" fill="none" stroke="url(#codeGrad)" stroke-width="2" stroke-linecap="round"/>
+</svg>

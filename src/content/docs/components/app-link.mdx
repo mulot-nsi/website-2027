@@ -1,0 +1,43 @@
+---
+title: AppLink
+description: Bouton d'accès à une application en ligne, avec son icône, ses couleurs et son nom.
+draft: true
+---
+
+import AppLink from "@components/AppLink.astro";
+
+Bouton reprenant l'icône, les couleurs et le nom d'une application en ligne, pour que les élèves la reconnaissent facilement.
+Il s'ouvre dans un nouvel onglet et s'insère aussi bien dans une phrase que seul sur une ligne.
+
+```mdx
+import AppLink from "@components/AppLink.astro";
+```
+
+## Props
+
+| Prop   | Valeur                                         | Par défaut               |
+| :----- | :--------------------------------------------- | :----------------------- |
+| `app`  | Clé de l'application dans `src/config/apps.ts` | (requis)                 |
+| `href` | Adresse à ouvrir                               | Adresse de l'application |
+
+Le contenu du composant, s'il y en a un, remplace le nom de l'application.
+
+## Applications disponibles
+
+| Clé        | Application                                                     |
+| :--------- | :-------------------------------------------------------------- |
+| `capycode` | <AppLink app="capycode" /> (éditeur de code dans le navigateur) |
+
+Pour ajouter une application, placer son icône dans `src/assets/apps/` puis la déclarer dans `src/config/apps.ts`.
+
+## Exemples
+
+```mdx
+1. Ouvrez l'application <AppLink app="capycode" />
+
+<AppLink app="capycode">Ouvrir CapyCode</AppLink>
+```
+
+1. Ouvrez l'application <AppLink app="capycode" />
+
+<AppLink app="capycode">Ouvrir CapyCode</AppLink>
