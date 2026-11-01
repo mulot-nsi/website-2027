@@ -1,0 +1,61 @@
+---
+title: Checklist
+description: Encadré « Ai-je bien compris ? » où l'élève coche ce qu'il a compris.
+draft: true
+---
+
+import Checklist from "@components/Checklist.astro";
+
+Encadré vert où chaque élément d'une liste Markdown devient une case à cocher.
+Les cases cochées sont conservées dans le navigateur de l'élève.
+
+```mdx
+import Checklist from "@components/Checklist.astro";
+```
+
+## Props
+
+| Prop    | Valeur        | Par défaut             |
+| :------ | :------------ | :--------------------- |
+| `title` | Titre affiché | `Ai-je bien compris ?` |
+
+## Exemple
+
+Laisser une ligne vide après la balise ouvrante et avant la balise fermante.
+
+```mdx
+<Checklist>
+
+- Je sais lancer Python en mode interactif
+- Je sais faire une affectation
+
+</Checklist>
+```
+
+<Checklist>
+
+- Je sais lancer Python en mode interactif
+- Je sais faire une affectation
+
+</Checklist>
+
+## Titre personnalisé
+
+```mdx
+<Checklist title="Avant de continuer">
+
+- J'ai enregistré mon fichier
+
+</Checklist>
+```
+
+<Checklist title="Avant de continuer">
+
+- J'ai enregistré mon fichier
+
+</Checklist>
+
+## Avec le mode étapes
+
+Sur une page avec `etapes: true` dans l'en-tête, une étape est validée dans la colonne de droite
+quand toutes les cases des `Checklist` de sa section sont cochées.

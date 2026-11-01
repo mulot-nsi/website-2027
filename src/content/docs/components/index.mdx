@@ -1,0 +1,36 @@
+---
+title: Composants
+description: Documentation des composants maison, avec des exemples d'utilisation.
+draft: true
+---
+
+Ces pages présentent les composants maison du site, avec le code MDX à écrire et le rendu obtenu.
+Elles sont marquées `draft: true` : elles ne sont visibles qu'avec `pnpm dev` et ne sont jamais publiées.
+
+| Composant                               | Rôle                                                                        |
+| :-------------------------------------- | :-------------------------------------------------------------------------- |
+| [`Callout`](/components/callout/)       | Encadré façon `Aside`, avec types supplémentaires, icônes Tabler, repliable |
+| [`Checklist`](/components/checklist/)   | Encadré « Ai-je bien compris ? » où l'élève coche ce qu'il a compris        |
+| [`Link`](/components/link/)             | Lien externe, ouvert dans un nouvel onglet                                  |
+| [`Video`](/components/video/)           | Vidéo PeerTube intégrée                                                     |
+| [`Playground`](/components/playground/) | Éditeur HTML ou Python interactif (LiveCodes)                               |
+
+Les props de chaque composant sont décrites en commentaire en tête de son fichier, dans `src/components/`.
+
+## Mode étapes
+
+Le composant `starlight/PageSidebar` remplace la colonne de droite de Starlight.
+Avec `etapes: true` dans l'en-tête d'une page, celle-ci s'affiche section par section (une section par titre de niveau 2),
+avec la liste des étapes dans la colonne de droite. Une étape est validée quand toutes les cases de ses `Checklist` sont cochées.
+
+```mdx
+---
+title: Décomposition en sous-problèmes
+etapes: true
+---
+```
+
+## Ajouter une page
+
+Créer un fichier `src/content/docs/components/<composant>.mdx` avec `draft: true` dans l'en-tête,
+puis l'ajouter au tableau ci-dessus.

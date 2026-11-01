@@ -1,0 +1,61 @@
+---
+title: Playground
+description: Éditeur HTML ou Python interactif (LiveCodes).
+draft: true
+---
+
+import Playground from "@components/Playground.astro";
+
+Éditeur interactif basé sur [LiveCodes](https://livecodes.io) : le code est modifiable et le résultat s'affiche à côté.
+
+```mdx
+import Playground from "@components/Playground.astro";
+```
+
+## Props
+
+| Prop       | Valeur                 | Par défaut |
+| :--------- | :--------------------- | :--------- |
+| `language` | `html` ou `python`     | `html`     |
+| `code`     | Code affiché au départ | (vide)     |
+| `height`   | Hauteur de l'éditeur   | `360px`    |
+
+Le code se donne entre accents graves (`` ` ``) pour pouvoir s'étendre sur plusieurs lignes.
+
+## HTML
+
+```mdx
+<Playground
+  language="html"
+  code={`<h1>Titre principal</h1>
+
+<p>Un paragraphe avec un mot <strong>important</strong>.</p>`}
+/>
+```
+
+<Playground
+  language="html"
+  code={`<h1>Titre principal</h1>
+
+<p>Un paragraphe avec un mot <strong>important</strong>.</p>`}
+/>
+
+## Python
+
+La console s'ouvre automatiquement pour afficher le résultat des `print`.
+
+```mdx
+<Playground
+  language="python"
+  height="280px"
+  code={`for i in range(3):
+    print("Bonjour", i)`}
+/>
+```
+
+<Playground
+  language="python"
+  height="280px"
+  code={`for i in range(3):
+    print("Bonjour", i)`}
+/>

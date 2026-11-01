@@ -44,7 +44,10 @@ export default defineConfig({
           },
         }),
         starlightKbd(kbdConfig),
-        starlightSidebarTopics(sidebarTopics),
+        starlightSidebarTopics(sidebarTopics, {
+          // Documentation des composants, visible uniquement avec `pnpm dev`.
+          exclude: ["/components", "/components/**"],
+        }),
       ],
     }),
   ],

@@ -1,0 +1,35 @@
+---
+title: Video
+description: Vidéo PeerTube intégrée.
+draft: true
+---
+
+import Video from "@components/Video.astro";
+
+Lecteur vidéo PeerTube, par exemple sur [Tube Sciences & Technologies](https://tube-sciences-technologies.apps.education.fr).
+
+```mdx
+import Video from "@components/Video.astro";
+```
+
+## Props
+
+| Prop    | Valeur                                                                 | Par défaut |
+| :------ | :--------------------------------------------------------------------- | :--------- |
+| `src`   | URL de partage (`/w/<id>`) ou URL d'intégration (`/videos/embed/<id>`) | (requis)   |
+| `title` | Titre de la vidéo (accessibilité)                                      | `Vidéo`    |
+| `width` | Largeur du lecteur                                                     | `100%`     |
+
+## Exemple
+
+```mdx
+<Video
+  src="https://tube-sciences-technologies.apps.education.fr/w/6anSDz6SKA7m45eK5ncont"
+  title="Démonstration : enregistrer et ouvrir une page HTML"
+/>
+```
+
+<Video
+  src="https://tube-sciences-technologies.apps.education.fr/w/6anSDz6SKA7m45eK5ncont"
+  title="Démonstration : enregistrer et ouvrir une page HTML"
+/>

@@ -1,0 +1,31 @@
+---
+title: Link
+description: Lien externe, ouvert dans un nouvel onglet.
+draft: true
+---
+
+import Link from "@components/Link.astro";
+
+Lien précédé d'une icône, ouvert dans un nouvel onglet (`target="_blank"`, `rel="nofollow noopener noreferrer"`).
+
+```mdx
+import Link from "@components/Link.astro";
+```
+
+## Props
+
+| Prop   | Valeur              | Par défaut |
+| :----- | :------------------ | :--------- |
+| `href` | Adresse de la cible | (requis)   |
+
+## Exemples
+
+```mdx
+Je m'y rends via le lien <Link href="https://capytale2.ac-paris.fr/">Capytale</Link>.
+
+Accédez à la page de démonstration : <Link href="/demo.html">demo.html</Link>
+```
+
+Je m'y rends via le lien <Link href="https://capytale2.ac-paris.fr/">Capytale</Link>.
+
+Accédez à la page de démonstration : <Link href="/demo.html">demo.html</Link>

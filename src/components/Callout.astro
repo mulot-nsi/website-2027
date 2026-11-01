@@ -1,0 +1,208 @@
+---
+// Encadré au style des encadrés Starlight (Aside), avec des types
+// supplémentaires, des icônes Tabler et la possibilité d'être rétractable.
+//
+// Utilisation dans un fichier .mdx :
+//
+//   <Callout type="question" title="Question - Choix des adresses IP">
+//   Contenu de l'encadré.
+//   </Callout>
+//
+//   <Callout type="lesson" collapsible>       (rétractable, fermé)
+//   <Callout type="lesson" collapsible open>  (rétractable, ouvert)
+//
+// Props :
+//   - type : note, tip, caution, danger (types de Starlight),
+//            question, objectives, lesson, result, example (par défaut : note)
+//   - title : titre affiché (par défaut : titre du type)
+//   - icon : nom d'une icône Tabler (https://tabler.io/icons), ex. "rocket"
+//   - collapsible : l'encadré peut être replié en cliquant sur son titre
+//   - open : un encadré rétractable est ouvert au chargement de la page
+import { readFileSync } from "node:fs";
+import { createRequire } from "node:module";
+import { AstroError } from "astro/errors";
+import { Icon } from "@astrojs/starlight/components";
+
+// Types de Starlight : icône et titre par défaut de Starlight.
+const starlightIcons = {
+  note: "information",
+  tip: "rocket",
+  caution: "warning",
+  danger: "error",
+} as const;
+
+// Types maison : icône Tabler et titre par défaut.
+const customTypes = {
+  question: { title: "Question", icon: "help-circle" },
+  objectives: { title: "Objectifs", icon: "target-arrow" },
+  lesson: { title: "Cours", icon: "school" },
+  result: { title: "Résultat", icon: "circle-check" },
+  example: { title: "Exemple", icon: "stereo-glasses" },
+};
+
+type StarlightType = keyof typeof starlightIcons;
+type CustomType = keyof typeof customTypes;
+
+interface Props {
+  type?: StarlightType | CustomType;
+  title?: string;
+  icon?: string;
+  collapsible?: boolean;
+  open?: boolean;
+}
+
+const { type = "note", collapsible = false, open = false } = Astro.props;
+
+const isStarlightType = type in starlightIcons;
+if (!isStarlightType && !(type in customTypes)) {
+  throw new AstroError(
+    "Type invalide pour le composant `<Callout>`.",
+    `Reçu : ${JSON.stringify(type)}\n` +
+      `Attendu : ${[...Object.keys(starlightIcons), ...Object.keys(customTypes)]
+        .map((t) => JSON.stringify(t))
+        .join(", ")}`,
+  );
+}
+
+const title =
+  Astro.props.title ??
+  (isStarlightType
+    ? Astro.locals.t(`aside.${type as StarlightType}`)
+    : customTypes[type as CustomType].title);
+const tablerIcon =
+  Astro.props.icon ??
+  (isStarlightType ? undefined : customTypes[type as CustomType].icon);
+
+/** Code SVG d'une icône Tabler (variante « outline »). */
+function loadTablerIcon(name: string) {
+  const require = createRequire(import.meta.url);
+  try {
+    return readFileSync(
+      require.resolve(`@tabler/icons/outline/${name}.svg`),
+      "utf-8",
+    );
+  } catch {
+    throw new AstroError(
+      `Icône Tabler introuvable pour le composant \`<Callout>\` : ${JSON.stringify(name)}`,
+      "Vérifiez le nom de l'icône sur https://tabler.io/icons.",
+    );
+  }
+}
+
+const svg = tablerIcon ? loadTablerIcon(tablerIcon) : undefined;
+
+const Wrapper = collapsible ? "details" : "aside";
+const Title = collapsible ? "summary" : "p";
+const classes = [
+  "starlight-aside",
+  "callout",
+  isStarlightType ? `starlight-aside--${type}` : `callout--${type}`,
+];
+---
+
+<Wrapper
+  class:list={classes}
+  aria-label={collapsible ? undefined : title}
+  open={collapsible && open}
+>
+  <Title
+    class="starlight-aside__title"
+    aria-hidden={collapsible ? undefined : "true"}
+  >
+    {svg ? (
+      <span class="starlight-aside__icon callout__icon" set:html={svg} />
+    ) : (
+      <Icon
+        name={starlightIcons[type as StarlightType]}
+        class="starlight-aside__icon"
+      />
+    )}
+    {title}
+  </Title>
+  <div class="starlight-aside__content">
+    <slot />
+  </div>
+</Wrapper>
+
+<style>
+  /* Couleurs des types maison, en mode sombre puis en mode clair. */
+  .callout--question {
+    --callout-low: #0b2a33;
+    --callout: #06b6d4;
+    --callout-high: #a5f3fc;
+  }
+  .callout--objectives {
+    --callout-low: #3b0d2a;
+    --callout: #ec4899;
+    --callout-high: #fbcfe8;
+  }
+  .callout--lesson {
+    --callout-low: #332a06;
+    --callout: #eab308;
+    --callout-high: #fef08a;
+  }
+  .callout--result {
+    --callout-low: var(--sl-color-green-low);
+    --callout: var(--sl-color-green);
+    --callout-high: var(--sl-color-green-high);
+  }
+  .callout--example {
+    --callout-low: #2e1065;
+    --callout: #8b5cf6;
+    --callout-high: #ddd6fe;
+  }
+
+  :global(:root[data-theme="light"]) .callout--question {
+    --callout-low: #ecfeff;
+    --callout: #0891b2;
+    --callout-high: #155e75;
+  }
+  :global(:root[data-theme="light"]) .callout--objectives {
+    --callout-low: #fdf2f8;
+    --callout: #db2777;
+    --callout-high: #9d174d;
+  }
+  :global(:root[data-theme="light"]) .callout--lesson {
+    --callout-low: #fefce8;
+    --callout: #ca8a04;
+    --callout-high: #854d0e;
+  }
+  :global(:root[data-theme="light"]) .callout--example {
+    --callout-low: #f5f3ff;
+    --callout: #7c3aed;
+    --callout-high: #5b21b6;
+  }
+
+  [class*="callout--"] {
+    --sl-color-asides-text-accent: var(--callout-high);
+    --sl-color-asides-border: var(--callout);
+    background-color: var(--callout-low);
+  }
+
+  /* Icône Tabler à la taille des icônes Starlight. */
+  .callout__icon {
+    display: inline-flex;
+  }
+  .callout__icon :global(svg) {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Encadré rétractable : neutralise le style des <details> de Starlight
+     et place le chevron à droite du titre. */
+  details.callout {
+    border-inline-start: 0.25rem solid var(--sl-color-asides-border);
+    padding: 1rem;
+  }
+  details.callout > summary {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    color: var(--sl-color-asides-text-accent);
+    cursor: pointer;
+  }
+  details.callout > summary::before {
+    order: 1;
+    margin-inline: auto 0;
+  }
+</style>

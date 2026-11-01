@@ -1,0 +1,98 @@
+---
+title: Callout
+description: Encadré façon Aside, avec types supplémentaires, icônes Tabler et option repliable.
+draft: true
+---
+
+import Callout from "@components/Callout.astro";
+
+Encadré au style des encadrés Starlight (`Aside`), avec des types supplémentaires,
+des icônes [Tabler](https://tabler.io/icons) et la possibilité d'être replié.
+
+```mdx
+import Callout from "@components/Callout.astro";
+```
+
+## Props
+
+| Prop          | Valeur                                               | Par défaut    |
+| :------------ | :--------------------------------------------------- | :------------ |
+| `type`        | Un des types ci-dessous                              | `note`        |
+| `title`       | Titre affiché                                        | Titre du type |
+| `icon`        | Nom d'une icône [Tabler](https://tabler.io/icons)    | Icône du type |
+| `collapsible` | L'encadré peut être replié en cliquant sur son titre | `false`       |
+| `open`        | Un encadré repliable est ouvert au chargement        | `false`       |
+
+## Types de Starlight
+
+Même rendu que le composant `Aside` de Starlight.
+
+```mdx
+<Callout type="note">Contenu de l'encadré.</Callout>
+<Callout type="tip">Contenu de l'encadré.</Callout>
+<Callout type="caution">Contenu de l'encadré.</Callout>
+<Callout type="danger">Contenu de l'encadré.</Callout>
+```
+
+<Callout type="note">Contenu de l'encadré.</Callout>
+<Callout type="tip">Contenu de l'encadré.</Callout>
+<Callout type="caution">Contenu de l'encadré.</Callout>
+<Callout type="danger">Contenu de l'encadré.</Callout>
+
+## Types maison
+
+```mdx
+<Callout type="question">Contenu de l'encadré.</Callout>
+<Callout type="objectives">Contenu de l'encadré.</Callout>
+<Callout type="lesson">Contenu de l'encadré.</Callout>
+<Callout type="result">Contenu de l'encadré.</Callout>
+<Callout type="example">Contenu de l'encadré.</Callout>
+```
+
+<Callout type="question">Contenu de l'encadré.</Callout>
+<Callout type="objectives">Contenu de l'encadré.</Callout>
+<Callout type="lesson">Contenu de l'encadré.</Callout>
+<Callout type="result">Contenu de l'encadré.</Callout>
+<Callout type="example">Contenu de l'encadré.</Callout>
+
+Les couleurs et les icônes de ces types sont définies dans `src/components/Callout.astro`.
+
+## Titre, icône et contenu Markdown
+
+Le contenu peut contenir du Markdown : laisser une ligne vide après la balise ouvrante et avant la balise fermante.
+
+```mdx
+<Callout type="question" title="Question - Choix des adresses IP" icon="network">
+
+1. Quelle adresse IP attribuer au poste A ?
+2. Pourquoi l'adresse `192.168.1.255` ne convient-elle pas ?
+
+</Callout>
+```
+
+<Callout type="question" title="Question - Choix des adresses IP" icon="network">
+
+1. Quelle adresse IP attribuer au poste A ?
+2. Pourquoi l'adresse `192.168.1.255` ne convient-elle pas ?
+
+</Callout>
+
+## Encadré repliable
+
+```mdx
+<Callout type="lesson" title="Cours - La passerelle" collapsible>
+  Contenu masqué tant que l'élève ne clique pas sur le titre.
+</Callout>
+
+<Callout type="result" collapsible open>
+  Contenu visible au chargement, que l'élève peut replier.
+</Callout>
+```
+
+<Callout type="lesson" title="Cours - La passerelle" collapsible>
+  Contenu masqué tant que l'élève ne clique pas sur le titre.
+</Callout>
+
+<Callout type="result" collapsible open>
+  Contenu visible au chargement, que l'élève peut replier.
+</Callout>

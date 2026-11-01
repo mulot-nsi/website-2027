@@ -46,13 +46,18 @@ Des alias d'import sont définis dans le fichier `tsconfig.json` :
 
 ### Composants maison
 
-| Composant               | Rôle                                                                      |
-| :---------------------- | :------------------------------------------------------------------------ |
-| `Link`                  | Lien externe                                                              |
-| `Video`                 | Vidéo intégrée                                                            |
-| `Playground`            | Éditeur HTML/CSS interactif (LiveCodes)                                   |
-| `Checklist`             | Encadré vert « Ai-je bien compris ? » où l'élève coche ce qu'il a compris |
-| `starlight/PageSidebar` | Colonne de droite avec la liste des étapes (pages avec `etapes: true`)    |
+| Composant               | Rôle                                                                        |
+| :---------------------- | :-------------------------------------------------------------------------- |
+| `Link`                  | Lien externe                                                                |
+| `Video`                 | Vidéo intégrée                                                              |
+| `Playground`            | Éditeur HTML/CSS interactif (LiveCodes)                                     |
+| `Checklist`             | Encadré vert « Ai-je bien compris ? » où l'élève coche ce qu'il a compris   |
+| `Callout`               | Encadré façon `Aside`, avec types supplémentaires, icônes Tabler, repliable |
+| `starlight/PageSidebar` | Colonne de droite avec la liste des étapes (pages avec `etapes: true`)      |
+
+Chaque composant est documenté, avec des exemples d'utilisation, dans `src/content/docs/components/`.
+Ces pages sont des brouillons (`draft: true`) : elles ne sont visibles qu'en développement,
+sur <http://localhost:4321/components/>, et ne sont pas publiées.
 
 ## Développement
 
