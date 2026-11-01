@@ -8,7 +8,7 @@ sidebar:
 
 import { Image } from "astro:assets";
 import { Steps, Tabs, TabItem, Aside } from "@astrojs/starlight/components";
-import { Kbd } from "starlight-kbd/components";
+import AppLink from "@components/AppLink.astro";
 import Link from "@components/Link.astro";
 import Callout from "@components/Callout.astro";
 import Checklist from "@components/Checklist.astro";
@@ -47,35 +47,19 @@ L'objectif n'est pas d'apprendre à réaliser une image avec le module `turtle`,
 
 ### Espace de travail
 
-Vous allez créer des dossiers afin de ne pas mélanger vos productions numériques entre vos différentes matières et travaux pratiques.
+L'ensemble de ce TP se fera sur **CapyCode**, un éditeur de code Python qui fonctionne directement dans le navigateur : aucune installation n'est nécessaire.
 
-<Tabs>
-<TabItem label="Ordinateur portable" icon="laptop">
-
-<Steps>
-
-1. Lancez l'application **Explorateur de fichiers** <Kbd windows="Win+E" />
-2. Accédez à votre dossier **OneDrive**
-3. Dans le dossier **OneDrive**, s'il n'y a pas de dossier **NSI**, créez-le
-4. Dans le dossier **NSI**, créez le dossier **chapitre_04**
-5. Dans le dossier **chapitre_04**, créez le dossier **tp1**
-
-</Steps>
-
-</TabItem>
-<TabItem label="Ordinateur fixe" icon="desktop">
+<Image
+  src={import("@/assets/images/nsi1re_fonctions_capycode.png")}
+  alt="Fenêtre de CapyCode avec l'explorateur de fichiers à gauche, l'éditeur de code au centre, le bouton Exécuter en haut à droite et le terminal en bas"
+  class="mx-auto block"
+/>
 
 <Steps>
 
-1. Depuis le bureau, double-cliquez sur l'icône intitulée **Zone personnelle**
-2. Dans la **zone personnelle**, s'il n'y a pas de dossier **NSI**, créez-le
-3. Dans le dossier **NSI**, créez le dossier **chapitre_04**
-4. Dans le dossier **chapitre_04**, créez le dossier **tp1**
+1. Connectez-vous à <AppLink app="capycode" />
 
 </Steps>
-
-</TabItem>
-</Tabs>
 
 ### Téléchargement
 
@@ -84,12 +68,17 @@ Pour réaliser ces travaux pratiques, il est nécessaire de disposer de certains
 <Steps>
 
 1. Téléchargez le fichier ZIP contenant les fichiers nécessaires : <a href="/files/nsi1re/NSI1RE04_TP1.zip" download="NSI1RE04_TP1.zip">NSI1RE04_TP1.zip</a>
-2. Ouvrez le fichier ZIP<br />_(si le navigateur ne l'ouvre pas automatiquement, cliquez sur le fichier téléchargé)_
-3. Sélectionnez tous les fichiers et dossiers <Kbd windows="Ctrl+A" mac="Cmd+A" />
-4. Copiez tous les fichiers et dossiers <Kbd windows="Ctrl+C" mac="Cmd+C" />
-5. Collez les fichiers dans le dossier **NSI/chapitre_04/tp1** <Kbd windows="Ctrl+V" mac="Cmd+V" />
+2. Dans CapyCode, ouvrez le menu **Fichier** puis cliquez sur **Importer (ZIP)**
+3. Sélectionnez le fichier **NSI1RE04_TP1.zip** que vous venez de télécharger
 
 </Steps>
+
+<Checklist>
+
+- CapyCode est ouvert dans mon navigateur
+- Les fichiers **aide.py**, **main.py** et **paysage.py** sont présents dans l'**Explorateur** de CapyCode
+
+</Checklist>
 
 ## Démarrage
 
