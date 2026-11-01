@@ -12,7 +12,11 @@ import AppLink from "@components/AppLink.astro";
 import Link from "@components/Link.astro";
 import Callout from "@components/Callout.astro";
 import Checklist from "@components/Checklist.astro";
-import { Scrollycoding, Step } from "starlight-codeblocks/components";
+import {
+  CodeWalkthrough,
+  Scrollycoding,
+  Step,
+} from "starlight-codeblocks/components";
 
 ## Introduction
 
@@ -196,64 +200,85 @@ Ce commentaire signale l'endroit où vous écrirez le code du tracé du mur, dan
 
 </Checklist>
 
-## Sous-problèmes
+## Factorisation
 
-### Factorisation
+Les fonctions `mur()` et `toit()` commencent toutes les deux par les mêmes lignes, qui positionnent la tortue aux coordonnées `(x, y)` sans tracer :
 
-La portion de code ci-dessous, présente dans les fonctions `mur()` et `toit()`, permet de positionner la tortue aux coordonnées _(x, y)_ :
-
-```python
+```python title="paysage.py (extrait)" icon="python"
 turtle.penup()
 turtle.goto(x, y)
 turtle.pendown()
 ```
 
-Ce code est donc utilisé à deux reprises.
-Il serait judicieux de le **factoriser** en créant une fonction dédiée au positionnement de la tortue.
+Ce code est donc **dupliqué**.
+Avant d'implémenter les tracés, il est judicieux de le **factoriser**, c'est-à-dire de le regrouper dans une fonction dédiée que `mur()` et `toit()` appelleront :
+
+- le code n'est écrit qu'une seule fois, et une correction ne se fait qu'à un seul endroit ;
+- l'appel `positionner(x, y)` est plus lisible que les trois lignes qu'il remplace.
 
 <Steps>
 
-1. Ouvrez le fichier **paysage.py**
-2. Exécutez-le et mémorisez le déplacement de la tortue.
-   Si tout fonctionne correctement, la tortue devra se déplacer de la même manière après vos modifications
-3. Créez la fonction `positionner` ayant deux paramètres `x` et `y` correspondant aux nouvelles coordonnées de la tortue.
-   Écrivez sa définition à la suite des instructions d'import
-4. Ajoutez en _docstring_ le texte suivant : « Positionne la tortue aux coordonnées (x, y). »
-5. Remplacez l'ancien code de positionnement des fonctions `mur()` et `toit()` par un appel à la fonction `positionner()`
-6. Exécutez le fichier **paysage.py** et vérifiez que le déplacement de la tortue n'a pas changé
+1. Dans l'**Explorateur** de CapyCode, ouvrez le fichier **paysage.py** s'il n'est pas déjà ouvert
+2. Exécutez-le avec le bouton **Exécuter** et observez le déplacement de la tortue : après le tracé de la grille, elle se rend en `(-300, 0)` puis en `(-300, 150)` sans rien tracer
+3. Juste après les instructions `import`, définissez une fonction `positionner()` ayant deux paramètres `x` et `y`, les nouvelles coordonnées de la tortue
+4. Ajoutez-lui une _docstring_ entre triples guillemets (`"""`) contenant le texte suivant : « Positionne la tortue aux coordonnées (x, y). »
+5. Dans les fonctions `mur()` et `toit()`, remplacez les trois lignes de positionnement par un appel à la fonction `positionner()`
+6. Exécutez à nouveau **paysage.py** et vérifiez que le déplacement de la tortue n'a pas changé
 
 </Steps>
 
-<details>
-<summary>Solution</summary>
+<Callout type="caution">
 
-<Tabs>
-<TabItem label="Avant">
+Seules les lignes concernées par la factorisation doivent changer.
+Aucune autre ligne du fichier ne doit être modifiée ou supprimée, en particulier les _docstrings_ des fonctions `mur()` et `toit()`.
 
-```python
+</Callout>
+
+<Callout type="result" title="Solution" collapsible>
+
+<CodeWalkthrough>
+
+```python title="paysage.py" icon="python" step="Version initiale" hidden={6-13,22-29}
 import turtle
 import aide
+
 
 def mur(x, y, largeur, hauteur):
+    """
+    Dessine le mur d'une maison.
+
+    x       -- position x du coin inférieur gauche du mur
+    y       -- position y du coin inférieur gauche du mur
+    largeur -- largeur du mur
+    hauteur -- hauteur du mur
+    """
     turtle.penup()
     turtle.goto(x, y)
     turtle.pendown()
+
+    # Implémenter le tracé ici
+
 
 def toit(x, y, base, hauteur):
+    """
+    Dessine le toit d'une maison.
+
+    x       -- position x du coin inférieur gauche du toit
+    y       -- position y du coin inférieur gauche du toit
+    base    -- largeur de la base du toit
+    hauteur -- hauteur du toit
+    """
     turtle.penup()
     turtle.goto(x, y)
     turtle.pendown()
+
+    # Implémenter le tracé ici
 ```
 
-</TabItem>
-<TabItem label="Après">
-
-La correction ci-dessous ne comporte que les modifications.
-**Ne supprimez pas les docstrings des fonctions `mur()` et `toit()` ni le reste du code du fichier !**
-
-```python
+```python title="paysage.py" icon="python" step="Définition de positionner()" hidden={15-22,31-38}
 import turtle
 import aide
+
 
 def positionner(x, y):
     """
@@ -263,17 +288,97 @@ def positionner(x, y):
     turtle.goto(x, y)
     turtle.pendown()
 
+
 def mur(x, y, largeur, hauteur):
-    positionner(x, y)
+    """
+    Dessine le mur d'une maison.
+
+    x       -- position x du coin inférieur gauche du mur
+    y       -- position y du coin inférieur gauche du mur
+    largeur -- largeur du mur
+    hauteur -- hauteur du mur
+    """
+    turtle.penup()
+    turtle.goto(x, y)
+    turtle.pendown()
+
+    # Implémenter le tracé ici
+
 
 def toit(x, y, base, hauteur):
-    positionner(x, y)
+    """
+    Dessine le toit d'une maison.
+
+    x       -- position x du coin inférieur gauche du toit
+    y       -- position y du coin inférieur gauche du toit
+    base    -- largeur de la base du toit
+    hauteur -- hauteur du toit
+    """
+    turtle.penup()
+    turtle.goto(x, y)
+    turtle.pendown()
+
+    # Implémenter le tracé ici
 ```
 
-</TabItem>
-</Tabs>
+```python title="paysage.py" icon="python" step="Version factorisée" hidden={15-22,29-36}
+import turtle
+import aide
 
-</details>
+
+def positionner(x, y):
+    """
+    Positionne la tortue aux coordonnées (x, y).
+    """
+    turtle.penup()
+    turtle.goto(x, y)
+    turtle.pendown()
+
+
+def mur(x, y, largeur, hauteur):
+    """
+    Dessine le mur d'une maison.
+
+    x       -- position x du coin inférieur gauche du mur
+    y       -- position y du coin inférieur gauche du mur
+    largeur -- largeur du mur
+    hauteur -- hauteur du mur
+    """
+    positionner(x, y)
+
+    # Implémenter le tracé ici
+
+
+def toit(x, y, base, hauteur):
+    """
+    Dessine le toit d'une maison.
+
+    x       -- position x du coin inférieur gauche du toit
+    y       -- position y du coin inférieur gauche du toit
+    base    -- largeur de la base du toit
+    hauteur -- hauteur du toit
+    """
+    positionner(x, y)
+
+    # Implémenter le tracé ici
+```
+
+</CodeWalkthrough>
+
+</Callout>
+
+<Checklist>
+
+- Je sais que **factoriser** consiste à regrouper du code dupliqué dans une fonction
+- J'ai défini la fonction `positionner()` et sa _docstring_ juste après les instructions `import`
+- Les fonctions `mur()` et `toit()` appellent `positionner()`
+- Le déplacement de la tortue n'a pas changé
+
+</Checklist>
+
+## Sous-problèmes
+
+Vous allez maintenant résoudre un par un les sous-problèmes identifiés lors de la décomposition, du plus spécifique au plus général.
 
 ### Tracé d'un mur
 
