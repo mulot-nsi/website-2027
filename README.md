@@ -16,6 +16,7 @@ Site de cours et de travaux pratiques en SNT et NSI.
 - [starlight-quiz](https://ewels.github.io/starlight-quiz) : questionnaires
 - [starlight-kbd](https://github.com/HiDeoo/starlight-kbd) : raccourcis clavier selon le système
 - [starlight-codeblocks](https://ewels.github.io/starlight-codeblocks/) : blocs de code enrichis
+- [starlight-image-zoom](https://starlight-image-zoom.vercel.app) : agrandissement des images au clic
 
 ### Autres dépendances
 

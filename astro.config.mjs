@@ -7,6 +7,7 @@ import starlightSidebarTopics from "starlight-sidebar-topics";
 import starlightQuiz from "starlight-quiz";
 import codeblocks from "starlight-codeblocks";
 import starlightKbd from "starlight-kbd";
+import starlightImageZoom from "starlight-image-zoom";
 
 import { kbdConfig } from "@/config/plugins.mjs";
 import { sidebarTopics } from "./src/config/sidebar/index.mjs";
@@ -44,6 +45,7 @@ export default defineConfig({
           },
         }),
         starlightKbd(kbdConfig),
+        starlightImageZoom(),
         starlightSidebarTopics(sidebarTopics, {
           // Documentation des composants, visible uniquement avec `pnpm dev`.
           exclude: ["/components", "/components/**"],
