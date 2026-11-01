@@ -1,6 +1,6 @@
 ---
 title: Paysage aléatoire
-description: Projet de génération d'un paysage urbain aléatoire avec le module Turtle.
+description: Projet de génération d'un paysage urbain aléatoire avec le module turtle.
 etapes: true
 sidebar:
   label: Paysage aléatoire
@@ -8,51 +8,92 @@ sidebar:
 ---
 
 import { Image } from "astro:assets";
-import { Aside } from "@astrojs/starlight/components";
+import { Steps } from "@astrojs/starlight/components";
+import AppLink from "@components/AppLink.astro";
+import Link from "@components/Link.astro";
+import Callout from "@components/Callout.astro";
+import Checklist from "@components/Checklist.astro";
 
-## Objectif
+## Introduction
 
-Le projet consiste en la génération d'un paysage urbain aléatoire.
-Ce paysage sera construit à partir d'un unique élément paramétrable.
+Dans ce projet, vous allez programmer la génération d'un **paysage urbain aléatoire** avec le module `turtle` : à chaque exécution du programme, un paysage différent est dessiné.
 
-## Tracé paramétrable
+<Image
+  src={import("@/assets/images/nsi1re_projet_paysage.png")}
+  alt="Fenêtre Turtle montrant cinq habitations alignées, de un à quatre étages, avec une porte, des fenêtres et un toit rouge"
+  width={600}
+  class="mx-auto block"
+/>
 
-L'élément paramétrable à dessiner est une **habitation**.
-Celle-ci peut varier de diverses façons :
+Le paysage est construit à partir d'un **unique élément paramétrable**, une habitation.
+Une seule fonction de tracé, appelée plusieurs fois avec des arguments différents, suffit ainsi à obtenir des habitations variées.
 
-- Le nombre d'étages
-- La forme du toit
-- La taille du toit
-- La présence de balcons à certaines fenêtres
-- La présence de jardinières à certaines fenêtres
-- La présence de paraboles
-- La couleur de la façade
-- La couleur du toit
-- ...
+Ce projet prolonge le TP [Décomposition d'un problème](/nsi1re/fonctions/decomposition/) : vous repartirez du code que vous y avez écrit.
+Il se réalise seul ou en binôme, au choix.
 
-Les paramètres doivent donc permettre d'ajuster le tracé de l'objet et potentiellement ses couleurs.
+<Callout type="objectives">
+
+- Concevoir une fonction de tracé paramétrée
+- Décomposer un tracé en sous-problèmes, chacun confié à une fonction
+- Organiser un programme en plusieurs modules
+- Utiliser le module `random` pour rendre un tracé aléatoire
+- Produire un code propre, bien nommé et documenté
+
+</Callout>
+
+<Checklist>
+
+- J'ai compris que tout le paysage repose sur une seule fonction de tracé d'une habitation
+- J'ai choisi de travailler seul ou en binôme
+- J'ai lu et compris chacun des objectifs
+
+</Checklist>
+
+## Cahier des charges
+
+### L'habitation paramétrable
+
+L'élément à dessiner est une **habitation**.
+D'un appel à l'autre, elle doit pouvoir varier, par exemple selon :
+
+- le nombre d'étages ;
+- la forme ou la taille du toit ;
+- le nombre de fenêtres par étage ;
+- la présence de balcons ou de jardinières à certaines fenêtres ;
+- la présence d'une parabole ou d'une cheminée ;
+- la couleur de la façade ;
+- la couleur du toit.
+
+Chaque variation correspond à un **paramètre** de la fonction de tracé.
+On distingue deux familles de paramètres :
+
+- les **paramètres de tracé**, qui modifient la forme de l'habitation : nombre d'étages, forme du toit, nombre de fenêtres… ;
+- les **paramètres de couleur**, qui modifient ses couleurs : façade, toit, porte…
+
+Les paramètres de position `x` et `y` ne comptent dans aucune des deux familles.
 
 ### Nombre de paramètres
 
-Le nombre de paramètres attendus, indépendamment des paramètres de positionnement `x` et `y`, est de six (quatre paramètres de tracé et deux paramètres de couleur).
-C'est un critère d'évaluation.
-Vous pouvez en implémenter moins, mais la note maximale sera ajustée en conséquence.
-Voici les configurations de paramètres envisageables triées par difficulté décroissante :
+Le nombre de paramètres de la fonction de tracé est un critère d'évaluation.
+L'habitation attendue possède **six paramètres** en plus de `x` et `y` : quatre paramètres de tracé et deux paramètres de couleur.
 
-1. Une habitation à quatre paramètres de tracé et deux paramètres de couleur
-2. Une habitation à quatre paramètres de tracé
-3. Une habitation à deux paramètres de tracé et deux paramètres de couleur
-4. Une habitation à deux paramètres de tracé
+Vous pouvez en implémenter moins, mais la note maximale est alors ajustée en conséquence.
+Voici les configurations possibles, de la plus complète à la plus simple :
 
-<Aside title="Exemple d'habitation à deux paramètres">
+1. Quatre paramètres de tracé et deux paramètres de couleur _(note maximale)_
+2. Quatre paramètres de tracé
+3. Deux paramètres de tracé et deux paramètres de couleur
+4. Deux paramètres de tracé
 
-Dans cet exemple, nous souhaitons dessiner une maison.
-Le tracé de celle-ci est ajustable selon deux paramètres : le nombre d'étages et le nombre de fenêtres par étage.
+<Callout type="example" title="Exemple - Une maison à deux paramètres de tracé">
 
-```python
+Dans cet exemple, le tracé d'une maison est ajustable selon deux paramètres de tracé : le nombre d'étages et le nombre de fenêtres par étage.
+Sans paramètre de couleur, c'est la configuration la plus simple.
+
+```python title="paysage.py (extrait)" icon="python"
 def maison(x, y, nb_etages, nb_fenetres):
     """
-    Dessine une maison
+    Dessine une maison.
 
     x           -- position x du coin inférieur gauche
     y           -- position y du coin inférieur gauche
@@ -61,93 +102,225 @@ def maison(x, y, nb_etages, nb_fenetres):
     """
 ```
 
-Voici un exemple de paysage construit à partir de plusieurs appels d'une fonction de tracé d'une habitation à **deux paramètres** de tracé `nb_etages` et `nb_fenetres` :
+Cinq appels de cette fonction, avec des arguments différents, suffisent à construire le paysage présenté en introduction :
 
-```python
+```python title="paysage.py (extrait)" icon="python"
 def dessiner_paysage():
     """
-    Dessine le paysage de la ville
+    Dessine le paysage de la ville.
     """
     maison(-450, -150, 1, 2)
     maison(-250, -150, 2, 2)
-    maison(-50,  -150, 1, 3)
-    maison(150,  -150, 3, 3)
-    maison(350,  -150, 4, 2)
+    maison(-50, -150, 1, 3)
+    maison(150, -150, 3, 3)
+    maison(350, -150, 4, 2)
 ```
 
-<Image
-  src={import("@/assets/images/nsi1re_projet_paysage.png")}
-  alt="Paysage urbain"
-  class="mx-auto block"
-/>
+</Callout>
 
-</Aside>
+<Checklist>
 
-## Livrable
+- Je sais distinguer un paramètre de tracé d'un paramètre de couleur
+- Je sais que `x` et `y` ne comptent pas parmi les six paramètres attendus
+- Je connais les quatre configurations possibles et leur effet sur la note maximale
 
-Votre projet devra être transmis à l'enseignant au format ZIP.
-Le code Python devra être séparé en deux modules minimum.
-Un ou plusieurs modules contiendront la définition de vos fonctions de tracé et idéalement du code de test.
-Un module appelé `main.py` contiendra la configuration Turtle et l'appel à la fonction de tracé du paysage.
+</Checklist>
 
-<Aside title="Exemple de fichier main.py">
+## Conception sur papier
 
-```python title="main.py"
-import turtle            # Module turtle
-import ville             # Nom arbitraire du module contenant les fonctions de dessin
+Ne vous précipitez pas sur l'ordinateur : une habitation bien conçue sur papier se programme vite, alors qu'un tracé improvisé dans l'éditeur se corrige longtemps.
 
-turtle.hideturtle()      # Masque la tortue
-turtle.tracer(False)     # Tracé instantané
-ville.dessiner_paysage() # Génère le paysage aléatoire
-turtle.tracer(True)      # Réactive les mouvements de la tortue
-turtle.mainloop()        # Boucle des événements
+<Steps>
+
+1. Choisissez l'allure de votre habitation (maison, immeuble, chalet…) et la liste de ses éléments : murs, toit, porte, fenêtres, balcons…
+2. Choisissez vos paramètres de tracé et vos paramètres de couleur, puis donnez un nom explicite à chacun
+3. Écrivez la signature de votre fonction de tracé et sa _docstring_, en décrivant le rôle de chaque paramètre
+4. Dessinez votre habitation sur papier quadrillé et notez les coordonnées de chaque point en fonction de `x`, `y` et des paramètres de tracé
+5. Décomposez le tracé en sous-problèmes, comme dans le TP : une fonction par élément (mur, toit, fenêtre…)
+6. Pour chaque fonction, écrivez sur papier l'algorithme de tracé
+
+</Steps>
+
+<Callout type="key">
+
+Les coordonnées de chaque point s'expriment en fonction de `x`, `y` et des paramètres de tracé, jamais avec des valeurs fixes.
+C'est ce qui permet de dessiner la même habitation à n'importe quelle position et dans n'importe quelle configuration.
+
+</Callout>
+
+<Checklist>
+
+- J'ai choisi mon habitation et la liste de ses éléments
+- J'ai nommé mes paramètres de tracé et mes paramètres de couleur
+- J'ai écrit la signature et la _docstring_ de ma fonction de tracé
+- J'ai dessiné mon habitation avec les coordonnées de ses points
+- J'ai décomposé le tracé en fonctions et écrit leurs algorithmes
+
+</Checklist>
+
+## Programmation
+
+### Espace de travail
+
+Le projet se réalise sur CapyCode, en repartant des fichiers du TP Décomposition : **paysage.py** contient déjà vos fonctions de tracé et **main.py** lance le dessin du paysage.
+
+<Steps>
+
+1. Connectez-vous à <AppLink app="capycode" />
+2. Vérifiez que les fichiers **paysage.py** et **main.py** du TP sont présents dans l'**Explorateur**
+3. En cas de besoin, téléchargez à nouveau le fichier <a href="/files/nsi1re/NSI1RE04_TP1.zip" download="NSI1RE04_TP1.zip">NSI1RE04_TP1.zip</a> puis importez-le avec le menu **Fichier** et **Importer (ZIP)**
+
+</Steps>
+
+### Organisation en modules
+
+Le code Python doit être réparti dans **deux modules au minimum** :
+
+- un ou plusieurs modules, par exemple **paysage.py**, contenant la définition de vos fonctions de tracé et, dans le bloc `if __name__ == "__main__":`, le code de test de ces fonctions ;
+- le module **main.py**, contenant la configuration de `turtle` et l'appel de la fonction qui dessine le paysage.
+
+Le fichier **main.py** reste donc très court :
+
+```python title="main.py" icon="python"
+import turtle
+import paysage
+
+# Configuration de turtle
+turtle.hideturtle()  # Masque la tortue
+turtle.speed(0)      # Tracé le plus rapide possible
+
+# Tracé du paysage
+paysage.dessiner_paysage()
+
+# Boucle des événements : la fenêtre reste ouverte
+turtle.mainloop()
 ```
 
-</Aside>
+### Tirer au sort
 
-## Critères d'évaluation
+Pour que le paysage change à chaque exécution, la fonction `dessiner_paysage()` tire au sort les arguments de chaque habitation grâce au module `random` :
 
-<Aside type="tip" title="Livrable">
+```python title="paysage.py (extrait)" icon="python"
+import random
 
-- Déposé sur Pronote à l'heure
-- Envoyé sous forme d'un fichier ZIP
-- Tous les auteurs sont mentionnés dans le code source
-- Le programme s'exécute depuis le fichier `main.py`
-- Le programme s'exécute sans anomalie
-- La fenêtre reste ouverte à la fin du tracé
+nb_etages = random.randint(1, 4)                    # Entier au hasard entre 1 et 4 inclus
+couleur = random.choice(["red", "orange", "gray"])  # Élément au hasard dans la liste
+```
 
-</Aside>
+Les fonctions `randint()` et `choice()` sont décrites dans la <Link href="https://docs.python.org/fr/3/library/random.html">documentation du module random</Link>.
 
-<Aside type="tip" title="Respect des contraintes">
+<Callout type="key" title="Aléatoire, mais cohérent">
 
-- Fonction unique de génération du paysage
-- Appel de la fonction de génération du paysage depuis le fichier `main.py`
-- Fonction dédiée au tracé de l'habitation
-- Fonction de tracé de l'habitation comportant des paramètres de tracé (hors `x` et `y`) et des paramètres de couleur
+Tout ne doit pas être tiré au sort.
+Les positions `x` des habitations, par exemple, peuvent être choisies de façon qu'elles ne se chevauchent pas, et le toit doit rester posé sur le dernier étage quel que soit leur nombre.
 
-</Aside>
+</Callout>
 
-<Aside type="tip" title="Programmation">
+### Colorier
 
-- Les variables, fonctions et modules sont correctement nommés
-- Les docstrings décrivent la fonction et ses paramètres
-- Le code est bien organisé et factorisé
+Le module `turtle` remplit une forme fermée dont le tracé est encadré par les appels `begin_fill()` et `end_fill()`.
+La couleur de remplissage se choisit avant le tracé avec `fillcolor()` :
+
+```python title="paysage.py (extrait)" icon="python"
+turtle.fillcolor("red")  # Couleur de remplissage
+turtle.begin_fill()      # Début de la forme à remplir
+...                      # Tracé de la forme fermée
+turtle.end_fill()        # Fin de la forme : remplissage
+```
+
+Les noms de couleurs utilisables sont listés dans la <Link href="https://docs.python.org/fr/3/library/turtle.html#turtle.fillcolor">documentation du module turtle</Link>.
+
+### À vous de jouer
+
+<Steps>
+
+1. Dans **paysage.py**, écrivez les fonctions de tracé des éléments de votre habitation (mur, toit, fenêtre…), en testant chacune dans le bloc `if __name__ == "__main__":`
+2. Écrivez la fonction de tracé de l'habitation, qui appelle les précédentes selon ses paramètres
+3. Écrivez la fonction `dessiner_paysage()`, qui tire au sort les arguments de chaque habitation puis les dessine
+4. Ajoutez au paysage des éléments autres que les habitations : soleil, arbres, route, nuages…
+5. Exécutez **main.py** plusieurs fois : un paysage différent doit apparaître à chaque exécution
+
+</Steps>
+
+<Callout type="caution">
+
+Le paysage est généré par une **fonction unique**, appelée depuis **main.py**.
+Aucun tracé ne doit se faire directement dans **main.py**, ni en dehors d'une fonction.
+
+</Callout>
+
+<Checklist>
+
+- Mon code est réparti dans au moins deux modules, dont **main.py**
+- Mes fonctions de tracé sont testées dans le bloc `if __name__ == "__main__":` de leur module
+- Ma fonction de tracé de l'habitation possède des paramètres de tracé et des paramètres de couleur
+- La fonction `dessiner_paysage()` tire au sort les arguments de chaque habitation
+- Chaque exécution de **main.py** produit un paysage différent
+
+</Checklist>
+
+## Auto-évaluation
+
+Les quatre listes ci-dessous reprennent les critères de la grille d'évaluation.
+Cochez-les honnêtement : chaque case non cochée est un point à corriger avant de rendre.
+
+<Checklist title="Respect des contraintes">
+
+- Une fonction unique génère le paysage
+- Cette fonction est appelée depuis le fichier **main.py**
+- Une fonction est dédiée au tracé de l'habitation
+- Cette fonction possède des paramètres de tracé (hors `x` et `y`) et des paramètres de couleur
+
+</Checklist>
+
+<Checklist title="Programmation">
+
+- Les variables, les fonctions et les modules sont correctement nommés
+- Les _docstrings_ décrivent chaque fonction et ses paramètres
+- Le code est bien organisé et factorisé : aucun code dupliqué
 - Le code est commenté lorsque c'est nécessaire
-- Tous les fichiers inutiles ont été supprimés
+- Tous les fichiers inutiles ont été supprimés, par exemple le module **aide.py** du TP et son `import`
 
-</Aside>
+</Checklist>
 
-<Aside type="tip" title="Qualité du rendu">
+<Checklist title="Qualité du rendu">
 
 - Les habitations comportent des éléments réalistes et travaillés
 - Le paysage est aléatoire tout en restant cohérent
 - Le paysage comporte des éléments en plus des habitations
 
-</Aside>
+</Checklist>
 
-<Aside type="caution" title="Conseil">
+<Checklist title="Livrable">
 
-Ne vous précipitez pas immédiatement sur vos ordinateurs.
-Préparez vos tracés et vos algorithmes sur papier.
+- Tous les auteurs sont mentionnés en commentaire au début de chaque fichier
+- Le programme s'exécute depuis le fichier **main.py**
+- Le programme s'exécute sans anomalie
+- La fenêtre reste ouverte à la fin du tracé
 
-</Aside>
+</Checklist>
+
+## Dépôt du projet
+
+Le projet est à rendre sous la forme d'un **unique fichier ZIP**, déposé sur Pronote avant la date annoncée en classe.
+En binôme, un seul des deux membres dépose le fichier.
+
+<Steps>
+
+1. Dans CapyCode, ouvrez le menu **Fichier** puis cliquez sur **Exporter (ZIP)** : le fichier ZIP du projet est téléchargé
+2. Connectez-vous à l'**ENT** : <Link href="https://ent.iledefrance.fr">ent.iledefrance.fr</Link>
+3. Accédez à l'application **Pronote**
+4. Depuis l'accueil, recherchez le devoir **Projet Paysage aléatoire**
+5. Cliquez sur le bouton **Déposer ma copie**
+6. Cliquez sur le bouton **Un seul fichier (\*.pdf, \*.doc, ...)**
+7. Déposez votre fichier ZIP
+
+</Steps>
+
+<Checklist title="Le projet est-il rendu ?">
+
+- Le fichier ZIP a été exporté depuis CapyCode
+- Il est déposé sur Pronote avant la date limite
+- En binôme, un seul dépôt a été fait pour nous deux
+
+</Checklist>
