@@ -3,3 +3,6 @@ public/
 
 # Généré automatiquement par pnpm
 pnpm-lock.yaml
+
+# Skill copiée telle quelle depuis starlight-codeblocks : ne pas reformater
+.claude/skills/starlight-codeblocks/
