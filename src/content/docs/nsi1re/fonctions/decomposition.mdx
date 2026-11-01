@@ -12,6 +12,7 @@ import AppLink from "@components/AppLink.astro";
 import Link from "@components/Link.astro";
 import Callout from "@components/Callout.astro";
 import Checklist from "@components/Checklist.astro";
+import { Scrollycoding, Step } from "starlight-codeblocks/components";
 
 ## Introduction
 
@@ -80,32 +81,31 @@ Pour réaliser ces travaux pratiques, il est nécessaire de disposer de certains
 
 </Checklist>
 
-## Démarrage
+## Analyse du problème
 
 ### Décomposition
-
-Voici une illustration d'une décomposition possible du tracé de plusieurs maisons :
-
-<Image
-  src={import("@/assets/images/nsi1re_fonctions_decomposition.svg")}
-  alt="Décomposition d'un problème en sous-problèmes"
-  class="mx-auto block"
-/>
 
 Nous souhaitons tracer un nombre quelconque de maisons identiques.
 Pour cela, un premier niveau de décomposition pourrait être de _« tracer une seule maison »_.
 Le tracé d'une seule maison pourrait à son tour être décomposé en sous-problèmes qui pourraient être : _« tracer le toit d'une maison »_ et _« tracer le mur d'une maison »_.
 
-### Structure du code
+Voici une illustration de cette décomposition du tracé de plusieurs maisons :
+
+<Image
+  src={import("@/assets/images/nsi1re_fonctions_decomposition.svg")}
+  alt="Schéma de décomposition : le paysage de plusieurs maisons mène au tracé d'une seule maison, qui se décompose en tracé d'un toit et tracé d'un mur, chacun librement positionnable selon les coordonnées (x, y)"
+  class="mx-auto block"
+/>
+
+### Code fourni
 
 Vous ne partirez pas de zéro.
 Un code Python a été préparé de façon à refléter la décomposition en sous-problèmes décrite précédemment.
 
 <Steps>
 
-1. Lancez l'application **Thonny** _(ou l'IDE ayant votre préférence)_
-2. Ouvrez le fichier **paysage.py**
-3. Parcourez le code source
+1. Dans l'**Explorateur** de CapyCode, ouvrez le fichier **paysage.py**
+2. Parcourez le code source
 
 </Steps>
 
@@ -116,19 +116,84 @@ Le fichier **paysage.py** contient la définition de quatre procédures :
 - `maison()`
 - `dessiner_paysage()`
 
-<Aside title="Procédure ou fonction ?">
+<Callout type="key" title="Procédure ou fonction ?">
 
 Pour rappel, une **procédure** désigne une fonction ne renvoyant aucune valeur (donc sans instruction `return`).
 Cependant, par souci de simplicité, nous n'utiliserons que le terme **fonction** pour la suite de l'énoncé.
 
-</Aside>
+</Callout>
 
 Ces fonctions sont en charge d'un tracé allant du plus spécifique avec `mur()` et `toit()`, au plus général avec `dessiner_paysage()`.
-
 Chaque fonction dispose d'une _docstring_ décrivant le comportement attendu et le rôle de chaque paramètre.
 
 Les fonctions `mur()` et `toit()` ne disposent que du code de positionnement de la tortue, le tracé reste à implémenter.
 Les fonctions `maison()` et `dessiner_paysage()` ne disposent que de leur _docstring_.
+
+Détaillons les différentes parties de la fonction `mur()`, que l'on retrouve dans les autres fonctions de **paysage.py** :
+
+<Scrollycoding>
+
+```python title="paysage.py (extrait)" icon="python" apiLinks=false
+def mur(x, y, largeur, hauteur):
+    """
+    Dessine le mur d'une maison.
+
+    x       -- position x ...
+    y       -- position y ...
+    largeur -- largeur du mur
+    hauteur -- hauteur du mur
+    """
+    turtle.penup()
+    turtle.goto(x, y)
+    turtle.pendown()
+
+    # Implémenter le tracé ici
+```
+
+<Step focus="1">
+
+**Signature**
+
+La signature donne le nom de la fonction et ses paramètres : ici, la position `x` et `y` du mur, puis ses dimensions `largeur` et `hauteur`.
+
+</Step>
+
+<Step focus="2-9">
+
+**Docstring**
+
+Placée juste après la signature, la _docstring_ est destinée aux humains qui lisent ou utilisent la fonction : elle décrit le comportement attendu de la fonction, puis le rôle de chaque paramètre.
+
+Tronquée ici, elle précise dans le fichier source d'origine **paysage.py** que `(x, y)` désigne le **coin inférieur gauche** du mur.
+
+</Step>
+
+<Step focus="10-12">
+
+**Positionnement**
+
+Ce code est déjà écrit : la tortue lève son crayon, se déplace aux coordonnées `(x, y)` sans tracer, puis abaisse son crayon.
+
+</Step>
+
+<Step focus="14">
+
+**Tracé**
+
+Ce commentaire signale l'endroit où vous écrirez le code du tracé du mur, dans la suite des travaux pratiques.
+
+</Step>
+
+</Scrollycoding>
+
+<Checklist>
+
+- J'ai compris la décomposition du problème en sous-problèmes
+- J'ai repéré les quatre fonctions de **paysage.py** et leur rôle
+- Je sais que la **signature** d'une fonction indique son nom et ses paramètres
+- Je sais que la _docstring_ se place **juste après** la signature et qu'elle s'adresse aux humains qui lisent le code
+
+</Checklist>
 
 ## Sous-problèmes
 
