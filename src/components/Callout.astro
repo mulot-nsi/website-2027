@@ -8,12 +8,12 @@
 //   Contenu de l'encadré.
 //   </Callout>
 //
-//   <Callout type="lesson" collapsible>       (rétractable, fermé)
-//   <Callout type="lesson" collapsible open>  (rétractable, ouvert)
+//   <Callout type="result" collapsible>       (rétractable, fermé)
+//   <Callout type="result" collapsible open>  (rétractable, ouvert)
 //
 // Props :
 //   - type : note, tip, caution, danger (types de Starlight),
-//            question, objectives, lesson, result, example (par défaut : note)
+//            objectives, key, example, question, result (par défaut : note)
 //   - title : titre affiché (par défaut : titre du type)
 //   - icon : nom d'une icône Tabler (https://tabler.io/icons), ex. "rocket"
 //   - collapsible : l'encadré peut être replié en cliquant sur son titre
@@ -33,11 +33,11 @@ const starlightIcons = {
 
 // Types maison : icône Tabler et titre par défaut.
 const customTypes = {
-  question: { title: "Question", icon: "help-circle" },
   objectives: { title: "Objectifs", icon: "target-arrow" },
-  lesson: { title: "Cours", icon: "school" },
+  key: { title: "À retenir", icon: "bookmark" },
+  example: { title: "Exemple", icon: "zoom-code" },
+  question: { title: "Question", icon: "help-circle" },
   result: { title: "Résultat", icon: "circle-check" },
-  example: { title: "Exemple", icon: "stereo-glasses" },
 };
 
 type StarlightType = keyof typeof starlightIcons;
@@ -125,52 +125,55 @@ const classes = [
 </Wrapper>
 
 <style>
-  /* Couleurs des types maison, en mode sombre puis en mode clair. */
-  .callout--question {
-    --callout-low: #0b2a33;
-    --callout: #06b6d4;
-    --callout-high: #a5f3fc;
-  }
+  /* Couleurs des types maison, en mode sombre puis en mode clair.
+     La couleur indique la posture de lecture (voir la documentation du
+     composant) : rose pour le cadrage, jaune pour l'essentiel, gris pour
+     l'illustration, teal puis vert pour la paire question / résultat. */
   .callout--objectives {
     --callout-low: #3b0d2a;
     --callout: #ec4899;
     --callout-high: #fbcfe8;
   }
-  .callout--lesson {
+  .callout--key {
     --callout-low: #332a06;
     --callout: #eab308;
     --callout-high: #fef08a;
+  }
+  .callout--example {
+    --callout-low: #1e293b;
+    --callout: #64748b;
+    --callout-high: #cbd5e1;
+  }
+  .callout--question {
+    --callout-low: #042f2e;
+    --callout: #14b8a6;
+    --callout-high: #99f6e4;
   }
   .callout--result {
     --callout-low: var(--sl-color-green-low);
     --callout: var(--sl-color-green);
     --callout-high: var(--sl-color-green-high);
   }
-  .callout--example {
-    --callout-low: #2e1065;
-    --callout: #8b5cf6;
-    --callout-high: #ddd6fe;
-  }
 
-  :global(:root[data-theme="light"]) .callout--question {
-    --callout-low: #ecfeff;
-    --callout: #0891b2;
-    --callout-high: #155e75;
-  }
   :global(:root[data-theme="light"]) .callout--objectives {
     --callout-low: #fdf2f8;
     --callout: #db2777;
     --callout-high: #9d174d;
   }
-  :global(:root[data-theme="light"]) .callout--lesson {
+  :global(:root[data-theme="light"]) .callout--key {
     --callout-low: #fefce8;
-    --callout: #ca8a04;
+    --callout: #eab308;
     --callout-high: #854d0e;
   }
   :global(:root[data-theme="light"]) .callout--example {
-    --callout-low: #f5f3ff;
-    --callout: #7c3aed;
-    --callout-high: #5b21b6;
+    --callout-low: #f8fafc;
+    --callout: #64748b;
+    --callout-high: #334155;
+  }
+  :global(:root[data-theme="light"]) .callout--question {
+    --callout-low: #f0fdfa;
+    --callout: #0d9488;
+    --callout-high: #115e59;
   }
 
   [class*="callout--"] {

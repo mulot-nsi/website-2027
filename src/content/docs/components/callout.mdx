@@ -23,39 +23,97 @@ import Callout from "@components/Callout.astro";
 | `collapsible` | L'encadré peut être replié en cliquant sur son titre | `false`       |
 | `open`        | Un encadré repliable est ouvert au chargement        | `false`       |
 
-## Types de Starlight
+## Choisir un type
 
-Même rendu que le composant `Aside` de Starlight.
+La couleur d'un encadré indique à l'élève **comment lire** son contenu, pas de quoi il parle :
+je sais où je vais, je lis, je fais puis je vérifie, je me méfie.
+L'icône et le titre sont toujours présents : la couleur n'est jamais le seul signal.
+
+| Type         | Titre par défaut | Couleur | Usage                                                |
+| :----------- | :--------------- | :------ | :--------------------------------------------------- |
+| `objectives` | Objectifs        | rose    | Ce que l'élève saura faire, une seule fois en haut   |
+| `key`        | À retenir        | jaune   | L'essentiel d'une section, ou une définition         |
+| `note`       | Remarque         | bleu    | Précision utile, en marge du fil du cours            |
+| `example`    | Exemple          | gris    | Illustration, discrète car dans le fil du cours      |
+| `question`   | Question         | teal    | Ce que l'élève doit faire (question, exercice)       |
+| `result`     | Résultat         | vert    | Réponse, correction, sortie attendue                 |
+| `tip`        | Astuce           | violet  | Bonus, pour aller plus loin                          |
+| `caution`    | Attention        | orange  | Piège, limite                                        |
+| `danger`     | Danger           | rouge   | Erreur fréquente ou à ne jamais faire, à garder rare |
+
+Les types `note`, `tip`, `caution` et `danger` ont le même rendu que le composant `Aside` de Starlight.
+Les couleurs et les icônes des types maison sont définies dans `src/components/Callout.astro`.
+
+### Cadrage et essentiel
+
+```mdx
+<Callout type="objectives">Contenu de l'encadré.</Callout>
+<Callout type="key">Contenu de l'encadré.</Callout>
+<Callout type="key" title="Définition">
+  Contenu de l'encadré.
+</Callout>
+```
+
+<Callout type="objectives">Contenu de l'encadré.</Callout>
+<Callout type="key">Contenu de l'encadré.</Callout>
+<Callout type="key" title="Définition">
+  Contenu de l'encadré.
+</Callout>
+
+### Lire
 
 ```mdx
 <Callout type="note">Contenu de l'encadré.</Callout>
+<Callout type="example">Contenu de l'encadré.</Callout>
+```
+
+<Callout type="note">Contenu de l'encadré.</Callout>
+<Callout type="example">Contenu de l'encadré.</Callout>
+
+### Faire, puis vérifier
+
+`question` et `result` vont par paire : leurs couleurs voisines (teal puis vert) les associent.
+
+```mdx
+<Callout type="question">Contenu de l'encadré.</Callout>
+<Callout type="question" title="Exercice">
+  Contenu de l'encadré.
+</Callout>
+<Callout type="result" collapsible>
+  Contenu de l'encadré.
+</Callout>
+```
+
+<Callout type="question">Contenu de l'encadré.</Callout>
+<Callout type="question" title="Exercice">
+  Contenu de l'encadré.
+</Callout>
+<Callout type="result" collapsible>
+  Contenu de l'encadré.
+</Callout>
+
+### Aller plus loin et attention
+
+```mdx
 <Callout type="tip">Contenu de l'encadré.</Callout>
 <Callout type="caution">Contenu de l'encadré.</Callout>
 <Callout type="danger">Contenu de l'encadré.</Callout>
 ```
 
-<Callout type="note">Contenu de l'encadré.</Callout>
 <Callout type="tip">Contenu de l'encadré.</Callout>
 <Callout type="caution">Contenu de l'encadré.</Callout>
 <Callout type="danger">Contenu de l'encadré.</Callout>
 
-## Types maison
+## Règles d'usage
 
-```mdx
-<Callout type="question">Contenu de l'encadré.</Callout>
-<Callout type="objectives">Contenu de l'encadré.</Callout>
-<Callout type="lesson">Contenu de l'encadré.</Callout>
-<Callout type="result">Contenu de l'encadré.</Callout>
-<Callout type="example">Contenu de l'encadré.</Callout>
-```
+Un encadré attire l'œil : trop d'encadrés, et plus aucun ne ressort.
 
-<Callout type="question">Contenu de l'encadré.</Callout>
-<Callout type="objectives">Contenu de l'encadré.</Callout>
-<Callout type="lesson">Contenu de l'encadré.</Callout>
-<Callout type="result">Contenu de l'encadré.</Callout>
-<Callout type="example">Contenu de l'encadré.</Callout>
-
-Les couleurs et les icônes de ces types sont définies dans `src/components/Callout.astro`.
+- Le cours lui-même est du texte courant avec ses titres, jamais un encadré.
+- Un seul `objectives` par page, et au plus un `key` par section.
+- `question` et `result` vont par paire ; replier le `result` pour laisser l'élève chercher.
+- `note`, `tip`, `caution` et `danger` seulement si l'information change la façon de lire ;
+  sinon, une phrase dans le texte suffit.
+- Repère : pas plus de deux encadrés visibles en même temps à l'écran.
 
 ## Titre, icône et contenu Markdown
 
@@ -80,7 +138,7 @@ Le contenu peut contenir du Markdown : laisser une ligne vide après la balise o
 ## Encadré repliable
 
 ```mdx
-<Callout type="lesson" title="Cours - La passerelle" collapsible>
+<Callout type="result" title="Correction - La passerelle" collapsible>
   Contenu masqué tant que l'élève ne clique pas sur le titre.
 </Callout>
 
@@ -89,7 +147,7 @@ Le contenu peut contenir du Markdown : laisser une ligne vide après la balise o
 </Callout>
 ```
 
-<Callout type="lesson" title="Cours - La passerelle" collapsible>
+<Callout type="result" title="Correction - La passerelle" collapsible>
   Contenu masqué tant que l'élève ne clique pas sur le titre.
 </Callout>
 
