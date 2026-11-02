@@ -7,7 +7,7 @@ sidebar:
 ---
 
 import { Image } from "astro:assets";
-import { Steps, Tabs, TabItem, Aside } from "@astrojs/starlight/components";
+import { Steps } from "@astrojs/starlight/components";
 import AppLink from "@components/AppLink.astro";
 import Link from "@components/Link.astro";
 import Callout from "@components/Callout.astro";
@@ -604,15 +604,15 @@ if __name__ == "__main__":
 
 ## Problème principal
 
-Vous avez traité l'ensemble des sous-problèmes.
-Il reste maintenant à résoudre le problème principal qui, pour rappel, consiste à dessiner un ensemble de maisons.
-Mais avant cela, veuillez prendre connaissance de l'introduction au principe de modules et de l'usage de la variable spéciale `__name__`.
+Tous les sous-problèmes sont résolus.
+Il reste à traiter le problème principal : dessiner un ensemble de maisons.
+Avant cela, voyons ce qu'est un module et à quoi sert la variable spéciale `__name__`.
 
 ### Exécution ou import d'un module
 
-Vous avez probablement remarqué les lignes suivantes à la fin du fichier **paysage.py** :
+Le fichier **paysage.py** se termine par ces lignes :
 
-```python
+```python title="paysage.py (extrait)" icon="python"
 if __name__ == "__main__":
     aide.grille()
     mur(-300, 0, 200, 100)
@@ -621,96 +621,84 @@ if __name__ == "__main__":
     turtle.mainloop()
 ```
 
-Mais quelle est la finalité de la condition `if __name__ == "__main__":` ?
+À quoi sert la condition `if __name__ == "__main__":` ?
 
-Avant toute chose, pour simplifier, considérez que tout fichier Python est un <Link href="https://docs.python.org/fr/3.9/tutorial/modules.html">module</Link>.
-Un module peut être directement **exécuté**, c'est-à-dire que son fichier est celui à partir duquel vous lancez l'interpréteur Python.
-Un module peut aussi être **importé**, c'est-à-dire qu'il est inclus dans un autre module via l'instruction `import`.
+Pour simplifier, considérez que tout fichier Python est un <Link href="https://docs.python.org/fr/3.9/tutorial/modules.html">module</Link>.
+Un module peut être utilisé de deux façons :
 
-La variable `__name__` permet de savoir si un module est exécuté ou importé.
-En effet, Python définit une variable `__name__` automatiquement pour chaque module.
-Celle-ci a pour valeur la chaîne de caractères `"__main__"` si le module est exécuté, ou le nom du module si celui-ci est importé.
+- **exécuté** : c'est le fichier à partir duquel vous lancez l'interpréteur Python ;
+- **importé** : il est inclus dans un autre module par l'instruction `import`.
 
-<Aside title="Cas de l'exécution du fichier paysage.py">
+<Callout type="key" title="La variable __name__">
 
-Si un fichier (ou module) est exécuté, alors la variable `__name__` aura pour valeur la chaîne de caractères `"__main__"`.
+Python définit automatiquement une variable `__name__` dans chaque module.
+Elle vaut :
 
-Ainsi, lorsqu'on lance l'interpréteur Python à partir du fichier **paysage.py**, la valeur de `__name__` à l'intérieur du module `paysage` sera `"__main__"`.
+- `"__main__"` si le module est **exécuté** ;
+- le nom du module s'il est **importé** : `"paysage"` pour **paysage.py**.
 
-<Tabs>
-<TabItem label="paysage.py">
+La condition `if __name__ == "__main__":` permet donc de n'exécuter du code que lorsque le module est lancé directement.
 
-```python title="paysage.py"
+</Callout>
+
+<Callout type="example" title="Exécution de paysage.py">
+
+L'interpréteur est lancé à partir de **paysage.py** : dans ce module, `__name__` vaut `"__main__"` et le code sous la condition est exécuté.
+
+:::code-tabs
+
+```python title="paysage.py" label="paysage.py" icon="python"
 print(__name__)
 if __name__ == "__main__":
-    print("Exécution code paysage")
+    print("Exécution du code de paysage")
 ```
 
-</TabItem>
-<TabItem label="Console">
-
-```
-> python paysage.py
+```sh label="Console" frame="terminal"
+$ python paysage.py
 __main__
-Exécution code paysage
+Exécution du code de paysage
 ```
 
-</TabItem>
-</Tabs>
+:::
 
-</Aside>
+</Callout>
 
-<Aside title="Cas de l'import du fichier paysage.py">
+<Callout type="example" title="Import de paysage.py">
 
-Si un fichier (ou module) est importé, alors la variable `__name__` aura pour valeur le nom du module importé.
+L'interpréteur est lancé à partir de **main.py**, qui importe `paysage` : dans le module `paysage`, `__name__` vaut `"paysage"` et le code sous la condition est ignoré.
 
-Ainsi, si on importe `paysage` et que l'exécution se fait depuis un autre module, alors la valeur de `__name__` à l'intérieur de **paysage.py** sera `"paysage"`.
+:::code-tabs
 
-<Tabs>
-<TabItem label="main.py">
-
-```python title="main.py"
+```python title="main.py" label="main.py" icon="python"
 import paysage
 
-print("Exécution code main")
+print("Exécution du code de main")
 ```
 
-</TabItem>
-<TabItem label="paysage.py">
-
-```python title="paysage.py"
+```python title="paysage.py" label="paysage.py" icon="python"
 print(__name__)
 if __name__ == "__main__":
-    # Dans le cas d'un import, cette portion de code ne sera pas exécutée
-    # car __name__ == "paysage" donc différent de "__main__"
-    print("Exécution du code")
+    # Ignoré lors d'un import, car __name__ vaut "paysage"
+    print("Exécution du code de paysage")
 ```
 
-</TabItem>
-<TabItem label="Console">
-
-Notez que c'est le module `main` qui est maintenant exécuté, le module `paysage` y étant importé :
-
-```
-> python main.py
+```sh label="Console" frame="terminal"
+$ python main.py
 paysage
-Exécution code main
+Exécution du code de main
 ```
 
-</TabItem>
-</Tabs>
+:::
 
-</Aside>
+</Callout>
 
-Dans le cadre de ces travaux pratiques, le point de départ du programme final sera le fichier **main.py** d'où sera importé `paysage`.
-Mais avant d'en arriver là, nous souhaitons pouvoir tester les fonctions du module `paysage`.
-C'est le rôle de ces quelques lignes à la fin du fichier **paysage.py**.
+Dans ce TP, le programme final sera lancé depuis **main.py**, qui importe `paysage`.
+Les lignes à la fin de **paysage.py** servent uniquement à tester ses fonctions : elles sont exécutées quand vous lancez **paysage.py**, et ignorées quand **main.py** l'importe.
 
 ### Tracé du paysage
 
-Vous allez maintenant implémenter la fonction `dessiner_paysage` en suivant la description donnée par la _docstring_, c'est-à-dire dessiner trois maisons.
-Vous êtes libre de leur positionnement.
-Pour vérifier le tracé, vous exécuterez cette fois-ci le fichier **main.py**.
+Implémentez la fonction `dessiner_paysage` en suivant sa _docstring_ : dessiner trois maisons, positionnées comme vous le souhaitez.
+Cette fois-ci, vous vérifierez le tracé en exécutant **main.py**.
 
 <Steps>
 
@@ -719,6 +707,25 @@ Pour vérifier le tracé, vous exécuterez cette fois-ci le fichier **main.py**.
 3. Dans l'**Explorateur** de CapyCode, ouvrez le fichier **main.py**, puis exécutez-le avec le bouton **Exécuter** et vérifiez le tracé
 
 </Steps>
+
+<Callout type="result">
+
+<Image
+  src={import("@/assets/images/nsi1re_fonctions_maisons.png")}
+  alt="Tracé de trois maisons"
+  width={400}
+  class="mx-auto block"
+/>
+
+</Callout>
+
+<Checklist>
+
+- Je sais que `__name__` vaut `"__main__"` quand un module est exécuté, et le nom du module quand il est importé
+- J'ai compris que les lignes à la fin de **paysage.py** servent à tester ses fonctions
+- J'ai tracé trois maisons en exécutant **main.py**
+
+</Checklist>
 
 ## Évolutions
 
