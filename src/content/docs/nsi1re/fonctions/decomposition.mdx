@@ -388,8 +388,7 @@ Celle-ci a pour paramètres la position _(x, y)_ du coin inférieur gauche du mu
 Le tracé du mur doit se faire en utilisant **uniquement** la fonction <Link href="https://docs.python.org/fr/3.9/library/turtle.html#turtle.goto">goto</Link> du module `turtle`.
 Vous devrez donc calculer les coordonnées de chaque point du rectangle formant le mur pour déplacer la tortue.
 
-<details>
-<summary>Conseils</summary>
+<Callout type="tip" title="Conseils">
 
 Soit **ABCD** le rectangle utilisé pour représenter le mur d'une maison.
 La _docstring_ précise que les paramètres `x` et `y` correspondent aux coordonnées du coin inférieur gauche du mur, donc le point **A**.
@@ -404,18 +403,17 @@ Pour tracer le mur, vous devez :
   class="mx-auto block"
 />
 
-</details>
+</Callout>
 
 <Steps>
 
-1. Ouvrez le fichier **paysage.py**
+1. Dans l'**Explorateur** de CapyCode, ouvrez le fichier **paysage.py** s'il n'est pas déjà ouvert
 2. Modifiez **uniquement** le corps de la fonction `mur` pour effectuer le tracé en n'utilisant que la fonction `goto`
-3. Exécutez le fichier **paysage.py** pour vérifier le tracé
+3. Exécutez le fichier **paysage.py** avec le bouton **Exécuter** et vérifiez le tracé
 
 </Steps>
 
-<details>
-<summary>Affichage attendu</summary>
+<Callout type="result">
 
 <Image
   src={import("@/assets/images/nsi1re_fonctions_resultat_mur.png")}
@@ -424,14 +422,13 @@ Pour tracer le mur, vous devez :
   class="mx-auto block"
 />
 
-</details>
+</Callout>
 
-<details>
-<summary>Solution</summary>
+<Callout type="result" title="Solution" collapsible>
 
-**Ne faites pas de copier/coller, comprenez le fonctionnement, fermez la solution et codez par vous-même.**
+Ne faites pas de copier/coller, **comprenez** le fonctionnement, fermez la solution et **codez par vous-même.**
 
-```python
+```python title="paysage.py" icon="python"
 def mur(x, y, largeur, hauteur):
     """
     Dessine le mur d'une maison.
@@ -448,15 +445,14 @@ def mur(x, y, largeur, hauteur):
     turtle.goto(x, y)                     # Tracé du segment DA
 ```
 
-</details>
+</Callout>
 
 ### Tracé d'un toit
 
 Vous allez maintenant implémenter la fonction `toit`.
 Celle-ci a pour paramètres la position _(x, y)_ du coin inférieur gauche du toit ainsi que ses dimensions.
 
-<details>
-<summary>Conseils</summary>
+<Callout type="tip" title="Conseils">
 
 Soit **ABC** le triangle utilisé pour représenter le toit d'une maison.
 La _docstring_ précise que les paramètres `x` et `y` correspondent aux coordonnées du coin inférieur gauche du toit, donc le point **A**.
@@ -467,18 +463,17 @@ La _docstring_ précise que les paramètres `x` et `y` correspondent aux coordon
   class="mx-auto block"
 />
 
-</details>
+</Callout>
 
 <Steps>
 
-1. Ouvrez le fichier **paysage.py**
+1. Dans l'**Explorateur** de CapyCode, ouvrez le fichier **paysage.py** s'il n'est pas déjà ouvert
 2. Modifiez **uniquement** le corps de la fonction `toit` pour effectuer le tracé en n'utilisant que la fonction `goto`
-3. Exécutez le fichier **paysage.py** pour vérifier le tracé
+3. Exécutez le fichier **paysage.py** avec le bouton **Exécuter** et vérifiez le tracé
 
 </Steps>
 
-<details>
-<summary>Affichage attendu</summary>
+<Callout type="result">
 
 <Image
   src={import("@/assets/images/nsi1re_fonctions_resultat_toit.png")}
@@ -487,14 +482,13 @@ La _docstring_ précise que les paramètres `x` et `y` correspondent aux coordon
   class="mx-auto block"
 />
 
-</details>
+</Callout>
 
-<details>
-<summary>Solution</summary>
+<Callout type="result" title="Solution" collapsible>
 
 Avez-vous vraiment besoin de la solution ? Allez, cherchez encore 😄 !
 
-</details>
+</Callout>
 
 ### Tracé d'une maison
 
@@ -503,15 +497,14 @@ Vous êtes maintenant en mesure d'implémenter la fonction `maison` en suivant l
 
 <Steps>
 
-1. Ouvrez le fichier **paysage.py**
+1. Dans l'**Explorateur** de CapyCode, ouvrez le fichier **paysage.py** s'il n'est pas déjà ouvert
 2. Modifiez **uniquement** le corps de la fonction `maison` pour effectuer le tracé.
    Celui-ci devra se faire en appelant les fonctions `toit` et `mur` avec des arguments en accord avec la description des dimensions de la maison indiquées dans la _docstring_
-3. Exécutez le fichier **paysage.py** pour vérifier le tracé
+3. Exécutez le fichier **paysage.py** avec le bouton **Exécuter** et vérifiez le tracé
 
 </Steps>
 
-<details>
-<summary>Affichage attendu</summary>
+<Callout type="result">
 
 <Image
   src={import("@/assets/images/nsi1re_fonctions_resultat_maison.png")}
@@ -520,16 +513,62 @@ Vous êtes maintenant en mesure d'implémenter la fonction `maison` en suivant l
   class="mx-auto block"
 />
 
-</details>
+</Callout>
 
-<details>
-<summary>Solution</summary>
+<Callout type="result" title="Solution" collapsible>
 
-La solution ci-dessous ne comporte que le strict nécessaire.
-**Ne supprimez pas** les docstrings des fonctions ou le code manquant !
+```python title="paysage.py" icon="python" hidden={4-42}
+import turtle
+import aide
 
-```python
+
+def positionner(x, y):
+    """
+    Positionne la tortue aux coordonnées (x, y).
+    """
+    turtle.penup()
+    turtle.goto(x, y)
+    turtle.pendown()
+
+
+def mur(x, y, largeur, hauteur):
+    """
+    Dessine le mur d'une maison.
+
+    x       -- position x du coin inférieur gauche du mur
+    y       -- position y du coin inférieur gauche du mur
+    largeur -- largeur du mur
+    hauteur -- hauteur du mur
+    """
+    positionner(x, y)                     # Positionnement de la tortue au point A
+    turtle.goto(x, y + hauteur)           # Tracé du segment AB
+    turtle.goto(x + largeur, y + hauteur) # Tracé du segment BC
+    turtle.goto(x + largeur, y)           # Tracé du segment CD
+    turtle.goto(x, y)                     # Tracé du segment DA
+
+
+def toit(x, y, base, hauteur):
+    """
+    Dessine le toit d'une maison.
+
+    x       -- position x du coin inférieur gauche du toit
+    y       -- position y du coin inférieur gauche du toit
+    base    -- largeur de la base du toit
+    hauteur -- hauteur du toit
+    """
+    positionner(x, y)
+
+    # Votre tracé du toit
+
+
 def maison(x, y):
+    """
+    Dessine une maison de 200px de largeur. Le mur fait 100px de hauteur et le toit, 50px de hauteur.
+
+    x -- position x du coin inférieur gauche de la maison
+    y -- position y du coin inférieur gauche de la maison
+    """
+    # [!code focus:8]
     # Caractéristiques de tracé d'une maison
     largeur = 200
     hauteur_mur = 100
@@ -538,9 +577,30 @@ def maison(x, y):
     # Tracé de la maison
     mur(x, y, largeur, hauteur_mur)                 # Tracé du mur
     toit(x, y + hauteur_mur, largeur, hauteur_toit) # Tracé du toit juste au-dessus du mur
+
+
+def dessiner_paysage():
+    """Dessine un paysage de 3 maisons sous Turtle."""
+
+
+# Tests
+if __name__ == "__main__":
+    aide.grille()
+    mur(-300, 0, 200, 100)
+    toit(-300, 150, 200, 50)
+    maison(0, 0)
+    turtle.mainloop()
 ```
 
-</details>
+</Callout>
+
+<Checklist>
+
+- J'ai réussi à tracer le mur
+- J'ai réussi à tracer le toit
+- J'ai réussi à tracer la maison
+
+</Checklist>
 
 ## Problème principal
 
@@ -654,9 +714,9 @@ Pour vérifier le tracé, vous exécuterez cette fois-ci le fichier **main.py**.
 
 <Steps>
 
-1. Ouvrez le fichier **paysage.py**
+1. Dans l'**Explorateur** de CapyCode, ouvrez le fichier **paysage.py** s'il n'est pas déjà ouvert
 2. Modifiez **uniquement** le corps de la fonction `dessiner_paysage` pour effectuer le tracé
-3. Exécutez le fichier **main.py** pour vérifier le tracé
+3. Dans l'**Explorateur** de CapyCode, ouvrez le fichier **main.py**, puis exécutez-le avec le bouton **Exécuter** et vérifiez le tracé
 
 </Steps>
 
@@ -695,15 +755,14 @@ if __name__ == "__main__":
 
 <Steps>
 
-1. Ouvrez le fichier **paysage.py**
+1. Dans l'**Explorateur** de CapyCode, ouvrez le fichier **paysage.py** s'il n'est pas déjà ouvert
 2. Modifiez les tests en ajoutant l'argument `2` _(pour deux étages)_ à l'appel de fonction `maison`
 3. Modifiez les paramètres et le corps de la fonction `maison` pour gérer les étages
-4. Exécutez le fichier **paysage.py** pour vérifier le tracé
+4. Exécutez le fichier **paysage.py** avec le bouton **Exécuter** et vérifiez le tracé
 
 </Steps>
 
-<details>
-<summary>Affichage attendu</summary>
+<Callout type="result">
 
 <Image
   src={import("@/assets/images/nsi1re_fonctions_absolu_final.png")}
@@ -711,7 +770,7 @@ if __name__ == "__main__":
   class="mx-auto block"
 />
 
-</details>
+</Callout>
 
 ### Suggestions
 
