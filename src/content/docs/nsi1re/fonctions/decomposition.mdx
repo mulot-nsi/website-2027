@@ -729,15 +729,20 @@ Cette fois-ci, vous vérifierez le tracé en exécutant **main.py**.
 
 ## Évolutions
 
-Vous pensez peut-être qu'il aurait été plus simple d'effectuer tous les tracés directement, sans décomposer et passer par des fonctions.
-Ne perdez pas de vue que c'est grâce à cette décomposition que vous pouvez modifier ou ajouter des maisons sans aucune duplication de code.
-Celle-ci sera encore plus appréciable maintenant qu'il va être question de faire évoluer le tracé.
+<Callout type="key" title="Pourquoi décomposer ?">
+
+Il aurait peut-être été plus rapide d'effectuer tous les tracés directement, sans fonctions.
+Mais c'est grâce à la décomposition que vous pouvez modifier ou ajouter des maisons sans dupliquer de code.
+Vous allez le constater en faisant évoluer le tracé.
+
+</Callout>
 
 ### Gestion des étages
 
-Vous allez modifier la fonction `maison` de façon à indiquer le nombre d'étages de la maison grâce au paramètre `etages` :
+Vous allez ajouter un paramètre `etages` à la fonction `maison` pour indiquer le nombre d'étages de la maison :
 
-```python
+```python title="paysage.py (extrait)" icon="python" del={1} ins={2,9}
+def maison(x, y):
 def maison(x, y, etages):
     """
     Dessine une maison de 200px de largeur.
@@ -749,13 +754,14 @@ def maison(x, y, etages):
     """
 ```
 
-Les tests seront modifiés de façon à prendre en compte ce nouveau paramètre :
+Les tests prennent en compte ce nouveau paramètre :
 
-```python {5}
+```python title="paysage.py (extrait)" icon="python" del={5} ins={6}
 if __name__ == "__main__":
     aide.grille()
     mur(-300, 0, 200, 100)
     toit(-300, 150, 200, 50)
+    maison(0, 0)
     maison(0, 0, 2)
     turtle.mainloop()
 ```
@@ -763,11 +769,18 @@ if __name__ == "__main__":
 <Steps>
 
 1. Dans l'**Explorateur** de CapyCode, ouvrez le fichier **paysage.py** s'il n'est pas déjà ouvert
-2. Modifiez les tests en ajoutant l'argument `2` _(pour deux étages)_ à l'appel de fonction `maison`
+2. Dans les tests, ajoutez l'argument `2` _(pour deux étages)_ à l'appel de la fonction `maison`
 3. Modifiez les paramètres et le corps de la fonction `maison` pour gérer les étages
 4. Exécutez le fichier **paysage.py** avec le bouton **Exécuter** et vérifiez le tracé
 
 </Steps>
+
+<Callout type="tip">
+
+Un étage est un mur supplémentaire, tracé au-dessus du précédent.
+Le toit se place au-dessus du dernier étage.
+
+</Callout>
 
 <Callout type="result">
 
@@ -781,13 +794,21 @@ if __name__ == "__main__":
 
 ### Suggestions
 
-Vous avez terminé ? Voici quelques suggestions pour faire évoluer le tracé de votre paysage et vous avancer pour le prochain projet :
+Vous avez terminé ? Voici quelques pistes pour faire évoluer votre paysage et prendre de l'avance sur le prochain projet :
 
 - Personnaliser le tracé de la maison
 - Tracer une porte
 - Tracer des fenêtres et rendre paramétrable leur nombre
-- Tracer le paysage de façon aléatoire
-- Concevoir un algorithme de tracé aléatoire plus harmonieux
+- Tracer le paysage de façon aléatoire, en évitant par exemple que les maisons se chevauchent
+
+<Checklist>
+
+- J'ai ajouté le paramètre `etages` à la fonction `maison` et mis à jour sa _docstring_
+- J'ai mis à jour les tests avec l'argument `2`
+- J'ai tracé une maison à deux étages
+- J'ai compris que la décomposition en fonctions facilite les évolutions du tracé
+
+</Checklist>
 
 ## Pour approfondir
 
@@ -795,28 +816,18 @@ Ces ressources reprennent les notions du TP. Consultez-les pour revoir un point 
 
 **Définir et appeler une fonction, utiliser ses paramètres**
 
-- <Link href="https://courspython.com/fonctions.html">Fonctions en Python</Link>
-  (Cours Python)
-- <Link href="https://zestedesavoir.com/tutoriels/2514/un-zeste-de-python/5-fonctions/1-fonctions-factoriser/">
-    Des fonctions pour factoriser
-  </Link>
-  et
-  <Link href="https://zestedesavoir.com/tutoriels/2514/un-zeste-de-python/5-fonctions/2-fonctions-parametrees/">
-    Fonctions paramétrées
-  </Link>
-  (Un zeste de Python)
-- <Link href="https://docs.python.org/fr/3/tutorial/controlflow.html#defining-functions">
-    Définir des fonctions
-  </Link>
-  (documentation Python)
+- Cours Python : <Link href="https://courspython.com/fonctions.html">Fonctions en Python</Link>
+- Un zeste de Python : <Link href="https://zestedesavoir.com/tutoriels/2514/un-zeste-de-python/5-fonctions/1-fonctions-factoriser/">Des fonctions pour factoriser</Link> et <Link href="https://zestedesavoir.com/tutoriels/2514/un-zeste-de-python/5-fonctions/2-fonctions-parametrees/">Fonctions paramétrées</Link>
+- Documentation Python : <Link href="https://docs.python.org/fr/3/tutorial/controlflow.html#defining-functions">Définir des fonctions</Link>
 
 **Documenter une fonction avec une _docstring_**
 
-- <Link href="https://zestedesavoir.com/tutoriels/2514/un-zeste-de-python/7-perfectionnement/4-fonctions/#3-3-documentation-annotations">
-    Documentation et annotations
-  </Link>
-  (Un zeste de Python ; les annotations de type ne sont pas au programme)
-- <Link href="https://docs.python.org/fr/3/tutorial/controlflow.html#tut-docstrings">
-    Chaînes de documentation
-  </Link>
-  (documentation Python)
+- Un zeste de Python : <Link href="https://zestedesavoir.com/tutoriels/2514/un-zeste-de-python/7-perfectionnement/4-fonctions/#3-3-documentation-annotations">Documentation et annotations</Link> _(les annotations de type ne sont pas au programme)_
+- Documentation Python : <Link href="https://docs.python.org/fr/3/tutorial/controlflow.html#tut-docstrings">Chaînes de documentation</Link>
+
+<Checklist>
+
+- J'ai consulté au moins une ressource sur la définition et l'appel d'une fonction
+- J'ai consulté au moins une ressource sur les _docstrings_
+
+</Checklist>
