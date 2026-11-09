@@ -13,6 +13,7 @@ etapes: true
 import { Steps, Tabs, TabItem, Aside } from "@astrojs/starlight/components";
 import { Image } from "astro:assets";
 import { Kbd } from "starlight-kbd/components";
+import Checklist from "@components/Checklist.astro";
 import Link from "@components/Link.astro";
 import Playground from "@components/Playground.astro";
 import Video from "@components/Video.astro";
@@ -201,6 +202,18 @@ Observez attentivement le résultat à droite, puis réalisez les étapes suivan
   </p>`}
 />
 
+<Checklist>
+
+- Je sais que le HTML est le langage qui structure les pages web et que le navigateur le transforme en page lisible
+- Je sais repérer les balises dans un code source : elles sont entre chevrons et ne s'affichent pas sur la page
+- Je sais faire la différence entre une balise ouvrante `<p>` et une balise fermante `</p>`
+- Je sais créer des titres avec les balises `<h1>` à `<h6>` et un paragraphe avec la balise `<p>`
+- Je sais mettre des mots en valeur avec les balises `<strong>` et `<em>`
+- Je sais qu'une balise orpheline, comme `<br>`, n'a pas de balise fermante
+- J'ai compris que le navigateur ignore les espaces et les sauts de ligne de mon code
+
+</Checklist>
+
 ## Première page
 
 Toutes les pages que vous consultez sur le web sont construites avec un même langage informatique : le HTML _(HyperText Markup Language)_.
@@ -216,6 +229,13 @@ Cette activité a pour objectif de vous faire découvrir ce langage étape par �
 
 </Aside>
 
+<Checklist>
+
+- J'ai compris et réussi à faire tout ce qui m'était demandé
+- J'ai appelé le professeur pour qu'il vérifie le travail
+
+</Checklist>
+
 ## Page thématique
 
 Toutes les pages que vous consultez sur le web sont construites avec un même langage informatique : le HTML _(HyperText Markup Language)_.
@@ -230,3 +250,10 @@ Cette activité a pour objectif de vous faire découvrir ce langage étape par �
     - **Mon accès à l'ENT ne fonctionne pas**, et uniquement dans ce cas, j'appelle le professeur
 
 </Aside>
+
+<Checklist>
+
+- J'ai compris et réussi à faire tout ce qui m'était demandé
+- J'ai appelé le professeur pour qu'il vérifie le travail
+
+</Checklist>
