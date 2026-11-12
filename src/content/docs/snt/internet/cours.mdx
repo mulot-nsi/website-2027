@@ -1,0 +1,107 @@
+---
+title: Cours
+description: Structure hiérarchique des noms de domaine
+
+sidebar:
+  order: 2
+---
+
+import { Image } from "astro:assets";
+import Checklist from "@components/Checklist.astro";
+import Callout from "@components/Callout.astro";
+
+Toute machine connectée au réseau Internet dispose d'une adresse IP, comme `141.94.212.184`.
+Ces adresses sont difficiles à mémoriser, tout comme les numéros de téléphone de vos contacts.
+
+À la place, nous utilisons des adresses symboliques appelées **noms de domaine**, comme `lemonde.fr` ou `mulot.prof`.
+Le service **DNS** (_Domain Name System_) se charge ensuite de retrouver l'adresse IP associée à chaque nom.
+
+Mais comment est construit un nom de domaine, et qui a le droit de l'utiliser ?
+
+## Une organisation en niveaux
+
+Pour désigner une pièce dans un appartement, on va du plus général au plus précis : la ville et le pays, l'adresse de l'appartement, puis la pièce.
+
+De la même manière, un nom de domaine possède une **structure hiérarchique**.
+Il est composé de libellés séparés par des points, et le rôle de chaque libellé dépend de sa position, en lisant **de droite à gauche**.
+
+Exemple de décomposition du nom de domaine `minisites.mulot.prof` :
+
+| Lieu physique                | Nom de domaine                |
+| :--------------------------- | :---------------------------- |
+| La ville et le pays          | L'extension : `prof`          |
+| L'adresse de l'appartement   | Le domaine déposé : `mulot`   |
+| Une pièce dans l'appartement | Le sous-domaine : `minisites` |
+
+On peut représenter l'ensemble des noms de domaine par un arbre.
+Tout en haut se trouve le **domaine racine**, noté par un point. Il est implicite à la fin de chaque adresse.
+
+<Image
+  src={import("@/assets/images/snt_internet_arbre_noms_de_domaine.svg")}
+  width={540}
+  alt="Arbre des noms de domaine : le domaine racine mène aux extensions fr, org et prof, puis aux domaines déposés lemonde, wikipedia et mulot, puis aux sous-domaines www, fr et minisites. Le chemin prof, mulot, minisites est mis en couleur."
+  class="mx-auto block"
+/>
+
+Le chemin en couleur correspond au nom de domaine `minisites.mulot.prof`.
+
+<Callout type="key">
+
+Chaque niveau dépend du niveau situé juste au-dessus de lui.
+Personne ne gère donc tout Internet : chacun est responsable de sa partie.
+
+</Callout>
+
+## Le rôle de chaque niveau
+
+### L'extension
+
+L'**extension** est le libellé le plus à droite.
+On l'appelle aussi domaine de 1er niveau ou **TLD** (_Top Level Domain_).
+
+Il est impossible d'inventer une extension.
+On choisit obligatoirement dans une **liste mondiale** d'environ 1 500 extensions, gérée par un organisme international : l'**ICANN**.
+
+| Catégorie             | Exemples                                            |
+| :-------------------- | :-------------------------------------------------- |
+| Extensions de pays    | `.fr` (France), `.de` (Allemagne), `.pt` (Portugal) |
+| Extensions génériques | `.com` (Commercial), `.org` (Organisation), `.net`  |
+| Nouvelles extensions  | `.prof`, `.paris`, `.shop`                          |
+
+### Le domaine
+
+Le **domaine de 2e niveau** est le libellé situé juste à gauche de l'extension.
+C'est le nom de domaine principal, aussi appelé **domaine déposé**.
+
+Un domaine déposé ne s'achète pas : il se **loue**, comme un appartement.
+La location se fait auprès d'une entreprise appelée **bureau d'enregistrement** (_registrar_), pour une dizaine d'euros par an avec l'extension `.fr`.
+
+Trois règles sont à retenir :
+
+- le nom doit être **libre** : le premier qui le demande l'obtient ;
+- le nom est **unique** : il n'y a qu'un seul locataire dans le monde pour `mulot.prof` ;
+- la location doit être **renouvelée** : sans paiement, le nom redevient libre et une autre personne peut le louer.
+
+### Les sous-domaines
+
+Le locataire d'un appartement organise les pièces comme il le souhaite.
+De la même manière, le locataire d'un domaine déposé crée librement des **sous-domaines** à gauche de son nom.
+
+La création d'un sous-domaine est **gratuite**, **sans limite** et ne nécessite **aucune autorisation**.
+
+- Le locataire de `mulot.prof` a créé `minisites.mulot.prof`.
+- Wikipédia loue `wikipedia.org` et a créé `fr.wikipedia.org` (version française) et `en.wikipedia.org` (version anglaise).
+- Google loue `google.com` et a créé `maps.google.com` et `mail.google.com`.
+- Le libellé `www` est lui aussi un simple sous-domaine : il n'est pas obligatoire.
+
+### Récapitulatif
+
+<Checklist>
+
+- J'ai compris qu'un nom de domaine se lit de droite à gauche
+- Je suis capable de repérer l'extension, le domaine déposé et le sous-domaine dans une adresse comme `fr.wikipedia.org`
+- J'ai compris que l'extension se choisit dans une liste mondiale gérée par l'ICANN
+- J'ai compris qu'un domaine déposé se loue auprès d'un bureau d'enregistrement et qu'il est unique
+- J'ai compris que le locataire d'un domaine déposé crée librement et gratuitement ses sous-domaines
+
+</Checklist>
