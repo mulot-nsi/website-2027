@@ -26,12 +26,10 @@ le **HTML** _(HyperText Markup Language)_.
 Ce langage, créé spécialement pour le web, permet de donner des instructions au navigateur afin de **définir** et **structurer** le contenu d'une page.
 C'est grâce à lui que vous pouvez voir du texte, des images, des liens et bien d'autres éléments sur un site web.
 
-### Analyse d'une page web
-
-#### Le code source
+### Le code source d'une page web
 
 Un **code source** est un texte qui contient des instructions destinées à l'ordinateur afin de lui expliquer quoi faire.
-Pour une page web, ce texte est écrit en HTML. Ce langage est interprété par le **navigateur web** (_Firefox_, _Chrome_, _Edge_...) qui le transforme en un contenu lisible pour les humains.
+Pour une page web, ce texte est écrit en langage HTML. Ce langage est interprété par le **navigateur web** (_Firefox_, _Chrome_, _Edge_...) qui le transforme en un contenu lisible pour les humains.
 Mais à quoi ressemble le code HTML ?
 
 <Tabs>
@@ -84,27 +82,27 @@ Il est possible de visualiser le code source de n'importe quelle page web direct
 
 <Aside type="note" title="Explications">
 
-Dans le code source, certains éléments entourés de chevrons comme `<h1>`, `<p>` ou `<strong>` ne s'affichent pas sur la page finale.
+Dans le code source, certains éléments entourés de chevrons (`<` et `>`) comme `<h1>`, `<p>` ou `<strong>` ne s'affichent pas sur la page.
 
 Ces éléments s'appellent des **balises** et constituent la base du langage HTML.
-Elles ne sont pas visibles par l'utilisateur, mais indiquent au navigateur (Chrome, Firefox…) comment structurer et hiérarchiser le contenu (définir un titre, un paragraphe ou du texte important).
+Elles ne sont pas visibles par l'utilisateur, mais permettent de structurer et de hiérarchiser le contenu.
+
+Autrement dit, vous « balisez » le contenu afin d'indiquer de façon explicite au navigateur ce qui est un titre, ce qui est un paragraphe, ce qui est un texte important, etc.
 
 </Aside>
 
-#### Les balises HTML
+### Les balises HTML
 
 Les balises HTML servent à structurer le contenu d'une page web.
 Chacune a un rôle précis, comme définir un titre, créer un paragraphe ou mettre du texte en valeur.
 Découvrons les plus courantes avant de construire votre première page.
 
-##### Structurer le contenu
+#### Structurer le contenu
 
 Tout comme dans un traitement de texte, une page web est structurée avec des titres, des sous-titres et des paragraphes.
 En HTML, on utilise des balises pour encadrer le texte et indiquer son rôle.
 
-###### Fonctionnement d'une balise
-
-Une balise fonctionne presque toujours par paire : elle **encadre** le contenu pour indiquer où l'élément commence et où il se termine.
+Une balise fonctionne presque toujours par paire : elle **encadre** le contenu pour indiquer où commence et se termine un **élément** (un titre, un paragraphe, etc.).
 
 {/* prettier-ignore */}
 ```html annotations="side"
@@ -114,13 +112,32 @@ Une balise fonctionne presque toujours par paire : elle **encadre** le contenu p
 </balise><!-- [!annotate] Balise **fermante** : marque la fin de l'élément (attention à la barre oblique `/`) -->
 
 <!-- Exemple avec un titre -->
-<h1>Bienvenue</h1><!-- [!annotate] Le titre "Bienvenue" est encadré par les balises `<h1>` et `</h1>` -->
+<h1>Bienvenue</h1><!-- [!annotate] La paire de balises `<h1> </h1>` encadrant le texte « Bienvenue » indique un élément titre. -->
 
 <!-- Exemple avec un paragraphe -->
 <p>
-  Contenu de mon paragraphe.<!-- [!annotate] Les espaces et les sauts de ligne servent à rendre le code lisible pour vous, le navigateur les ignore. -->
+  Contenu de mon paragraphe.<!-- [!annotate] Les espaces et les sauts de ligne servent à rendre le code lisible pour vous ; le navigateur les ignore. Ici, la paire de balises `<p> </p>` indique un élément paragraphe. -->
 </p>
 ```
+
+<Checklist>
+
+- Je sais que le HTML est le langage qui structure les pages web et que le navigateur le transforme en page lisible
+- Je sais repérer les balises dans un code source : elles sont entre chevrons et ne s'affichent pas sur la page
+- Je sais faire la distinction entre une balise ouvrante `<p>` et une balise fermante `</p>`
+- J'ai compris que chaque balise a un rôle précis (`<h1>` pour un titre, `<p>` pour un paragraphe)
+- J'ai compris que le navigateur ignore les espaces et les sauts de ligne de mon code
+
+</Checklist>
+
+## Expérimentation
+
+Le simulateur ci-après vous permet d'écrire du code HTML à gauche et de voir immédiatement le résultat à droite.
+
+### Structurer du texte
+
+Une page web, comme l'énoncé de ces travaux pratiques, est découpée en parties avec des titres, des sous-titres et des paragraphes.
+En HTML, chacun de ces éléments est défini par sa propre balise.
 
 <Aside type="note" title="Les balises pour structurer le texte">
 
@@ -129,15 +146,13 @@ Une balise fonctionne presque toujours par paire : elle **encadre** le contenu p
 
 </Aside>
 
-###### Mise en pratique
-
-Le simulateur ci-après vous permet d'écrire du code HTML à gauche et de voir immédiatement le résultat à droite.
+#### Mise en pratique
 
 <Steps>
 
-1. Remplacez le texte du titre principal `<h1>` par votre prénom.
+1. Remplacez le texte encadré par la paire de balises `<h1> </h1>` par votre prénom.
 2. Remplacez le texte du premier sous-titre `<h2>` par le texte "Qui suis-je ?"
-3. Modifiez le texte du premier paragraphe `<p>` par la phrase de votre choix.
+3. Remplacez le texte du premier paragraphe `<p>` par la phrase de votre choix.
 4. Remplacez le texte du deuxième sous-titre `<h2>` par le texte "Mes passions"
 5. Créez un nouveau sous-titre de niveau 3 en utilisant les balises `<h3>` et `</h3>`.<br/>Écrivez le texte de votre choix à l'intérieur.
 6. Créez un nouveau paragraphe en utilisant les balises `<p>` et `</p>`.<br/>Écrivez le texte de votre choix à l'intérieur.
@@ -155,7 +170,7 @@ Le simulateur ci-après vous permet d'écrire du code HTML à gauche et de voir 
 <h2>Sous-Titre 2</h2>`}
 />
 
-##### Mettre en valeur du texte
+### Mettre en valeur du texte
 
 À l'intérieur d'un paragraphe, vous pouvez avoir besoin de faire ressortir certains mots importants ou d'insérer un saut de ligne.
 En HTML, on utilise des balises spécifiques qui s'insèrent directement au milieu du texte.
@@ -168,7 +183,7 @@ En HTML, on utilise des balises spécifiques qui s'insèrent directement au mili
 
 </Aside>
 
-###### Mise en pratique
+#### Mise en pratique
 
 Dans l'éditeur ci-dessous, le code d'un petit paragraphe vous est proposé.
 Observez attentivement le résultat à droite, puis réalisez les étapes suivantes :
@@ -204,9 +219,6 @@ Observez attentivement le résultat à droite, puis réalisez les étapes suivan
 
 <Checklist>
 
-- Je sais que le HTML est le langage qui structure les pages web et que le navigateur le transforme en page lisible
-- Je sais repérer les balises dans un code source : elles sont entre chevrons et ne s'affichent pas sur la page
-- Je sais faire la différence entre une balise ouvrante `<p>` et une balise fermante `</p>`
 - Je sais créer des titres avec les balises `<h1>` à `<h6>` et un paragraphe avec la balise `<p>`
 - Je sais mettre des mots en valeur avec les balises `<strong>` et `<em>`
 - Je sais qu'une balise orpheline, comme `<br>`, n'a pas de balise fermante
