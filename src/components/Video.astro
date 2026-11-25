@@ -1,27 +1,36 @@
 ---
 // Lecteur vidéo PeerTube (ex. tube-sciences-technologies.apps.education.fr)
 // Accepte l'URL de partage (/w/<id>) ou l'URL d'intégration (/videos/embed/<id>)
-const { src, title = "Vidéo", width = "100%" } = Astro.props;
+// Option `caption` : légende centrée affichée sous la vidéo
+const { src, title = "Vidéo", width = "100%", caption } = Astro.props;
 
 const url = new URL(src);
 url.pathname = url.pathname.replace(/^\/w\//, "/videos/embed/");
 ---
 
-<div class="video" style={`max-width: ${width}`}>
-  <iframe
-    src={url.toString()}
-    title={title}
-    allow="fullscreen"
-    allowfullscreen
-    sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
-    loading="lazy"
-  ></iframe>
-</div>
+<figure class="video" style={`max-width: ${width}`}>
+  <div class="video-frame">
+    <iframe
+      src={url.toString()}
+      title={title}
+      allow="fullscreen"
+      allowfullscreen
+      sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
+      loading="lazy"
+    ></iframe>
+  </div>
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
 
 <style>
   .video {
-    aspect-ratio: 16 / 9;
     width: 100%;
+    margin-inline: auto;
+  }
+
+  .video-frame {
+    aspect-ratio: 16 / 9;
+    border: 1px solid black;
   }
 
   .video iframe {
@@ -29,5 +38,11 @@ url.pathname = url.pathname.replace(/^\/w\//, "/videos/embed/");
     width: 100%;
     height: 100%;
     border: 0;
+  }
+
+  .video figcaption {
+    margin-top: 0.5rem;
+    text-align: center;
+    font-style: italic;
   }
 </style>
